@@ -24,9 +24,9 @@ public class UserInputController : MonoBehaviour
     /***************\
     | Helper values |
     \***************/
-    private Vector2 pressureAbsolute_value;
+    private float pressureAbsolute_value;
     private Vector2 pressureModifier_value;
-    private Vector2 accelerationAbsolute_value;
+    private float accelerationAbsolute_value;
     private Vector2 accelerationModifier_value;
 
     /********************\
@@ -115,14 +115,15 @@ public class UserInputController : MonoBehaviour
         \**********/
         // Check if absolute pressure input is available, if a compatible joystick is being used.
         // Should be bound in settings to ensure correct functionality, maybe a bool if custom joystick has been set in settings.
-        pressureAbsolute_value = pressureAbsolute.ReadValue<Vector2>();
+        pressureAbsolute_value = pressureAbsolute.ReadValue<float>();
         pressureModifier_value = pressureModifier.ReadValue<Vector2>();
-        if (pressureAbsolute_value.y != 0) {
+        if (pressureAbsolute_value != 0) {
             // Absolute pressure input is available
-            Debug.Log("Input: pressureAbsolute value = " + pressureAbsolute_value);
-            pressure = pressureAbsolute_value.y;
+            pressure = (pressureAbsolute_value+1)/2; // Axises go from -1 to 1, changes it to 0 -> 1
+            Debug.Log("Input: pressureAbsolute value = " + pressureAbsolute_value + " -> " + pressure);
 
-        } else if (pressureModifier_value.y != 0) {
+        }
+        else if (pressureModifier_value.y != 0) {
 
             // Absolute pressure input not available, using modifier input
             pressure += pressureModifier_value.y * pressureModificationMagnitude;
@@ -135,12 +136,13 @@ public class UserInputController : MonoBehaviour
         \**************/
         // Check if absolute acceleration input is available, if a compatible joystick is being used.
         // Should be bound in settings to ensure correct functionality, maybe a bool if custom joystick has been set in settings.
-        accelerationAbsolute_value = accelerationAbsolute.ReadValue<Vector2>();
+        accelerationAbsolute_value = accelerationAbsolute.ReadValue<float>();
         accelerationModifier_value = accelerationModifier.ReadValue<Vector2>();
-        if (accelerationAbsolute_value.y != 0) {
+        if (accelerationAbsolute_value != 0) {
+            acceleration = accelerationAbsolute_value;
             // Absolute acceleration input is available
-            Debug.Log("Input: accelerationAbsolute value = " + accelerationAbsolute_value);
-            acceleration = accelerationAbsolute_value.y;
+            acceleration = (accelerationAbsolute_value+1)/2;
+            Debug.Log("Input: accelerationAbsolute value = " + accelerationAbsolute_value + " -> " + acceleration);
 
         } else if(accelerationModifier_value.y != 0) {
 

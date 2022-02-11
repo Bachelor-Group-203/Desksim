@@ -31,8 +31,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Pressure Absolute"",
                     ""type"": ""Value"",
                     ""id"": ""f1e35f4c-0ce3-4673-ad80-9c1ed6bffac4"",
-                    ""expectedControlType"": ""Analog"",
-                    ""processors"": """",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": ""AxisDeadzone(min=0.05,max=0.95)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -49,8 +49,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Acceleration Absolute"",
                     ""type"": ""Value"",
                     ""id"": ""5b6dbf3d-5ad8-42f0-a77d-20dc2a868eff"",
-                    ""expectedControlType"": ""Analog"",
-                    ""processors"": """",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": ""AxisDeadzone(min=0.05,max=0.95)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -239,8 +239,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f150ddb5-5dc7-4210-86f1-ea6ad3070291"",
-                    ""path"": ""<Joystick>/stick/y"",
+                    ""id"": ""668afab4-2866-484d-96e8-cadf4de41b19"",
+                    ""path"": ""<HID::Mega World USB Game Controllers>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -251,7 +251,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""45c1ce24-6715-418c-87b3-0e3c29a42350"",
-                    ""path"": ""<Joystick>/stick/x"",
+                    ""path"": ""<HID::Mega World USB Game Controllers>/rz"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
