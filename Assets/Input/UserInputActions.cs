@@ -240,7 +240,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""668afab4-2866-484d-96e8-cadf4de41b19"",
-                    ""path"": ""<HID::Mega World USB Game Controllers>/z"",
+                    ""path"": ""<HID::Saitek Saitek Pro Flight Quadrant>/stick/y"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

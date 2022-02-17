@@ -410,9 +410,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 10
-  maxAcceleration: 0.5
+  maxAcceleration: 0
   maxBreakForce: 0
-  maxVelocity: 70
+  maxVelocity: 0
 --- !u!114 &1226679324
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Traincontroller : MonoBehaviour
 {
 
     private TrainValues tValues;
-    private Rigidbody rigidbody;
+    private Rigidbody rBody;
+    private UserInputActions inputActions;
 
 
     // TODO!!! Find out how to get the train head direction
@@ -15,7 +17,18 @@ public class Traincontroller : MonoBehaviour
     private void Awake()
     {
         tValues = GetComponent<TrainValues>();
-        rigidbody = GetComponent<Rigidbody>();
+        rBody = GetComponent<Rigidbody>();
+
+        inputActions = new UserInputActions();
+        inputActions.Train.Enable();
+        inputActions.Train.AccelerationAbsolute.performed += AccelerationAbsolute;
+
+    }
+
+    private void AccelerationAbsolute(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+        Debug.Log(context.ReadValue<float>());
     }
 
     // Update is called once per frame
@@ -38,7 +51,7 @@ public class Traincontroller : MonoBehaviour
          ******************/
 
         // For tracking the speed of the train in km/h
-        Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
+        //Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
 
     }
 
@@ -48,15 +61,15 @@ public class Traincontroller : MonoBehaviour
         /***************************
          * Execute train acceleraton
          ***************************/
-        if (Vector3.Magnitude(rigidbody.velocity) >= tValues.GetMaxVelocityAsMS())
+        if (Vector3.Magnitude(rBody.velocity) >= tValues.GetMaxVelocityAsMS())
         {
             //Debug.LogWarning("Train exceeds the speedlimit!!!");
-            rigidbody.velocity = tDirection.normalized * tValues.GetMaxVelocityAsMS();
-            rigidbody.AddForce(0, 0, 0);
+            rBody.velocity = tDirection.normalized * tValues.GetMaxVelocityAsMS();
+            rBody.AddForce(0, 0, 0);
         }
         else
         {
-            rigidbody.AddForce(tValues.maxAcceleration, 0, 0);
+            rBody.AddForce(tValues.maxAcceleration, 0, 0);
         }
 
         /**********************
@@ -64,5 +77,10 @@ public class Traincontroller : MonoBehaviour
          **********************/
         //rigidbody.AddForce(-tValues.maxBreakForce, 0, 0, ForceMode.Force);
 
+    }
+
+    public void Acceleration()
+    {
+        Debug.Log("Value");
     }
 }
