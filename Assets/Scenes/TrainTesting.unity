@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 1226679325}
   - component: {fileID: 1226679324}
   - component: {fileID: 1226679323}
+  - component: {fileID: 1226679326}
   m_Layer: 0
   m_Name: Train
   m_TagString: Untagged
@@ -409,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d39f1b50f28c8a449da8c580d912a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 10
+  mass: 200000
   maxAcceleration: 0
   maxBreakForce: 0
   maxVelocity: 0
@@ -441,6 +442,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1226679326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226679318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c261310f800f3e7468900e93166dbb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: 0
 --- !u!1 &1894490691
 GameObject:
   m_ObjectHideFlags: 0

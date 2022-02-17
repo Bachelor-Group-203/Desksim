@@ -8,7 +8,7 @@ public class Traincontroller : MonoBehaviour
 
     private TrainValues tValues;
     private Rigidbody rBody;
-    private UserInputActions inputActions;
+    private UserInputController inputController;
 
 
     // TODO!!! Find out how to get the train head direction
@@ -18,17 +18,7 @@ public class Traincontroller : MonoBehaviour
     {
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
-
-        inputActions = new UserInputActions();
-        inputActions.Train.Enable();
-        inputActions.Train.AccelerationAbsolute.performed += AccelerationAbsolute;
-
-    }
-
-    private void AccelerationAbsolute(InputAction.CallbackContext context)
-    {
-        Debug.Log(context);
-        Debug.Log(context.ReadValue<float>());
+        inputController = GetComponent<UserInputController>();
     }
 
     // Update is called once per frame
@@ -52,6 +42,7 @@ public class Traincontroller : MonoBehaviour
 
         // For tracking the speed of the train in km/h
         //Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
+        //Debug.Log(inputController.acceleration);
 
     }
 

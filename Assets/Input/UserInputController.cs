@@ -19,7 +19,7 @@ public class UserInputController : MonoBehaviour
     | Core values |
     \*************/
     private float pressure;     // 0 -> 1, apply to curve in train controller or in separate value
-    private float acceleration; // 0 -> 1
+    public float acceleration; // 0 -> 1
 
     /***************\
     | Helper values |
