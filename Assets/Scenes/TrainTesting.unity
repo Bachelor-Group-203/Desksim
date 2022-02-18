@@ -454,7 +454,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c261310f800f3e7468900e93166dbb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressure: 0
   acceleration: 0
+  pressureSlider: {fileID: 0}
+  accelerationSlider: {fileID: 0}
+  invertModifiersToggle: {fileID: 0}
+  invertModifiers: 0
+  pressureAbsolute_value: 0
+  pressureAbsolute_delta: 0
+  pressureModifier_value: 0
+  accelerationAbsolute_value: 0
+  accelerationAbsolute_delta: 0
+  accelerationModifier_value: 0
+  enabled: 0
+  debug: 0
+  userInputActionMap_Train:
+    m_Name: 
+    m_Id: 
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  pressureAbsolute:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  pressureModifier:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  accelerationAbsolute:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  accelerationModifier:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!1 &1894490691
 GameObject:
   m_ObjectHideFlags: 0
