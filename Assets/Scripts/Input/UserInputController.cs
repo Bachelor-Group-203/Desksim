@@ -32,6 +32,8 @@ public class UserInputController : MonoBehaviour
     [SerializeField]
     private Slider accelerationSlider;
     [SerializeField]
+    private Toggle invertModifiersToggle;
+    [SerializeField]
     private bool invertModifiers = false;
 
 
@@ -184,7 +186,6 @@ public class UserInputController : MonoBehaviour
             pressure += pressureModifier_value * pressureModificationMagnitude;
             pressure = Mathf.Clamp(pressure, 0.0f, 1.0f);
             if(debug) Debug.Log("Input: pressureMODIFIER value = " + pressureModifier_value + " == " + pressure);
-            if (invertModifiers) Debug.Log("INVERTED MODIFIERS");
         }
 
         /**************\
@@ -256,7 +257,7 @@ public class UserInputController : MonoBehaviour
         Debug.Log("LoadExtraOptions called");
         invertModifiers = PlayerPrefs.GetInt("invertModifiers") == 1 ? true : false;
         // If a ui element for selecting modifierInvert exists, update it to reflect the saved setting
-        if(GameObject.FindGameObjectsWithTag("Setting_invertModifiers")[0] != null) GameObject.FindGameObjectsWithTag("Setting_invertModifiers")[0].GetComponent<Toggle>().isOn = invertModifiers;
+        if(invertModifiersToggle != null) invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
     }
 
     /**
