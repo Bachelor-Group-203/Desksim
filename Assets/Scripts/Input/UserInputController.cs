@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,6 +54,8 @@ public class UserInputController : MonoBehaviour
     private bool enabled = false;
     [SerializeField]
     private bool debug = false;
+    [SerializeField]
+    private bool superDebug = true;
 
 
 
@@ -160,15 +162,21 @@ public class UserInputController : MonoBehaviour
     private void FixedUpdate()
     {
         // Wait for InputManager to have been initiated, before enabling controls.
-        if (!enabled) {
+        if (!enabled)
+        {
             if (InputManager.userInputActions != null && userInputActions == null)
             {
                 userInputActions = InputManager.userInputActions;
                 Enable();
             }
-        };
+        }
         // All controller vector2/axis values are assumed to be from -1 to 1, or 0 to 1 for joysticks, this might vary from device to device, hopefully not. Can be checked in window->analysis->input 
 
+
+        if(superDebug)
+        {
+            Debug.Log("--PRESSURE ABSOLUTE-- = " +pressureAbsolute.ReadValue<float>()+" | "+pressureAbsolute.GetBindingDisplayString() + " | " +pressureAbsolute.enabled);
+        }
 
         /**********\
         | PRESSURE |
