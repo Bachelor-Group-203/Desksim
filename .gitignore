@@ -70,3 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+.vscode/launch.json
+.vscode/settings.json
+Assets/Plugins.meta
+Assets/Plugins/Editor.meta
+Assets/Plugins/Editor/VSCode.cs
+Assets/Plugins/Editor/VSCode.cs.meta
