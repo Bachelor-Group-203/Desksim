@@ -32,7 +32,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""f1e35f4c-0ce3-4673-ad80-9c1ed6bffac4"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": ""AxisDeadzone(min=1.401298E-45,max=0.975),Invert"",
+                    ""processors"": ""AxisDeadzone(min=1.401298E-45,max=0.975)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -41,7 +41,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""9f92cb2a-f4f3-486b-a49c-e5ed4ac0e959"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": ""ScaleVector2(x=0),StickDeadzone(min=0.125,max=0.925),Invert"",
+                    ""processors"": ""ScaleVector2,StickDeadzone(min=0.125,max=0.925),AxisDeadzone(min=0.1,max=0.95)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -50,7 +50,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""5b6dbf3d-5ad8-42f0-a77d-20dc2a868eff"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": ""Invert,AxisDeadzone(min=1.401298E-45,max=0.95)"",
+                    ""processors"": ""AxisDeadzone(min=1.401298E-45,max=0.975)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -59,7 +59,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""cec50a4c-5b71-4f18-83b3-fe85f5c301b8"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": ""ScaleVector2,StickDeadzone(min=0.125,max=0.925),Invert"",
+                    ""processors"": ""ScaleVector2,StickDeadzone(min=0.125,max=0.925),AxisDeadzone(min=0.1,max=0.95)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -126,18 +126,18 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""positive"",
                     ""id"": ""7495b12a-8cfe-41f9-a7ca-36c269d2353c"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.125,max=0.95)"",
                     ""groups"": """",
                     ""action"": ""Acceleration Modifier"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""negative"",
                     ""id"": ""9c342a09-ee82-402f-932b-5c0024be05fb"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -225,22 +225,22 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
+                    ""name"": ""positive"",
                     ""id"": ""920a1a07-a841-4f88-8b64-76c960c86066"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.125,max=0.95)"",
                     ""groups"": """",
                     ""action"": ""Pressure Modifier"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
+                    ""name"": ""negative"",
                     ""id"": ""0b6e660d-6fda-4749-bcf0-5642ed960ad8"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.125,max=0.95)"",
                     ""groups"": """",
                     ""action"": ""Pressure Modifier"",
                     ""isComposite"": false,
