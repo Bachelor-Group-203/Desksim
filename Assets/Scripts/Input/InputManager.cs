@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
         {
             userInputActions = new UserInputActions();
         }
+        LoadAllBindingOverrides();
     }
 
     /**
@@ -144,6 +145,23 @@ public class InputManager : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
                 action.ApplyBindingOverride(i, PlayerPrefs.GetString(action.actionMap + action.name + i));
+        }
+    }
+
+    /**
+     * 
+     **/
+    public static void LoadAllBindingOverrides()
+    {
+        if (userInputActions == null) userInputActions = new UserInputActions();
+        var actionMaps = userInputActions.asset.actionMaps;
+        for(int i=0; i<actionMaps.Count; i++)
+        {
+            var actions = actionMaps[i].actions;
+            for(int j=0; j<actions.Count; j++)
+            {
+                LoadBindingOverride(actions[j].name);
+            }
         }
     }
 

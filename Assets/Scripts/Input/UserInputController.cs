@@ -34,7 +34,9 @@ public class UserInputController : MonoBehaviour
     [SerializeField]
     private Toggle invertModifiersToggle;
     [SerializeField]
+    private Toggle invertAbsolutesToggle;
     private bool invertModifiers = false;
+    private bool invertAbsolutes = false;
 
 
     /***************\
@@ -175,8 +177,9 @@ public class UserInputController : MonoBehaviour
         pressureModifier_value = pressureModifier.ReadValue<float>();
         if (pressureAbsolute_delta != 0) {
             // Absolute pressure input is available, and changed
-            if(debug) Debug.Log("Input: pressureABSOLUTE value = " + pressureAbsolute_value + " -> " + (pressureAbsolute_value + 1) / 2);
+            if(debug) Debug.Log("Input: pressureABSOLUTE value = " + pressureAbsolute_value + " -> " + (pressureAbsolute_value + 1) / 2 +""+ (invertAbsolutes ? " <inverted>" : ""));
             pressure = (pressureAbsolute_value+1)/2; // Axises go from -1 to 1, changes it to 0 -> 
+            if (invertAbsolutes) pressure = 1 - pressure;
 
         }
         else if (pressureModifier_value != 0) {
@@ -199,8 +202,9 @@ public class UserInputController : MonoBehaviour
         // If absolute value has changed
         if (accelerationAbsolute_delta != 0) {
             // Absolute acceleration input is available, and changed
-            if(debug) Debug.Log("Input: accelerationABSOLUTE value = " + accelerationAbsolute_value + " -> " + (accelerationAbsolute_value+1)/2);
+            if(debug) Debug.Log("Input: accelerationABSOLUTE value = " + accelerationAbsolute_value + " -> " + (accelerationAbsolute_value+1)/2 +""+ (invertAbsolutes?" <inverted>":""));
             acceleration = (accelerationAbsolute_value+1)/2;
+            if (invertAbsolutes) acceleration = 1 - acceleration;
 
         } else if(accelerationModifier_value != 0) {
 
@@ -252,12 +256,23 @@ public class UserInputController : MonoBehaviour
     /**
      * 
      **/
+    public void OnInvertAbsoluteToggleValueChanged(bool value)
+    {
+        invertAbsolutes = value;
+        SaveExtraOptions();
+    }
+
+    /**
+     * 
+     **/
     public void LoadExtraOptions()
     {
         Debug.Log("LoadExtraOptions called");
         invertModifiers = PlayerPrefs.GetInt("invertModifiers") == 1 ? true : false;
+        invertAbsolutes = PlayerPrefs.GetInt("invertAbsolutes") == 1 ? true : false;
         // If a ui element for selecting modifierInvert exists, update it to reflect the saved setting
-        if(invertModifiersToggle != null) invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
+        if (invertModifiersToggle != null) invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
+        if (invertAbsolutesToggle != null) invertAbsolutesToggle.GetComponent<Toggle>().isOn = invertAbsolutes;
     }
 
     /**
@@ -267,7 +282,8 @@ public class UserInputController : MonoBehaviour
     public void SaveExtraOptions()
     {
         Debug.Log("SaveExtraOptions called");
-        PlayerPrefs.SetInt("invertModifiers", invertModifiers?1:0);
+        PlayerPrefs.SetInt("invertModifiers", invertModifiers ? 1 : 0);
+        PlayerPrefs.SetInt("invertAbsolutes", invertAbsolutes ? 1 : 0);
     }
 
     /**********************************************************************\
