@@ -19,9 +19,9 @@ public class CameraLook : MonoBehaviour
     void Update()
     {
         // TODO!!! Make new inputsystem work with this
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        //float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        //float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        playerBody.Rotate(Vector3.up * mouseX );
+        //playerBody.Rotate(Vector3.up * mouseX );
     }
 }

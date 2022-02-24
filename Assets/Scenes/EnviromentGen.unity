@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 658012936}
   - component: {fileID: 658012935}
   - component: {fileID: 658012934}
-  - component: {fileID: 658012933}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -157,22 +156,6 @@ Transform:
   m_Father: {fileID: 942664676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &658012933
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658012931}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!136 &658012934
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -399,6 +382,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 942664676}
+  - component: {fileID: 942664677}
+  - component: {fileID: 942664678}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -414,7 +399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942664675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1836517, y: 262.6791, z: 5.880748}
+  m_LocalPosition: {x: 3, y: 261.25, z: 55.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 658012932}
@@ -422,6 +407,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &942664677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942664675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238de7f803e20744e96e8be4d983af2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 6
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!54 &942664678
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942664675}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!1 &1192357349
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +450,7 @@ GameObject:
   - component: {fileID: 1192357350}
   - component: {fileID: 1192357352}
   - component: {fileID: 1192357351}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TerrainTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,9 +608,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1348782363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01662ad510bfed547a3ad5de53bb1976, type: 3}
+  m_Script: {fileID: 11500000, guid: 69590818b0727ac4396aa48e1a99bce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensitivity: 100
+  playerBody: {fileID: 942664676}
 --- !u!1 &1518253085
 GameObject:
   m_ObjectHideFlags: 0
