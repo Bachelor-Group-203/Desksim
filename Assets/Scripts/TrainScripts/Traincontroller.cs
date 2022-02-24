@@ -70,8 +70,10 @@ public class Traincontroller : MonoBehaviour
 
     }
 
-    public void Acceleration()
+    public float GetAcceleration()
     {
-        Debug.Log("Value");
+        return tValues.maxAcceleration;
     }
+
+
 }
