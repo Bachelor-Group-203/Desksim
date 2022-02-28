@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Terrain.meta
 guid: 6c9703d0142ea9f40ba5b3b742f16ddd
-=======
-guid: 37afd3c65f48fa94bbb5a65473466658
->>>>>>> develop:Assets/Scripts/Editor.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
