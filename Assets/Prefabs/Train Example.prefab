@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 531916413168108363}
   - component: {fileID: 531916413168108360}
+  - component: {fileID: 4252622076312879175}
+  - component: {fileID: 8250491514321909846}
+  - component: {fileID: 1061555680930466452}
+  - component: {fileID: 2864196656575896280}
   m_Layer: 0
   m_Name: Train Example
   m_TagString: Untagged
@@ -47,6 +51,71 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   end: 0
   speed: 5
+--- !u!114 &4252622076312879175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531916413168108361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6df19930553154f9670bf0fca4ea4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8250491514321909846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531916413168108361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d39f1b50f28c8a449da8c580d912a86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 1000
+  maxAcceleration: 5
+  maxBreakForce: 50
+  maxVelocity: 120
+--- !u!114 &1061555680930466452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531916413168108361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c261310f800f3e7468900e93166dbb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressure: 0
+  acceleration: 0
+  pressureSlider: {fileID: 0}
+  accelerationSlider: {fileID: 0}
+  invertModifiersToggle: {fileID: 0}
+  invertAbsoluteAToggle: {fileID: 0}
+  invertAbsolutePToggle: {fileID: 0}
+  debug: 0
+  superDebug: 1
+--- !u!54 &2864196656575896280
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531916413168108361}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1273098360238678899
 GameObject:
   m_ObjectHideFlags: 0
