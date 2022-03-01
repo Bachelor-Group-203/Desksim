@@ -8,16 +8,19 @@ public class Traincontroller : MonoBehaviour
 
     private TrainValues tValues;
     private Rigidbody rBody;
-    //private UserInputController inputController;
+    private UserInputController input;
 
 
     // TODO!!! Find out how to get the train head direction
     private Vector3 tDirection = new Vector3(1, 0, 0);
 
+    private float bar = 0;
+
     private void Awake()
     {
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
+        input = GetComponent<UserInputController>();
         //inputController = GetComponent<UserInputController>();
     }
 
@@ -35,6 +38,7 @@ public class Traincontroller : MonoBehaviour
          ******************/
         // Breaks go from 0 to 5 bar
         // controller 0 - 100% * maxBreakForce = current BreakForce
+        UpdatePressure();
 
         /******************
          * Notes and uefull things
@@ -42,7 +46,8 @@ public class Traincontroller : MonoBehaviour
 
         // For tracking the speed of the train in km/h
         //Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
-        //Debug.Log(inputController.acceleration);
+        //Debug.Log("\tBar: " + bar);
+        Debug.Log("Acceleration: " + GetAccelerationForce() + "\tVelocity: " + Vector3.Magnitude(rBody.velocity) + "\tBar: " + bar);
 
     }
 
@@ -54,26 +59,48 @@ public class Traincontroller : MonoBehaviour
          ***************************/
         if (Vector3.Magnitude(rBody.velocity) >= tValues.GetMaxVelocityAsMS())
         {
-            //Debug.LogWarning("Train exceeds the speedlimit!!!");
             rBody.velocity = tDirection.normalized * tValues.GetMaxVelocityAsMS();
             rBody.AddForce(0, 0, 0);
         }
-        else
+        else if (bar >= 5.0f)
         {
-            rBody.AddForce(tValues.maxAcceleration, 0, 0);
+            rBody.AddForce(GetAccelerationForce(), 0, 0);
         }
 
         /**********************
          * Execute train breaks
          **********************/
-        //rigidbody.AddForce(-tValues.maxBreakForce, 0, 0, ForceMode.Force);
+        if (bar <= 4.5f)
+        {
+            rBody.AddForce(-GetBreakForce(), 0, 0);
+        }
 
     }
 
-    public float GetAcceleration()
+    // Finding the force needed to stop the train as kinetic energy over time
+    // TODO! Maybe fix so that it is not dependent on time but on stick position.
+    private float GetBreakForce()
     {
-        return tValues.maxAcceleration;
+        return (0.5f * tValues.mass * (Mathf.Pow(Vector3.Magnitude(rBody.velocity), 2))) / 2;
     }
 
+    // Gets the acceleration to go into the mass
+    private float GetAccelerationForce()
+    {
+        return tValues.maxAcceleration * input.acceleration * tValues.mass;
+    }
+
+    // Updates the pressure
+    private void UpdatePressure()
+    {
+        if (input.pressure <= 0 && bar >= 0)
+        {
+            bar -= 0.007f;
+        }
+        else if (input.pressure > 0 && bar < 5.0f)
+        {
+            bar += 0.005f * input.pressure;
+        }
+    }
 
 }
