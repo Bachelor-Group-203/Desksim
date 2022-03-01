@@ -3,15 +3,15 @@ using PathCreation.Utility;
 using UnityEngine;
 
 namespace PathCreation.Examples {
-    public class RoadMeshCreator : PathSceneTool {
-        [Header ("Road settings")]
-        public float roadWidth = .4f;
+    public class RailMeshCreator : PathSceneTool {
+        [Header ("Rail settings")]
+        public float railWidth = .4f;
         [Range (0, .5f)]
         public float thickness = .15f;
         public bool flattenSurface;
 
         [Header ("Material settings")]
-        public Material roadMaterial;
+        public Material railMaterial;
         public Material undersideMaterial;
         public float textureTiling = 1;
 
@@ -26,24 +26,24 @@ namespace PathCreation.Examples {
             if (pathCreator != null) {
                 AssignMeshComponents ();
                 AssignMaterials ();
-                CreateRoadMesh ();
+                CreateRailMesh ();
             }
         }
 
-        void CreateRoadMesh () {
+        void CreateRailMesh () {
             Vector3[] verts = new Vector3[path.NumPoints * 8];
             Vector2[] uvs = new Vector2[verts.Length];
             Vector3[] normals = new Vector3[verts.Length];
 
             int numTris = 2 * (path.NumPoints - 1) + ((path.isClosedLoop) ? 2 : 0);
-            int[] roadTriangles = new int[numTris * 3];
-            int[] underRoadTriangles = new int[numTris * 3];
-            int[] sideOfRoadTriangles = new int[numTris * 2 * 3];
+            int[] railTriangles = new int[numTris * 3];
+            int[] underRailTriangles = new int[numTris * 3];
+            int[] sideOfRailTriangles = new int[numTris * 2 * 3];
 
             int vertIndex = 0;
             int triIndex = 0;
 
-            // Vertices for the top of the road are layed out:
+            // Vertices for the top of the rail are layed out:
             // 0  1
             // 8  9
             // and so on... So the triangle map 0,8,1 for example, defines a triangle from top left to bottom left to bottom right.
@@ -57,17 +57,17 @@ namespace PathCreation.Examples {
                 Vector3 localRight = (usePathNormals) ? path.GetNormal (i) : Vector3.Cross (localUp, path.GetTangent (i));
 
                 // Find position to left and right of current path vertex
-                Vector3 vertSideA = path.GetPoint (i) - localRight * Mathf.Abs (roadWidth);
-                Vector3 vertSideB = path.GetPoint (i) + localRight * Mathf.Abs (roadWidth);
+                Vector3 vertSideA = path.GetPoint (i) - localRight * Mathf.Abs (railWidth);
+                Vector3 vertSideB = path.GetPoint (i) + localRight * Mathf.Abs (railWidth);
 
-                // Add top of road vertices
+                // Add top of rail vertices
                 verts[vertIndex + 0] = vertSideA;
                 verts[vertIndex + 1] = vertSideB;
-                // Add bottom of road vertices
+                // Add bottom of rail vertices
                 verts[vertIndex + 2] = vertSideA - localUp * thickness;
                 verts[vertIndex + 3] = vertSideB - localUp * thickness;
 
-                // Duplicate vertices to get flat shading for sides of road
+                // Duplicate vertices to get flat shading for sides of rail
                 verts[vertIndex + 4] = verts[vertIndex + 0];
                 verts[vertIndex + 5] = verts[vertIndex + 1];
                 verts[vertIndex + 6] = verts[vertIndex + 2];
@@ -77,13 +77,13 @@ namespace PathCreation.Examples {
                 uvs[vertIndex + 0] = new Vector2 (0, path.times[i]);
                 uvs[vertIndex + 1] = new Vector2 (1, path.times[i]);
 
-                // Top of road normals
+                // Top of rail normals
                 normals[vertIndex + 0] = localUp;
                 normals[vertIndex + 1] = localUp;
-                // Bottom of road normals
+                // Bottom of rail normals
                 normals[vertIndex + 2] = -localUp;
                 normals[vertIndex + 3] = -localUp;
-                // Sides of road normals
+                // Sides of rail normals
                 normals[vertIndex + 4] = -localRight;
                 normals[vertIndex + 5] = localRight;
                 normals[vertIndex + 6] = -localRight;
@@ -92,12 +92,12 @@ namespace PathCreation.Examples {
                 // Set triangle indices
                 if (i < path.NumPoints - 1 || path.isClosedLoop) {
                     for (int j = 0; j < triangleMap.Length; j++) {
-                        roadTriangles[triIndex + j] = (vertIndex + triangleMap[j]) % verts.Length;
-                        // reverse triangle map for under road so that triangles wind the other way and are visible from underneath
-                        underRoadTriangles[triIndex + j] = (vertIndex + triangleMap[triangleMap.Length - 1 - j] + 2) % verts.Length;
+                        railTriangles[triIndex + j] = (vertIndex + triangleMap[j]) % verts.Length;
+                        // reverse triangle map for under rail so that triangles wind the other way and are visible from underneath
+                        underRailTriangles[triIndex + j] = (vertIndex + triangleMap[triangleMap.Length - 1 - j] + 2) % verts.Length;
                     }
                     for (int j = 0; j < sidesTriangleMap.Length; j++) {
-                        sideOfRoadTriangles[triIndex * 2 + j] = (vertIndex + sidesTriangleMap[j]) % verts.Length;
+                        sideOfRailTriangles[triIndex * 2 + j] = (vertIndex + sidesTriangleMap[j]) % verts.Length;
                     }
 
                 }
@@ -111,9 +111,9 @@ namespace PathCreation.Examples {
             mesh.uv = uvs;
             mesh.normals = normals;
             mesh.subMeshCount = 3;
-            mesh.SetTriangles (roadTriangles, 0);
-            mesh.SetTriangles (underRoadTriangles, 1);
-            mesh.SetTriangles (sideOfRoadTriangles, 2);
+            mesh.SetTriangles (railTriangles, 0);
+            mesh.SetTriangles (underRailTriangles, 1);
+            mesh.SetTriangles (sideOfRailTriangles, 2);
             mesh.RecalculateBounds ();
         }
 
@@ -121,7 +121,7 @@ namespace PathCreation.Examples {
         void AssignMeshComponents () {
 
             if (meshHolder == null) {
-                meshHolder = new GameObject ("Road Mesh Holder");
+                meshHolder = new GameObject ("Rail Mesh Holder");
             }
 
             meshHolder.transform.rotation = Quaternion.identity;
@@ -145,8 +145,8 @@ namespace PathCreation.Examples {
         }
 
         void AssignMaterials () {
-            if (roadMaterial != null && undersideMaterial != null) {
-                meshRenderer.sharedMaterials = new Material[] { roadMaterial, undersideMaterial, undersideMaterial };
+            if (railMaterial != null && undersideMaterial != null) {
+                meshRenderer.sharedMaterials = new Material[] { railMaterial, undersideMaterial, undersideMaterial };
                 meshRenderer.sharedMaterials[0].mainTextureScale = new Vector3 (1, textureTiling);
             }
         }
