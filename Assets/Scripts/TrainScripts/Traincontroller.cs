@@ -21,14 +21,7 @@ public class Traincontroller : MonoBehaviour
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
         input = GetComponent<UserInputController>();
-        StartCoroutine(Wait());
         //inputController = GetComponent<UserInputController>();
-    }
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(5);
-        rBody.velocity = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -79,7 +72,7 @@ public class Traincontroller : MonoBehaviour
          **********************/
         if (bar <= 4.5f)
         {
-            rBody.AddForce(-GetBreakForce(), 0, 0);
+            rBody.AddForce(GetBreakForce(), 0, 0);
         }
 
     }
@@ -88,7 +81,7 @@ public class Traincontroller : MonoBehaviour
     // TODO! Maybe fix so that it is not dependent on time but on stick position.
     private float GetBreakForce()
     {
-        return (0.5f * tValues.mass * (Mathf.Pow(Vector3.Magnitude(rBody.velocity), 2))) / 2;
+        return (0.5f * tValues.mass * (Mathf.Pow(Vector3.Magnitude(rBody.velocity), 2))) / -100;
     }
 
     // Gets the acceleration to go into the mass
