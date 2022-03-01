@@ -21,7 +21,14 @@ public class Traincontroller : MonoBehaviour
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
         input = GetComponent<UserInputController>();
+        StartCoroutine(Wait());
         //inputController = GetComponent<UserInputController>();
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(5);
+        rBody.velocity = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -101,6 +108,11 @@ public class Traincontroller : MonoBehaviour
         {
             bar += 0.005f * input.pressure;
         }
+    }
+
+    public float GetVelocity()
+    {
+        return Vector3.Magnitude(rBody.velocity);
     }
 
 }
