@@ -12,9 +12,16 @@ public class TrainUi : MonoBehaviour
     private const float START_LABEL_ANGLE = 230;
 
     [Header("UI Objects")]
+    [Header("Velocity and pressure")]
     [SerializeField] private Transform velocityNeedleTransform;
     [SerializeField] private Transform pressureNeedleTransform;
     [SerializeField] private Transform labelTransform;
+    [Header("Reverse Button")]
+    [SerializeField] private GameObject reverseBackground;
+    [SerializeField] private Color reverseOffCollor;
+    [SerializeField] private Color reverseOnCollor;
+    [Header("Slpoe Finder")]
+    [SerializeField] private Text angleDisplay;
 
     private Traincontroller trainController;
     private TrainValues trainValues;
@@ -114,6 +121,22 @@ public class TrainUi : MonoBehaviour
         }
     }
 
-    
+    /*
+     * This function swithes the moving direction of the train and the color of the button.
+     * Called by Unity event under UI -> ReverseButton in hierarchy
+     */
+    public void EngageReverse()
+    {
+        if (reverse)
+        {
+            reverse = false;
+            reverseBackground.GetComponent<Image>().color = reverseOffCollor;
+        }
+        else
+        {
+            reverse = true;
+            reverseBackground.GetComponent<Image>().color = reverseOnCollor;
+        }
+    }
 
 }
