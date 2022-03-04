@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Speedometer : MonoBehaviour
+/*
+ * This class contains all the HUD elements and visual displays that relays information to the user.
+ */
+public class TrainUi : MonoBehaviour
 {
     private const float END_LABEL_ANGLE = -50;
     private const float START_LABEL_ANGLE = 230;
 
+    [Header("UI Objects")]
     [SerializeField] private Transform velocityNeedleTransform;
     [SerializeField] private Transform pressureNeedleTransform;
     [SerializeField] private Transform labelTransform;
@@ -19,15 +23,33 @@ public class Speedometer : MonoBehaviour
     private int maxViewPressure;
     private float totalAngleSize;
 
+    private bool reverse = false;
+
+    /*
+     * Get method for reverse
+     */
+    public bool Reverse
+    {
+        get
+        {
+            return reverse;
+        }
+    }
+
+    /*
+     * Awake is called first when the object is instantiated
+     */
     private void Awake()
     {
+        // Gets the refrence to components needed
         trainController = GetComponent<Traincontroller>();
         trainValues = GetComponent<TrainValues>();
 
+        // Finds the total angle to use on the gauge
         totalAngleSize = START_LABEL_ANGLE - END_LABEL_ANGLE;
 
         // Creates the labels for the Speedometer
-        maxViewVelocity = ((int)((trainValues.maxVelocity * 1.1f) / 20f)) * 20;
+        maxViewVelocity = ((int)((trainValues.MaxVelocity * 3.6 * 1.1f) / 20f)) * 20;
         CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent);
         velocityNeedleTransform.SetAsLastSibling();
 
@@ -37,6 +59,9 @@ public class Speedometer : MonoBehaviour
         pressureNeedleTransform.SetAsLastSibling();
     }
 
+    /*
+     * Update is called once per frame
+     */
     private void Update()
     {
         // Rotates the velocity needle
@@ -63,22 +88,32 @@ public class Speedometer : MonoBehaviour
     /*
      * This converts the velocity from the train into degrees for rotating the needle
      * 
-     * @return          Returns the angle to rotate the object
+     * @param       labelAmount     The amount of labels on the gauge
+     * @param       maxLabelValue   The highest value shown on the gauge
+     * @param       parent          The parent transform that contains the instatiated objects
+     * @return                      Returns the angle to rotate the object
      */
     private void CreateLabels(int labelAmount, float maxLabelValue, Transform parent)
     {
-        float totalAngleSize = START_LABEL_ANGLE - END_LABEL_ANGLE;
-
         for (int i = 0; i <= labelAmount; i++)
         {
+            // Instatiate new label object
             Transform label = Instantiate(labelTransform, parent);
+            
+            // Find angle of the label and rotate it accordingly 
             float labelNormalized = (float)i / labelAmount;
             float labelAngle = START_LABEL_ANGLE - labelNormalized * totalAngleSize;
             label.eulerAngles = new Vector3(0, 0, labelAngle);
+
+            // Set the text to the apropriate number 
             label.GetComponentInChildren<Text>().text = Mathf.RoundToInt(labelNormalized * maxLabelValue).ToString();
+            // Makes the numer not rotate with the tranform
             label.Find("Text").eulerAngles = Vector3.zero;
+            // Activate the label so it is visible
             label.gameObject.SetActive(true);
         }
     }
+
+    
 
 }

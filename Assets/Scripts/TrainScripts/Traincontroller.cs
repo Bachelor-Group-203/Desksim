@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+ * This class is for controlling the train and contains all the logic for how the train moves
+ */
 public class Traincontroller : MonoBehaviour
 {
 
@@ -17,6 +20,9 @@ public class Traincontroller : MonoBehaviour
     private float velocity = 0;
     private float pressure = 0;
 
+    /*
+     * Get method for velocity
+     */
     public float Velocity
     {
         get
@@ -25,6 +31,9 @@ public class Traincontroller : MonoBehaviour
         }
     }
 
+    /*
+     * Get method for pressure
+     */
     public float Pressure
     {
         get
@@ -33,6 +42,9 @@ public class Traincontroller : MonoBehaviour
         }
     }
 
+    /*
+     * Awake is called first when the object is instantiated
+     */
     private void Awake()
     {
         tValues = GetComponent<TrainValues>();
@@ -41,7 +53,9 @@ public class Traincontroller : MonoBehaviour
         //inputController = GetComponent<UserInputController>();
     }
 
-    // Update is called once per frame
+    /*
+     * Update is called once per frame
+     */
     void Update()
     {
         /************************
@@ -61,7 +75,6 @@ public class Traincontroller : MonoBehaviour
         /******************
          * Notes and uefull things
          ******************/
-
         // For tracking the speed of the train in km/h
         //Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
         //Debug.Log("\tBar: " + bar);
@@ -69,15 +82,17 @@ public class Traincontroller : MonoBehaviour
 
     }
 
-    // FixedUpdate is called many times per frame
+    /*
+     * FixedUpdate is called many times per frame
+     */
     private void FixedUpdate()
     {
         /***************************
          * Execute train acceleraton
          ***************************/
-        if (velocity >= tValues.GetMaxVelocityAsMS())
+        if (velocity >= tValues.MaxVelocity)
         {
-            rBody.velocity = tDirection.normalized * tValues.GetMaxVelocityAsMS();
+            rBody.velocity = tDirection.normalized * tValues.MaxVelocity;
             rBody.AddForce(0, 0, 0);
         }
         else if (pressure >= 5.0f)
@@ -95,20 +110,29 @@ public class Traincontroller : MonoBehaviour
 
     }
 
-    // Finding the force needed to stop the train as kinetic energy over time
-    // TODO! Maybe fix so that it is not dependent on time but on stick position.
+    /*
+     * Calculates the force needed to stop the train as kinetic energy over time
+     * 
+     * TODO!!! Maybe fix so that it is not dependent on time but on stick position. little force when close to 0
+     */
     private float GetBreakForce()
     {
-        return (0.5f * tValues.mass * (Mathf.Pow(velocity, 2))) / -50;
+        return (0.5f * tValues.Mass * (Mathf.Pow(velocity, 2))) / -50;
     }
 
-    // Gets the acceleration to go into the mass
+    /*
+     * Calculates the acceleration force to be applied on the train
+     * 
+     * @return                      Returns the acceleration force
+     */
     private float GetAccelerationForce()
     {
-        return tValues.maxAcceleration * input.acceleration * tValues.mass;
+        return tValues.MaxAcceleration * input.acceleration * tValues.Mass;
     }
 
-    // Updates the pressure
+    /*
+     * Adds or subtracts pressurevalues based on the input.
+     */
     private void UpdatePressure()
     {
         if (input.pressure <= 0 && pressure >= 0)
