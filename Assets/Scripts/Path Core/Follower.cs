@@ -21,7 +21,7 @@ public class Follower : MonoBehaviour
         if (pathCreator != null) // if path exists
         {
             // Move and rotate game object to points of the path
-            distanceTravelled += trainController.GetVelocity() * Time.deltaTime;
+            distanceTravelled += trainController.Velocity * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, end);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
         }
