@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+ * This class is for controlling the train and contains all the logic for how the train moves
+ */
 public class Traincontroller : MonoBehaviour
 {
+
+    [SerializeField] private LayerMask railLayer;
 
     private TrainValues tValues;
     private Rigidbody rBody;
@@ -14,8 +19,46 @@ public class Traincontroller : MonoBehaviour
     // TODO!!! Find out how to get the train head direction
     private Vector3 tDirection = new Vector3(1, 0, 0);
 
-    private float bar = 0;
+    private float velocity = 0;
+    private float pressure = 0;
+    private float slope = 0;
 
+    /*
+     * Get method for slope
+     */
+    public float Slope
+    {
+        get
+        {
+            return slope;
+        }
+    }
+
+    /*
+     * Get method for velocity
+     */
+    public float Velocity
+    {
+        get
+        {
+            return velocity;
+        }
+    }
+
+    /*
+     * Get method for pressure
+     */
+    public float Pressure
+    {
+        get
+        {
+            return pressure;
+        }
+    }
+
+    /*
+     * Awake is called first when the object is instantiated
+     */
     private void Awake()
     {
         tValues = GetComponent<TrainValues>();
@@ -24,7 +67,9 @@ public class Traincontroller : MonoBehaviour
         //inputController = GetComponent<UserInputController>();
     }
 
-    // Update is called once per frame
+    /*
+     * Update is called once per frame
+     */
     void Update()
     {
         /************************
@@ -32,6 +77,7 @@ public class Traincontroller : MonoBehaviour
          ************************/
         // Input train controller here 
         // controller 0 - 100% * maxAcceleration = current acceleration 
+        velocity = Vector3.Magnitude(rBody.velocity);
 
         /******************
          * Break controller
@@ -40,29 +86,35 @@ public class Traincontroller : MonoBehaviour
         // controller 0 - 100% * maxBreakForce = current BreakForce
         UpdatePressure();
 
+        /**************
+         * Slope finder
+         **************/
+        slope = GetGroundAngle();
+
         /******************
          * Notes and uefull things
          ******************/
-
         // For tracking the speed of the train in km/h
         //Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
         //Debug.Log("\tBar: " + bar);
-        Debug.Log("Acceleration: " + GetAccelerationForce() + "\tVelocity: " + Vector3.Magnitude(rBody.velocity) + "\tBar: " + bar);
+        //Debug.Log("Acceleration: " + GetAccelerationForce() + "\tVelocity: " + Vector3.Magnitude(rBody.velocity) + "\tBar: " + pressure);
 
     }
 
-    // FixedUpdate is called many times per frame
+    /*
+     * FixedUpdate is called many times per frame
+     */
     private void FixedUpdate()
     {
         /***************************
          * Execute train acceleraton
          ***************************/
-        if (Vector3.Magnitude(rBody.velocity) >= tValues.GetMaxVelocityAsMS())
+        if (velocity >= tValues.MaxVelocity)
         {
-            rBody.velocity = tDirection.normalized * tValues.GetMaxVelocityAsMS();
+            rBody.velocity = tDirection.normalized * tValues.MaxVelocity;
             rBody.AddForce(0, 0, 0);
         }
-        else if (bar >= 5.0f)
+        else if (pressure >= 5.0f)
         {
             rBody.AddForce(GetAccelerationForce(), 0, 0);
         }
@@ -70,42 +122,69 @@ public class Traincontroller : MonoBehaviour
         /**********************
          * Execute train breaks
          **********************/
-        if (bar <= 4.5f)
+        if (pressure <= 4.5f)
         {
             rBody.AddForce(GetBreakForce(), 0, 0);
         }
 
     }
 
-    // Finding the force needed to stop the train as kinetic energy over time
-    // TODO! Maybe fix so that it is not dependent on time but on stick position.
+    /*
+     * Calculates the force needed to stop the train as kinetic energy over time
+     * 
+     * TODO!!! Maybe fix so that it is not dependent on time but on stick position. little force when close to 0
+     */
     private float GetBreakForce()
     {
-        return (0.5f * tValues.mass * (Mathf.Pow(Vector3.Magnitude(rBody.velocity), 2))) / -100;
+        return (0.5f * tValues.Mass * (Mathf.Pow(velocity, 2))) / -50;
     }
 
-    // Gets the acceleration to go into the mass
+    /*
+     * Calculates the acceleration force to be applied on the train
+     * 
+     * @return                      Returns the acceleration force
+     */
     private float GetAccelerationForce()
     {
-        return tValues.maxAcceleration * input.acceleration * tValues.mass;
+        return tValues.MaxAcceleration * input.acceleration * tValues.Mass;
     }
 
-    // Updates the pressure
+    /*
+     * Adds or subtracts pressurevalues based on the input.
+     */
     private void UpdatePressure()
     {
-        if (input.pressure <= 0 && bar >= 0)
+        if (input.pressure <= 0 && pressure >= 0)
         {
-            bar -= 0.007f;
+            pressure -= 0.007f;
         }
-        else if (input.pressure > 0 && bar < 5.0f)
+        else if (input.pressure > 0 && pressure < 5.0f)
         {
-            bar += 0.005f * input.pressure;
+            pressure += 0.005f * input.pressure;
         }
     }
 
-    public float GetVelocity()
+    /*
+     * Finds the slope-angle by finding the diffrence between the up vector and the plane normal
+     * 
+     * @return                      Retruns the angle of the slope if it can find the layer, if not retirns -1
+     */
+    private float GetGroundAngle()
     {
-        return Vector3.Magnitude(rBody.velocity);
+        RaycastHit hit;
+        float groundAngle = -1.0f;
+
+        // Generate a ray that pints down
+        Ray ray = new Ray(transform.position, -transform.up);
+
+        // If the Ray collides with an object in the layer specified
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, 50.0f, railLayer))
+        {
+            // Finds the angle between the ground normal and the up vector
+            groundAngle = Vector3.Angle(Vector3.up, hit.normal);
+        }
+        return groundAngle;
     }
+
 
 }
