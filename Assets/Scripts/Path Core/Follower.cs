@@ -23,7 +23,10 @@ public class Follower : MonoBehaviour
             // Move and rotate game object to points of the path
             distanceTravelled += trainController.Velocity * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, end);
-            transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
+            Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
+            Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
+
+            transform.rotation = pathRotation * normalRotation;
         }
     }
 }
