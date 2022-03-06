@@ -9,6 +9,8 @@ using UnityEngine.InputSystem;
 public class Traincontroller : MonoBehaviour
 {
 
+    [SerializeField] private LayerMask railLayer;
+
     private TrainValues tValues;
     private Rigidbody rBody;
     private UserInputController input;
@@ -19,6 +21,18 @@ public class Traincontroller : MonoBehaviour
 
     private float velocity = 0;
     private float pressure = 0;
+    private float slope = 0;
+
+    /*
+     * Get method for slope
+     */
+    public float Slope
+    {
+        get
+        {
+            return slope;
+        }
+    }
 
     /*
      * Get method for velocity
@@ -71,6 +85,11 @@ public class Traincontroller : MonoBehaviour
         // Breaks go from 0 to 5 bar
         // controller 0 - 100% * maxBreakForce = current BreakForce
         UpdatePressure();
+
+        /**************
+         * Slope finder
+         **************/
+        slope = GetGroundAngle();
 
         /******************
          * Notes and uefull things
@@ -144,5 +163,28 @@ public class Traincontroller : MonoBehaviour
             pressure += 0.005f * input.pressure;
         }
     }
+
+    /*
+     * Finds the slope-angle by finding the diffrence between the up vector and the plane normal
+     * 
+     * @return                      Retruns the angle of the slope if it can find the layer, if not retirns -1
+     */
+    private float GetGroundAngle()
+    {
+        RaycastHit hit;
+        float groundAngle = -1.0f;
+
+        // Generate a ray that pints down
+        Ray ray = new Ray(transform.position, -transform.up);
+
+        // If the Ray collides with an object in the layer specified
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, 50.0f, railLayer))
+        {
+            // Finds the angle between the ground normal and the up vector
+            groundAngle = Vector3.Angle(Vector3.up, hit.normal);
+        }
+        return groundAngle;
+    }
+
 
 }

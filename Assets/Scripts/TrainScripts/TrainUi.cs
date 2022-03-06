@@ -76,6 +76,9 @@ public class TrainUi : MonoBehaviour
 
         // Rotates the pressure needle
         pressureNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(trainController.Pressure, maxViewPressure));
+
+        // Displays the slope angle
+        angleDisplay.text = trainController.Slope.ToString();
     }
 
     /*
