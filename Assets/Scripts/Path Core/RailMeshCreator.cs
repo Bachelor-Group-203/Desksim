@@ -6,8 +6,13 @@ namespace PathCreation.Examples {
     public class RailMeshCreator : PathSceneTool {
         [Header ("Rail settings")]
         public float railWidth = .4f;
-        [Range (0, .5f)]
-        public float thickness = .15f;
+        /** 
+         * @touched Michael-Angelo Karpowicz
+         * 
+         * Increased maximum range of thickness to serve as ground foundation for rails
+         */
+        [Range (0, 200f)]
+        public float thickness = 1.5f;
         public bool flattenSurface;
 
         [Header ("Material settings")]

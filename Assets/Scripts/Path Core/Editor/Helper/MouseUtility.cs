@@ -13,7 +13,17 @@ namespace PathCreationEditor
         public static Vector3 GetMouseWorldPosition(PathSpace space, float depthFor3DSpace = 10)
         {
             Ray mouseRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-            Vector3 worldMouse = mouseRay.GetPoint(depthFor3DSpace);
+            RaycastHit hit;
+            Vector3 worldMouse;
+            if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit, 999, LayerMask.GetMask("Ground")))
+            {
+                worldMouse = hit.point;
+                //worldMouse = Camera.current.transform.InverseTransformPoint(hit.point);
+            }
+            else worldMouse = new Vector3(0,0,0);
+            
+            //Debug.DrawRay(mouseRay.origin, -mouseRay.direction*10f, Color.red);
+            //Debug.Log("World Mouse: " + worldMouse);
 
             // Mouse can only move on XY plane
             if (space == PathSpace.xy)
@@ -24,7 +34,8 @@ namespace PathCreationEditor
                     float dstToXYPlane = Mathf.Abs(mouseRay.origin.z / zDir);
                     worldMouse = mouseRay.GetPoint(dstToXYPlane);
                 }
-            }
+            } 
+
             // Mouse can only move on XZ plane 
             else if (space == PathSpace.xz)
             {
