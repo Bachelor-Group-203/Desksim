@@ -17,9 +17,17 @@ namespace PathCreation {
     [System.Serializable]
     public class BezierPath {
         public event System.Action OnModified;
-        public enum ControlMode { Aligned, Mirrored, Free, Automatic };
+        public enum ControlMode { Automatic, Aligned, Mirrored, Free };
 
  #region Fields
+
+ /** 
+  * @touched Michael-Angelo Karpowicz
+  * 
+  * Added height variable inside BezierPath class
+  */
+ [SerializeField, HideInInspector]
+ float height = .5f;
 
  [SerializeField, HideInInspector]
  List<Vector3> points;
@@ -205,6 +213,18 @@ namespace PathCreation {
                         AutoSetAllControlPoints ();
                         NotifyPathModified ();
                     }
+                }
+            }
+        }
+
+        public float Height {
+            get {
+                return height;
+            }
+            set {
+                if (value != height) {
+                    height = value;
+                    NotifyPathModified ();
                 }
             }
         }
