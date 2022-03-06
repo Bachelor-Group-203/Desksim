@@ -14,11 +14,13 @@ public class Traincontroller : MonoBehaviour
     private TrainValues tValues;
     private Rigidbody rBody;
     private UserInputController input;
+    private TrainUi tUi;
 
 
     // TODO!!! Find out how to get the train head direction
     private Vector3 tDirection = new Vector3(1, 0, 0);
 
+    private float force = 0;
     private float velocity = 0;
     private float pressure = 0;
     private float slope = 0;
@@ -64,7 +66,7 @@ public class Traincontroller : MonoBehaviour
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
         input = GetComponent<UserInputController>();
-        //inputController = GetComponent<UserInputController>();
+        tUi = GetComponent<TrainUi>();
     }
 
     /*
@@ -77,7 +79,7 @@ public class Traincontroller : MonoBehaviour
          ************************/
         // Input train controller here 
         // controller 0 - 100% * maxAcceleration = current acceleration 
-        velocity = Vector3.Magnitude(rBody.velocity);
+        velocity = Vector3.Magnitude(rBody.velocity) * force;
 
         /******************
          * Break controller
@@ -89,7 +91,25 @@ public class Traincontroller : MonoBehaviour
         /**************
          * Slope finder
          **************/
-        slope = GetGroundAngle();
+        if (GetGroundAngle() >= 0)
+        {
+            slope = GetGroundAngle();
+        }
+
+        /***************
+         * Reverse train
+         ***************/
+        if (Mathf.Abs(velocity) <= 0)
+        {
+            if (tUi.Reverse)
+            {
+                force = -1;
+            }
+            else
+            {
+                force = 1;
+            }
+        }
 
         /******************
          * Notes and uefull things
@@ -109,14 +129,17 @@ public class Traincontroller : MonoBehaviour
         /***************************
          * Execute train acceleraton
          ***************************/
-        if (velocity >= tValues.MaxVelocity)
+        if (pressure >= 5.0f)
         {
-            rBody.velocity = tDirection.normalized * tValues.MaxVelocity;
-            rBody.AddForce(0, 0, 0);
-        }
-        else if (pressure >= 5.0f)
-        {
-            rBody.AddForce(GetAccelerationForce(), 0, 0);
+            if (Mathf.Abs(velocity) >= tValues.MaxVelocity)
+            {
+                rBody.velocity = tDirection.normalized * tValues.MaxVelocity;
+                rBody.AddForce(0, 0, 0);
+            }
+            else
+            {
+                rBody.AddForce(force * GetAccelerationForce(), 0, 0);
+            }
         }
 
         /**********************
@@ -124,9 +147,16 @@ public class Traincontroller : MonoBehaviour
          **********************/
         if (pressure <= 4.5f)
         {
-            rBody.AddForce(GetBreakForce(), 0, 0);
+            if (Mathf.Abs(velocity) <= 0.01f)
+            {
+                rBody.velocity = Vector3.zero;
+                rBody.AddForce(0, 0, 0);
+            }
+            else
+            {
+                rBody.AddForce(force * GetBreakForce(), 0, 0);
+            }
         }
-
     }
 
     /*
@@ -134,9 +164,10 @@ public class Traincontroller : MonoBehaviour
      * 
      * TODO!!! Maybe fix so that it is not dependent on time but on stick position. little force when close to 0
      */
+    //(0.5f * tValues.Mass* (Mathf.Pow(velocity, 2))) / -50;
     private float GetBreakForce()
     {
-        return (0.5f * tValues.Mass * (Mathf.Pow(velocity, 2))) / -50;
+        return -tValues.MaxAcceleration * 1 * tValues.Mass;
     }
 
     /*

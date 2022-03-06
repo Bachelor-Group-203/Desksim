@@ -72,7 +72,7 @@ public class TrainUi : MonoBehaviour
     private void Update()
     {
         // Rotates the velocity needle
-        velocityNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(trainController.Velocity, maxViewVelocity / 3.6f));
+        velocityNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(Mathf.Abs(trainController.Velocity), maxViewVelocity / 3.6f));
 
         // Rotates the pressure needle
         pressureNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(trainController.Pressure, maxViewPressure));
