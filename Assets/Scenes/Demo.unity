@@ -1627,8 +1627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d39f1b50f28c8a449da8c580d912a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 10
-  maxAcceleration: 0.1
+  mass: 218.35
+  maxPullingForce: 240
   maxBreakForce: 0
   maxVelocity: 200
 --- !u!114 &655134367064290061

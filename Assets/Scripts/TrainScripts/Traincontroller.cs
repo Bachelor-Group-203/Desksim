@@ -164,10 +164,9 @@ public class Traincontroller : MonoBehaviour
      * 
      * TODO!!! Maybe fix so that it is not dependent on time but on stick position. little force when close to 0
      */
-    //(0.5f * tValues.Mass* (Mathf.Pow(velocity, 2))) / -50;
     private float GetBreakForce()
     {
-        return -tValues.MaxAcceleration * 1 * tValues.Mass;
+        return -tValues.MaxPullingForce * (1 - (pressure / 5)) / tValues.Mass;
     }
 
     /*
@@ -177,7 +176,7 @@ public class Traincontroller : MonoBehaviour
      */
     private float GetAccelerationForce()
     {
-        return tValues.MaxAcceleration * input.acceleration * tValues.Mass;
+        return tValues.MaxPullingForce * input.acceleration / tValues.Mass;
     }
 
     /*
