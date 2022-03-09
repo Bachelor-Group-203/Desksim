@@ -13,6 +13,7 @@ public class DvergScript : MonoBehaviour
 
     enum DvergSignal
     {
+        Av,
         SkiftingForbudt,
         VarsomSkifting,
         SkiftingTillat,
@@ -46,14 +47,17 @@ public class DvergScript : MonoBehaviour
             light.GetComponent<MeshRenderer>().material = signalOffMaterial;
         }
 
-        // Makes the new light show
-        switch (i)
+        if (i != 0)
         {
-            case 0: ActiveSignal(0, 1); break;
-            case 1: ActiveSignal(0, 2); break;
-            case 2: ActiveSignal(0, 3); break;
-            case 3: ActiveSignal(1, 3); break;
-            default: Debug.LogError("Not a valid sign number: " + i); break;
+            // Makes the new light show
+            switch (i)
+            {
+                case 1: ActiveSignal(0, 1); break;
+                case 2: ActiveSignal(0, 2); break;
+                case 3: ActiveSignal(0, 3); break;
+                case 4: ActiveSignal(1, 3); break;
+                default: Debug.LogError("Not a valid sign number: " + i); break;
+            }
         }
     }
 
