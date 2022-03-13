@@ -175,7 +175,7 @@ public class UserInputController : MonoBehaviour
 
         if(superDebug)
         {
-            Debug.Log("--PRESSURE ABSOLUTE-- = " +pressureAbsolute.ReadValue<float>()+" | "+pressureAbsolute.GetBindingDisplayString() + " | " +pressureAbsolute.enabled);
+            //Debug.Log("--PRESSURE ABSOLUTE-- = " +pressureAbsolute.ReadValue<float>()+" | "+pressureAbsolute.GetBindingDisplayString() + " | " +pressureAbsolute.enabled);
         }
 
         /**********\
@@ -287,7 +287,7 @@ public class UserInputController : MonoBehaviour
      **/
     public void LoadExtraOptions()
     {
-        Debug.Log("LoadExtraOptions called");
+        //Debug.Log("LoadExtraOptions called");
         invertModifiers = PlayerPrefs.GetInt("invertModifiers") == 1 ? true : false;
         invertAbsoluteA = PlayerPrefs.GetInt("invertAbsoluteA") == 1 ? true : false;
         invertAbsoluteP = PlayerPrefs.GetInt("invertAbsoluteP") == 1 ? true : false;

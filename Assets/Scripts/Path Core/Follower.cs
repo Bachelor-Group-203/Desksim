@@ -7,18 +7,26 @@ public class Follower : MonoBehaviour
 {
     public PathCreator pathCreator;
     public EndOfPathInstruction end;
-    public float speed = 5;
     float distanceTravelled;
 
+    private Traincontroller trainController;
+
+    private void Awake()
+    {
+        trainController = GetComponent<Traincontroller>();
+    }
 
     void Update()
     {
         if (pathCreator != null) // if path exists
         {
             // Move and rotate game object to points of the path
-            distanceTravelled += speed * Time.deltaTime;
+            distanceTravelled += trainController.Velocity * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, end);
-            transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
+            Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
+            Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
+
+            transform.rotation = pathRotation * normalRotation;
         }
     }
 }

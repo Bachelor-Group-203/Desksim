@@ -39,7 +39,14 @@ namespace PathCreationEditor
             dstMouseToDragPointStart = float.MaxValue;
         }
 
-        public static Vector3 DrawHandle(Vector3 position, PathSpace space, bool isInteractive, float handleDiameter, Handles.CapFunction capFunc, HandleColours colours, out HandleInputType inputType, int handleIndex)
+        /** 
+         * @touched Michael-Angelo Karpowicz
+         * 
+         * Added raycast collision on terrain to easily place anchorpoints of paths 
+         * Added height of path over generated terrain in editor
+         * Added Debug ray and continous height update while mouse is dragged
+         */
+        public static Vector3 DrawHandle(Vector3 position, PathSpace space, bool isInteractive, float handleDiameter, Handles.CapFunction capFunc, HandleColours colours, out HandleInputType inputType, int handleIndex, float height, ref float newHeight)
         {
             int id = GetID(handleIndex);
             Vector3 screenPosition = Handles.matrix.MultiplyPoint(position);
@@ -51,7 +58,6 @@ namespace PathCreationEditor
             float handleRadius = handleDiameter / 2f;
             float dstToHandle = HandleUtility.DistanceToCircle(position, handleRadius + extraInputRadius);
             float dstToMouse = HandleUtility.DistanceToCircle(position, 0);
-
             // Handle input events
             if (isInteractive)
             {
@@ -74,6 +80,14 @@ namespace PathCreationEditor
                 }
                 switch (eventType)
                 {
+                    case EventType.KeyDown:
+                        if (Event.current.keyCode == KeyCode.O) {
+                            newHeight += 1f;
+                        }
+                        else if (Event.current.keyCode == KeyCode.L) {
+                            newHeight -= 1f;
+                        }
+                        break;
                     case EventType.MouseDown:
                         if (Event.current.button == 0 && Event.current.modifiers != EventModifiers.Alt)
                         {
@@ -82,6 +96,7 @@ namespace PathCreationEditor
                                 dstMouseToDragPointStart = dstToMouse;
                                 GUIUtility.hotControl = id;
                                 handleDragMouseEnd = handleDragMouseStart = Event.current.mousePosition;
+                                Debug.DrawRay(position, Vector3.down * height, Color.blue, .005f);
                                 handleDragWorldStart = position;
                                 selectedHandleID = id;
                                 inputType = HandleInputType.LMBPress;
@@ -117,7 +132,22 @@ namespace PathCreationEditor
                             // Handle can move freely in 3d space
                             if (space == PathSpace.xyz)
                             {
-                                position = Handles.matrix.inverse.MultiplyPoint(Camera.current.ScreenToWorldPoint(position2));
+                                
+                                Ray mouseRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+                                RaycastHit hit;
+                                Vector3 worldMouse;
+                                if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit, 999, LayerMask.GetMask("Ground")))
+                                {
+                                    worldMouse = hit.point;
+                                    worldMouse.y += height;
+                                    //worldMouse = Camera.current.transform.InverseTransformPoint(hit.point);
+                                }
+                                else worldMouse = new Vector3(0,0,0);
+
+                                position = Handles.matrix.inverse.MultiplyPoint(worldMouse);
+
+                                Debug.DrawRay(hit.point, Vector3.up * height, Color.blue, .005f);
+                                //Debug.Log("World Mouse: " + worldMouse);
                             }
                             // Handle is clamped to xy or xz plane
                             else
