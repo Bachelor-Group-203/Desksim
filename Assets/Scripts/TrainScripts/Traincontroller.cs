@@ -8,7 +8,7 @@ public class Traincontroller : MonoBehaviour
 
     private TrainValues tValues;
     private Rigidbody rBody;
-    //private UserInputController inputController;
+    private TrainInputController input;
 
 
     // TODO!!! Find out how to get the train head direction
@@ -18,7 +18,8 @@ public class Traincontroller : MonoBehaviour
     {
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
-        //inputController = GetComponent<UserInputController>();
+        input = GetComponent<TrainInputController>();
+        //inputController = GetComponent<TrainInputController>();
     }
 
     // Update is called once per frame

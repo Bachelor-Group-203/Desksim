@@ -1,11 +1,11 @@
-    using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class UserInputController : MonoBehaviour
+public class TrainInputController : MonoBehaviour
 {
 
     /***************\
@@ -20,26 +20,15 @@ public class UserInputController : MonoBehaviour
     | Core values |
     \*************/
     public float pressure;     // 0 -> 1, apply to curve in train controller or in separate value
-    public float acceleration; // 0 -> 1
-
+    public float acceleration; // 0 -> 
 
     /***************\
     | UI components |
     \***************/
-
     [SerializeField]
     private Slider pressureSlider;
     [SerializeField]
     private Slider accelerationSlider;
-    [SerializeField]
-    private Toggle invertModifiersToggle;
-    [SerializeField]
-    private Toggle invertAbsoluteAToggle;
-    [SerializeField]
-    private Toggle invertAbsolutePToggle;
-    private bool invertModifiers = false;
-    private bool invertAbsoluteA = false;
-    private bool invertAbsoluteP = false;
 
 
     /***************\
@@ -51,11 +40,11 @@ public class UserInputController : MonoBehaviour
     private float accelerationAbsolute_value = 0;
     private float accelerationAbsolute_delta = 0;
     private float accelerationModifier_value;
-    private bool enabled = false;
+    private bool hasBeenEnabled = false;
     [SerializeField]
-    private bool debug = false;
+    private bool debug = true;
     [SerializeField]
-    private bool superDebug = true;
+    private bool superDebug = false;
 
 
 
@@ -110,7 +99,7 @@ public class UserInputController : MonoBehaviour
      **/
     private void Enable()
     {
-        enabled = true;
+        hasBeenEnabled = true;
         if(debug) Debug.Log("InputController: Enable() called");
 
 
@@ -121,20 +110,24 @@ public class UserInputController : MonoBehaviour
         accelerationModifier = userInputActions.Train.AccelerationModifier;
 
         // Subscribing input actions "performed" to functions
-        userInputActions.Train.Menu.performed += Pause;
         userInputActions.Train.FocusPanel.performed += Train_FocusPanel;
-        userInputActions.Train.RebindMenu.performed += RebindMenu;
+        userInputActions.Train.Menu.performed += InputManager.Pause;
+        userInputActions.Train.RebindMenu.performed += InputManager.RebindMenu;
+        userInputActions.Train.ExitTrain.performed += Train_ExitTrain;
+
+
 
         // Enabling the action inputs
         pressureAbsolute.Enable();
         pressureModifier.Enable();
         accelerationAbsolute.Enable();
         accelerationModifier.Enable();
-        userInputActions.Train.Menu.Enable();
         userInputActions.Train.FocusPanel.Enable();
+        userInputActions.Train.ExitTrain.Enable();
+        userInputActions.Train.Menu.Enable();
         userInputActions.Train.RebindMenu.Enable();
 
-        LoadExtraOptions();
+        InputManager.LoadExtraOptions();
 
     }
 
@@ -144,7 +137,7 @@ public class UserInputController : MonoBehaviour
      **/
     private void OnDisable()
     {
-        if(debug) Debug.Log("InputController: OnEnable called");
+        if(debug) Debug.Log("<InputController Train> \tOnDisable called");
         // Enabling the action inputs, so they won't call
         pressureAbsolute.Disable();
         pressureModifier.Disable();
@@ -153,6 +146,7 @@ public class UserInputController : MonoBehaviour
         userInputActions.Train.Menu.Disable();
         userInputActions.Train.FocusPanel.Disable();
         userInputActions.Train.RebindMenu.Disable();
+        userInputActions.Train.ExitTrain.Disable();
     }
 
 
@@ -162,7 +156,7 @@ public class UserInputController : MonoBehaviour
     private void FixedUpdate()
     {
         // Wait for InputManager to have been initiated, before enabling controls.
-        if (!enabled)
+        if (!hasBeenEnabled)
         {
             if (InputManager.userInputActions != null && userInputActions == null)
             {
@@ -173,10 +167,8 @@ public class UserInputController : MonoBehaviour
         // All controller vector2/axis values are assumed to be from -1 to 1, or 0 to 1 for joysticks, this might vary from device to device, hopefully not. Can be checked in window->analysis->input 
 
 
-        if(superDebug)
-        {
-            Debug.Log("--PRESSURE ABSOLUTE-- = " +pressureAbsolute.ReadValue<float>()+" | "+pressureAbsolute.GetBindingDisplayString() + " | " +pressureAbsolute.enabled);
-        }
+        if(superDebug) Debug.Log("<InputController Train> \t--PRESSURE ABSOLUTE-- = " + pressureAbsolute.ReadValue<float>()+" | "+pressureAbsolute.GetBindingDisplayString() + " | " +pressureAbsolute.enabled);
+        
 
         /**********\
         | PRESSURE |
@@ -188,18 +180,18 @@ public class UserInputController : MonoBehaviour
         pressureModifier_value = pressureModifier.ReadValue<float>();
         if (pressureAbsolute_delta != 0) {
             // Absolute pressure input is available, and changed
-            if(debug) Debug.Log("Input: pressureABSOLUTE value = " + pressureAbsolute_value + " -> " + (pressureAbsolute_value + 1) / 2 +""+ (invertAbsoluteP ? " <inverted>" : ""));
+            if(debug) Debug.Log("<InputController Train> \tpressureABSOLUTE value = " + pressureAbsolute_value + " -> " + (pressureAbsolute_value + 1) / 2 +""+ (InputManager.invertAbsoluteP ? " <inverted>" : ""));
             pressure = (pressureAbsolute_value+1)/2; // Axises go from -1 to 1, changes it to 0 -> 
-            if (invertAbsoluteP) pressure = 1 - pressure;
+            if (InputManager.invertAbsoluteP) pressure = 1 - pressure;
 
         }
         else if (pressureModifier_value != 0) {
 
             // Absolute pressure input not available, using modifier input
-            if (invertModifiers) pressureModifier_value = ((pressureModifier_value > 0) ? 1 - pressureModifier_value : -(1 + pressureModifier_value));
+            if (InputManager.invertModifiers) pressureModifier_value = ((pressureModifier_value > 0) ? 1 - pressureModifier_value : -(1 + pressureModifier_value));
             pressure += pressureModifier_value * pressureModificationMagnitude;
             pressure = Mathf.Clamp(pressure, 0.0f, 1.0f);
-            if(debug) Debug.Log("Input: pressureMODIFIER value = " + pressureModifier_value + " == " + pressure);
+            if(debug) Debug.Log("<InputController Train> \tpressureMODIFIER value = " + pressureModifier_value + " == " + pressure);
         }
 
         /**************\
@@ -213,17 +205,17 @@ public class UserInputController : MonoBehaviour
         // If absolute value has changed
         if (accelerationAbsolute_delta != 0) {
             // Absolute acceleration input is available, and changed
-            if(debug) Debug.Log("Input: accelerationABSOLUTE value = " + accelerationAbsolute_value + " -> " + (accelerationAbsolute_value+1)/2 +""+ (invertAbsoluteA?" <inverted>":""));
+            if(debug) Debug.Log("<InputController Train> \taccelerationABSOLUTE value = " + accelerationAbsolute_value + " -> " + (accelerationAbsolute_value+1)/2 +""+ (InputManager.invertAbsoluteA ?" <inverted>":""));
             acceleration = (accelerationAbsolute_value+1)/2;
-            if (invertAbsoluteA) acceleration = 1 - acceleration;
+            if (InputManager.invertAbsoluteA) acceleration = 1 - acceleration;
 
         } else if(accelerationModifier_value != 0) {
 
             // Absolute acceleration input not available, using modifier
-            if (invertModifiers) accelerationModifier_value = ((accelerationModifier_value > 0) ? 1 - accelerationModifier_value : -(1 + accelerationModifier_value));
+            if (InputManager.invertModifiers) accelerationModifier_value = ((accelerationModifier_value > 0) ? 1 - accelerationModifier_value : -(1 + accelerationModifier_value));
             acceleration += accelerationModifier_value  * accelerationModificationMagnitude;
             acceleration = Mathf.Clamp(acceleration, 0.0f, 1.0f);
-            if(debug) Debug.Log("Input: accelerationMODIFIER value = " + accelerationModifier_value + " == " + acceleration);
+            if(debug) Debug.Log("<InputController Train> \taccelerationMODIFIER value = " + accelerationModifier_value + " == " + acceleration);
         }
 
         /*********\
@@ -233,11 +225,8 @@ public class UserInputController : MonoBehaviour
         if (accelerationSlider != null) accelerationSlider.value = acceleration;
         if (pressureSlider != null) pressureSlider.value = pressure;
         // May cause jittering, if so only update this when the value wasn't changed by the slider
-        
 
     }
-
-
 
     /**
      * 
@@ -254,80 +243,15 @@ public class UserInputController : MonoBehaviour
     {
         pressure = value;
     }
-
-    /**
-     * 
-     **/
-    public void OnInvertModifiersToggleValueChanged(bool value)
-    {
-        invertModifiers = value;
-        SaveExtraOptions();
-    }
-
-    /**
-     * 
-     **/
-    public void OninvertAbsoluteAToggleValueChanged(bool value)
-    {
-        invertAbsoluteA = value;
-        SaveExtraOptions();
-    }
-
-    /**
-     * 
-     **/
-    public void OninvertAbsolutePToggleValueChanged(bool value)
-    {
-        invertAbsoluteP = value;
-        SaveExtraOptions();
-    }
-
-    /**
-     * 
-     **/
-    public void LoadExtraOptions()
-    {
-        Debug.Log("LoadExtraOptions called");
-        invertModifiers = PlayerPrefs.GetInt("invertModifiers") == 1 ? true : false;
-        invertAbsoluteA = PlayerPrefs.GetInt("invertAbsoluteA") == 1 ? true : false;
-        invertAbsoluteP = PlayerPrefs.GetInt("invertAbsoluteP") == 1 ? true : false;
-        // If a ui element for selecting modifierInvert exists, update it to reflect the saved setting
-        if (invertModifiersToggle != null) invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
-        if (invertAbsoluteAToggle != null) invertAbsoluteAToggle.GetComponent<Toggle>().isOn = invertAbsoluteA;
-        if (invertAbsolutePToggle != null) invertAbsolutePToggle.GetComponent<Toggle>().isOn = invertAbsoluteP;
-
-    }
-
-    /**
-     * 
-     * Called by the UI elements that change these options
-     **/
-    public void SaveExtraOptions()
-    {
-        Debug.Log("SaveExtraOptions called");
-        PlayerPrefs.SetInt("invertModifiers", invertModifiers ? 1 : 0);
-        PlayerPrefs.SetInt("invertAbsoluteA", invertAbsoluteA ? 1 : 0);
-        PlayerPrefs.SetInt("invertAbsoluteP", invertAbsoluteP ? 1 : 0);
-    }
-
-    /**********************************************************************\
-    |                      SECTION: INPUT ACTION FUNCTIONS                 |
-    \**********************************************************************/
     private void Train_FocusPanel(InputAction.CallbackContext obj)
     {
-        Debug.Log("Input: Train - FocusPanel");
+        Debug.Log("<InputController Train> \tFocusPanel");
     }
-
-    private void Pause(InputAction.CallbackContext obj)
+    private void Train_ExitTrain(InputAction.CallbackContext obj)
     {
-        Debug.Log("Input: Pause");
-    
+        // Do checks like, only leaving if the train is standing still, here
+        Debug.Log("<InputController Train> \tExitTrain");
+        InputManager.ExitTrain();
     }
-    private void RebindMenu(InputAction.CallbackContext obj)
-    {
-        Debug.Log("Input: RebindMenu");
-    }
-
-
 
 }
