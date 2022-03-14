@@ -9,9 +9,6 @@ public class RebindUI : MonoBehaviour
     [SerializeField]
     private InputActionReference inputActionReference; // This is part of the SO (scriptable object)
 
-    [SerializeField]
-    private bool excludeMouse = true; // Disable it when rebinding
-
     [Range(0, 10)]
     [SerializeField]
     private int selectedBinding;
@@ -19,7 +16,7 @@ public class RebindUI : MonoBehaviour
     [SerializeField]
     private InputBinding.DisplayStringOptions displayStringOptions; // Built in enum that lets us format the binding name
 
-    [Header("Binding Info - DO NOT EDIT")]
+    [Header("Binding Info - DON'T EDIT")]
     [SerializeField]
     private InputBinding inputBinding; // To help see what binding we have 
     private int bindingIndex;
@@ -115,7 +112,7 @@ public class RebindUI : MonoBehaviour
 
     private void DoRebind()
     {
-        InputManager.StartRebind(actionName, bindingIndex, rebindText, excludeMouse);
+        InputManager.StartRebind(actionName, bindingIndex, rebindText);
     }
 
     private void ResetBinding()

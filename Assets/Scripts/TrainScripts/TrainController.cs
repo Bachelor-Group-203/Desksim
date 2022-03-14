@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 /*
  * This class is for controlling the train and contains all the logic for how the train moves
  */
-public class Traincontroller : MonoBehaviour
+public class TrainController : MonoBehaviour
 {
 
     [SerializeField] private LayerMask railLayer;
 
     private TrainValues tValues;
     private Rigidbody rBody;
-    private UserInputController input;
+    private TrainInput input;
     private TrainUi tUi;
 
 
@@ -21,7 +21,7 @@ public class Traincontroller : MonoBehaviour
     private Vector3 tDirection = new Vector3(1, 0, 0);
 
     private float force = 0;
-    private float velocity = 0;
+    private float vel = 0;
     private float pressure = 0;
     private float slope = 0;
 
@@ -43,7 +43,7 @@ public class Traincontroller : MonoBehaviour
     {
         get
         {
-            return velocity;
+            return vel;
         }
     }
 
@@ -65,8 +65,15 @@ public class Traincontroller : MonoBehaviour
     {
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
-        input = GetComponent<UserInputController>();
         tUi = GetComponent<TrainUi>();
+        if (GameObject.FindGameObjectWithTag("InputScripts"))
+        {
+            input = GameObject.FindGameObjectWithTag("InputScripts").GetComponent<TrainInput>();
+        }
+        else
+        {
+            Debug.LogWarning("!!! InputScripts game object not found !!!");
+        }
     }
 
     /*
@@ -79,7 +86,7 @@ public class Traincontroller : MonoBehaviour
          ************************/
         // Input train controller here 
         // controller 0 - 100% * maxAcceleration = current acceleration 
-        velocity = Vector3.Magnitude(rBody.velocity) * force;
+        vel = Vector3.Magnitude(rBody.velocity) * force;
 
         /******************
          * Break controller
@@ -99,7 +106,7 @@ public class Traincontroller : MonoBehaviour
         /***************
          * Reverse train
          ***************/
-        if (Mathf.Abs(velocity) <= 0)
+        if (Mathf.Abs(vel) <= 0)
         {
             if (tUi.Reverse)
             {
@@ -131,7 +138,7 @@ public class Traincontroller : MonoBehaviour
          ***************************/
         if (pressure >= 5.0f)
         {
-            if (Mathf.Abs(velocity) >= tValues.MaxVelocity)
+            if (Mathf.Abs(vel) >= tValues.MaxVelocity)
             {
                 rBody.velocity = tDirection.normalized * tValues.MaxVelocity;
                 rBody.AddForce(0, 0, 0);
@@ -147,7 +154,7 @@ public class Traincontroller : MonoBehaviour
          **********************/
         if (pressure <= 4.5f)
         {
-            if (Mathf.Abs(velocity) <= 0.01f)
+            if (Mathf.Abs(vel) <= 0.01f)
             {
                 rBody.velocity = Vector3.zero;
                 rBody.AddForce(0, 0, 0);

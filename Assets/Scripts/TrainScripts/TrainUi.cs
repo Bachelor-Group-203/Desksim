@@ -23,7 +23,7 @@ public class TrainUi : MonoBehaviour
     [Header("Slpoe Finder")]
     [SerializeField] private Text angleDisplay;
 
-    private Traincontroller trainController;
+    private TrainController trainController;
     private TrainValues trainValues;
 
     private int maxViewVelocity;
@@ -49,7 +49,7 @@ public class TrainUi : MonoBehaviour
     private void Awake()
     {
         // Gets the refrence to components needed
-        trainController = GetComponent<Traincontroller>();
+        trainController = GetComponent<TrainController>();
         trainValues = GetComponent<TrainValues>();
 
         // Finds the total angle to use on the gauge

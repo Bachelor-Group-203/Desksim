@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - UI_SelectedByDefault
-  - InputPack
+  - InputScripts
   layers:
   - Default
   - TransparentFX
