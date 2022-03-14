@@ -21,7 +21,7 @@ public class TrainController : MonoBehaviour
     private Vector3 tDirection = new Vector3(1, 0, 0);
 
     private float force = 0;
-    private float velocity = 0;
+    private float vel = 0;
     private float pressure = 0;
     private float slope = 0;
 
@@ -43,7 +43,7 @@ public class TrainController : MonoBehaviour
     {
         get
         {
-            return velocity;
+            return vel;
         }
     }
 
@@ -66,9 +66,9 @@ public class TrainController : MonoBehaviour
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
         tUi = GetComponent<TrainUi>();
-        if (GameObject.FindGameObjectWithTag("InputPack"))
+        if (GameObject.FindGameObjectWithTag("InputScripts"))
         {
-            input = GameObject.FindGameObjectWithTag("InputPack").GetComponent<TrainInput>();
+            input = GameObject.FindGameObjectWithTag("InputScripts").GetComponent<TrainInput>();
         }
         else
         {
@@ -86,7 +86,7 @@ public class TrainController : MonoBehaviour
          ************************/
         // Input train controller here 
         // controller 0 - 100% * maxAcceleration = current acceleration 
-        velocity = Vector3.Magnitude(rBody.velocity) * force;
+        vel = Vector3.Magnitude(rBody.velocity) * force;
 
         /******************
          * Break controller
@@ -106,7 +106,7 @@ public class TrainController : MonoBehaviour
         /***************
          * Reverse train
          ***************/
-        if (Mathf.Abs(velocity) <= 0)
+        if (Mathf.Abs(vel) <= 0)
         {
             if (tUi.Reverse)
             {
@@ -138,7 +138,7 @@ public class TrainController : MonoBehaviour
          ***************************/
         if (pressure >= 5.0f)
         {
-            if (Mathf.Abs(velocity) >= tValues.MaxVelocity)
+            if (Mathf.Abs(vel) >= tValues.MaxVelocity)
             {
                 rBody.velocity = tDirection.normalized * tValues.MaxVelocity;
                 rBody.AddForce(0, 0, 0);
@@ -154,7 +154,7 @@ public class TrainController : MonoBehaviour
          **********************/
         if (pressure <= 4.5f)
         {
-            if (Mathf.Abs(velocity) <= 0.01f)
+            if (Mathf.Abs(vel) <= 0.01f)
             {
                 rBody.velocity = Vector3.zero;
                 rBody.AddForce(0, 0, 0);

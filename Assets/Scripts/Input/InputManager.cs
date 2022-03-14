@@ -104,7 +104,7 @@ public class InputManager : MonoBehaviour
      * Called by UI component
      * From Unity's rebinding sample
      **/
-    public static void StartRebind(string actionName, int bindingIndex, Text statusText, bool excludeMouse)
+    public static void StartRebind(string actionName, int bindingIndex, Text statusText)
     {
         InputAction action = userInputActions.asset.FindAction(actionName); // Find action by name from our input action asset instance
         if (action == null || action.bindings.Count <= bindingIndex) {
@@ -119,18 +119,18 @@ public class InputManager : MonoBehaviour
             // If not composite, rebind normally
             if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isPartOfComposite)
             {
-                DoRebind(action, firstPartIndex, statusText, true, excludeMouse);
+                DoRebind(action, firstPartIndex, statusText, true);
             }
                 
         } // Else, rebind normally
-        else DoRebind(action, bindingIndex, statusText, false, excludeMouse);
+        else DoRebind(action, bindingIndex, statusText, false);
 
     }
 
     /**
      * 
      **/
-    private static void DoRebind(InputAction actionToRebind, int bindingIndex, Text statusText, bool allCompositeParts, bool excludeMouse) 
+    private static void DoRebind(InputAction actionToRebind, int bindingIndex, Text statusText, bool allCompositeParts) 
     {
         if (actionToRebind == null || bindingIndex < 0) return;
 
@@ -153,7 +153,7 @@ public class InputManager : MonoBehaviour
                 var nextBindingIndex = bindingIndex + 1;
                 // Recursively increase index until next binding isn't a composite
                 if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isPartOfComposite)
-                    DoRebind(actionToRebind, nextBindingIndex, statusText, allCompositeParts, excludeMouse);
+                    DoRebind(actionToRebind, nextBindingIndex, statusText, allCompositeParts);
             }
 
             SaveBindingOverride(actionToRebind);
@@ -173,7 +173,7 @@ public class InputManager : MonoBehaviour
         rebind.WithCancelingThrough("<Keyboard>/escape");
         rebind.WithCancelingThrough("<Mouse>/rightButton");
         rebind.WithCancelingThrough("<Mouse>/leftButton");
-        if (excludeMouse) rebind.WithControlsExcluding("Mouse");
+         rebind.WithControlsExcluding("Mouse");
 
         // Start the rebinding process
         rebindStarted?.Invoke(actionToRebind, bindingIndex);

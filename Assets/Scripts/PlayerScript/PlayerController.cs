@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        if(GameObject.FindGameObjectWithTag("InputPack"))
+        if(GameObject.FindGameObjectWithTag("InputScripts"))
         {
-            input = GameObject.FindGameObjectWithTag("InputPack").GetComponent<PlayerInput>();
+            input = GameObject.FindGameObjectWithTag("InputScripts").GetComponent<PlayerInput>();
         } else
         {
             Debug.LogWarning("!!! InputScripts game object not found !!!");
