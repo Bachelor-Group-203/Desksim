@@ -20,8 +20,6 @@ public class TrainUi : MonoBehaviour
     [SerializeField] private GameObject reverseBackground;
     [SerializeField] private Color reverseOffCollor;
     [SerializeField] private Color reverseOnCollor;
-    [Header("Slpoe Finder")]
-    [SerializeField] private Text angleDisplay;
 
     private TrainController trainController;
     private TrainValues trainValues;
@@ -76,9 +74,6 @@ public class TrainUi : MonoBehaviour
 
         // Rotates the pressure needle
         pressureNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(trainController.Pressure, maxViewPressure));
-
-        // Displays the slope angle
-        angleDisplay.text = trainController.Slope.ToString();
     }
 
     /*
