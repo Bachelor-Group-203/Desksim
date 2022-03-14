@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class TrainInputController : MonoBehaviour
+public class TrainInput : MonoBehaviour
 {
 
     /***************\
@@ -19,8 +19,16 @@ public class TrainInputController : MonoBehaviour
     /*************\
     | Core values |
     \*************/
-    public float pressure;     // 0 -> 1, apply to curve in train controller or in separate value
-    public float acceleration; // 0 -> 
+
+    private float p;
+    public float pressure       // 0 -> 1, apply to curve in train controller or in separate value
+    {   get { return p; }
+        set { } }
+
+    private float a;
+    public float acceleration   // 0 -> 1
+    {   get { return a; }
+        set { } }
 
     /***************\
     | UI components |
@@ -42,7 +50,7 @@ public class TrainInputController : MonoBehaviour
     private float accelerationModifier_value;
     private bool hasBeenEnabled = false;
     [SerializeField]
-    private bool debug = true;
+    private bool debug = false;
     [SerializeField]
     private bool superDebug = false;
 
@@ -53,10 +61,7 @@ public class TrainInputController : MonoBehaviour
     \********************/
     private UserInputActions userInputActions; // Not static or global, this is this scripts own instance of the input action asset
 
-    /*********************\
-    | TRAIN input actions |
-    \*********************/
-    private InputActionMap userInputActionMap_Train;
+
     // Pressure
     private InputAction pressureAbsolute; // For compatible joysticks, use when available
     private InputAction pressureModifier; // For alternative inputs, keyboard & gamepads
@@ -68,11 +73,11 @@ public class TrainInputController : MonoBehaviour
 
 
     /**
-     * Called when object is instantiated (?), instantiates user input action asset
+     * Called when object is instantiated
      **/
     private void Awake()
     {
-        // Creating a new instance of our input action asset
+        // Creating a new instance of input action asset
         // userInputActions = new UserInputActions();
     }
 
@@ -114,6 +119,7 @@ public class TrainInputController : MonoBehaviour
         userInputActions.Train.Menu.performed += InputManager.Pause;
         userInputActions.Train.RebindMenu.performed += InputManager.RebindMenu;
         userInputActions.Train.ExitTrain.performed += Train_ExitTrain;
+        userInputActions.Train.ChangePerspective.performed += ChangePerspective;
 
 
 
@@ -126,6 +132,7 @@ public class TrainInputController : MonoBehaviour
         userInputActions.Train.ExitTrain.Enable();
         userInputActions.Train.Menu.Enable();
         userInputActions.Train.RebindMenu.Enable();
+        userInputActions.Train.ChangePerspective.Enable();
 
         InputManager.LoadExtraOptions();
 
@@ -147,6 +154,7 @@ public class TrainInputController : MonoBehaviour
         userInputActions.Train.FocusPanel.Disable();
         userInputActions.Train.RebindMenu.Disable();
         userInputActions.Train.ExitTrain.Disable();
+        userInputActions.Train.ChangePerspective.Disable();
     }
 
 
@@ -181,17 +189,17 @@ public class TrainInputController : MonoBehaviour
         if (pressureAbsolute_delta != 0) {
             // Absolute pressure input is available, and changed
             if(debug) Debug.Log("<InputController Train> \tpressureABSOLUTE value = " + pressureAbsolute_value + " -> " + (pressureAbsolute_value + 1) / 2 +""+ (InputManager.invertAbsoluteP ? " <inverted>" : ""));
-            pressure = (pressureAbsolute_value+1)/2; // Axises go from -1 to 1, changes it to 0 -> 
-            if (InputManager.invertAbsoluteP) pressure = 1 - pressure;
+            p = (pressureAbsolute_value+1)/2; // Axises go from -1 to 1, changes it to 0 -> 
+            if (InputManager.invertAbsoluteP) p = 1 - p;
 
         }
         else if (pressureModifier_value != 0) {
 
             // Absolute pressure input not available, using modifier input
             if (InputManager.invertModifiers) pressureModifier_value = ((pressureModifier_value > 0) ? 1 - pressureModifier_value : -(1 + pressureModifier_value));
-            pressure += pressureModifier_value * pressureModificationMagnitude;
-            pressure = Mathf.Clamp(pressure, 0.0f, 1.0f);
-            if(debug) Debug.Log("<InputController Train> \tpressureMODIFIER value = " + pressureModifier_value + " == " + pressure);
+            p += pressureModifier_value * pressureModificationMagnitude;
+            p = Mathf.Clamp(p, 0.0f, 1.0f);
+            if(debug) Debug.Log("<InputController Train> \tpressureMODIFIER value = " + pressureModifier_value + " == " + p);
         }
 
         /**************\
@@ -206,24 +214,24 @@ public class TrainInputController : MonoBehaviour
         if (accelerationAbsolute_delta != 0) {
             // Absolute acceleration input is available, and changed
             if(debug) Debug.Log("<InputController Train> \taccelerationABSOLUTE value = " + accelerationAbsolute_value + " -> " + (accelerationAbsolute_value+1)/2 +""+ (InputManager.invertAbsoluteA ?" <inverted>":""));
-            acceleration = (accelerationAbsolute_value+1)/2;
-            if (InputManager.invertAbsoluteA) acceleration = 1 - acceleration;
+            a = (accelerationAbsolute_value+1)/2;
+            if (InputManager.invertAbsoluteA) a = 1 - a;
 
         } else if(accelerationModifier_value != 0) {
 
             // Absolute acceleration input not available, using modifier
             if (InputManager.invertModifiers) accelerationModifier_value = ((accelerationModifier_value > 0) ? 1 - accelerationModifier_value : -(1 + accelerationModifier_value));
-            acceleration += accelerationModifier_value  * accelerationModificationMagnitude;
-            acceleration = Mathf.Clamp(acceleration, 0.0f, 1.0f);
-            if(debug) Debug.Log("<InputController Train> \taccelerationMODIFIER value = " + accelerationModifier_value + " == " + acceleration);
+            a += accelerationModifier_value  * accelerationModificationMagnitude;
+            a = Mathf.Clamp(a, 0.0f, 1.0f);
+            if(debug) Debug.Log("<InputController Train> \taccelerationMODIFIER value = " + accelerationModifier_value + " == " + a);
         }
 
         /*********\
         | SLIDERS |
         \*********/
         // Update value of sliders (Sliders update the value in separate OnValueChanged event)
-        if (accelerationSlider != null) accelerationSlider.value = acceleration;
-        if (pressureSlider != null) pressureSlider.value = pressure;
+        if (accelerationSlider != null) accelerationSlider.value = a;
+        if (pressureSlider != null) pressureSlider.value = p;
         // May cause jittering, if so only update this when the value wasn't changed by the slider
 
     }
@@ -233,7 +241,7 @@ public class TrainInputController : MonoBehaviour
      **/
     public void OnSliderAccelerationValueChanged(System.Single value)
     {
-        acceleration = value;
+        a = value;
     }
 
     /**
@@ -241,17 +249,33 @@ public class TrainInputController : MonoBehaviour
      **/
     public void OnSliderPressureValueChanged(System.Single value)
     {
-        pressure = value;
+        p = value;
     }
+
+    /**
+     * 
+     **/
     private void Train_FocusPanel(InputAction.CallbackContext obj)
     {
         Debug.Log("<InputController Train> \tFocusPanel");
     }
+    
+    /**
+     * 
+     **/
     private void Train_ExitTrain(InputAction.CallbackContext obj)
     {
         // Do checks like, only leaving if the train is standing still, here
         Debug.Log("<InputController Train> \tExitTrain");
         InputManager.ExitTrain();
+    }
+
+    /**
+     * 
+     **/
+    private void ChangePerspective(InputAction.CallbackContext obj)
+    {
+        
     }
 
 }

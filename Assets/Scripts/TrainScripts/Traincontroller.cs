@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 /*
  * This class is for controlling the train and contains all the logic for how the train moves
  */
-public class Traincontroller : MonoBehaviour
+public class TrainController : MonoBehaviour
 {
 
     [SerializeField] private LayerMask railLayer;
 
     private TrainValues tValues;
     private Rigidbody rBody;
-    private UserInputController input;
+    private TrainInput input;
     private TrainUi tUi;
 
 
@@ -65,8 +65,15 @@ public class Traincontroller : MonoBehaviour
     {
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
-        input = GetComponent<UserInputController>();
         tUi = GetComponent<TrainUi>();
+        if (GameObject.FindGameObjectWithTag("InputPack"))
+        {
+            input = GameObject.FindGameObjectWithTag("InputPack").GetComponent<TrainInput>();
+        }
+        else
+        {
+            Debug.LogWarning("!!! InputScripts game object not found !!!");
+        }
     }
 
     /*

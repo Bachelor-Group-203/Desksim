@@ -43,6 +43,7 @@ public class InputManager : MonoBehaviour
         userInputActions.Train.Disable();
         userInputActions.Player.Disable();
         SwitchToActionMap(userInputActions.Train);
+
     }
 
     /**

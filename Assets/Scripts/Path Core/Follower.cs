@@ -9,11 +9,11 @@ public class Follower : MonoBehaviour
     public EndOfPathInstruction end;
     float distanceTravelled;
 
-    private Traincontroller trainController;
+    private TrainController trainController;
 
     private void Awake()
     {
-        trainController = GetComponent<Traincontroller>();
+        trainController = GetComponent<TrainController>();
     }
 
     void Update()

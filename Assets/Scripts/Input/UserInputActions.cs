@@ -98,6 +98,15 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Change Perspective"",
+                    ""type"": ""Button"",
+                    ""id"": ""737fe307-3981-4f6a-a1b6-ff1aeccae8be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -318,6 +327,28 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ccb1dcb-bb34-4f86-a2cd-edd4fd96d8ca"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Change Perspective"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06374f26-61a0-449f-8082-1d221b1c0649"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Change Perspective"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -847,6 +878,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         m_Train_ExitTrain = m_Train.FindAction("Exit Train", throwIfNotFound: true);
         m_Train_RebindMenu = m_Train.FindAction("Rebind Menu", throwIfNotFound: true);
         m_Train_Menu = m_Train.FindAction("Menu", throwIfNotFound: true);
+        m_Train_ChangePerspective = m_Train.FindAction("Change Perspective", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
@@ -929,6 +961,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Train_ExitTrain;
     private readonly InputAction m_Train_RebindMenu;
     private readonly InputAction m_Train_Menu;
+    private readonly InputAction m_Train_ChangePerspective;
     public struct TrainActions
     {
         private @UserInputActions m_Wrapper;
@@ -941,6 +974,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         public InputAction @ExitTrain => m_Wrapper.m_Train_ExitTrain;
         public InputAction @RebindMenu => m_Wrapper.m_Train_RebindMenu;
         public InputAction @Menu => m_Wrapper.m_Train_Menu;
+        public InputAction @ChangePerspective => m_Wrapper.m_Train_ChangePerspective;
         public InputActionMap Get() { return m_Wrapper.m_Train; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -974,6 +1008,9 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @Menu.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
+                @ChangePerspective.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
+                @ChangePerspective.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
+                @ChangePerspective.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
             }
             m_Wrapper.m_TrainActionsCallbackInterface = instance;
             if (instance != null)
@@ -1002,6 +1039,9 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @ChangePerspective.started += instance.OnChangePerspective;
+                @ChangePerspective.performed += instance.OnChangePerspective;
+                @ChangePerspective.canceled += instance.OnChangePerspective;
             }
         }
     }
@@ -1154,6 +1194,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         void OnExitTrain(InputAction.CallbackContext context);
         void OnRebindMenu(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnChangePerspective(InputAction.CallbackContext context);
     }
     public interface IPlayerActions
     {

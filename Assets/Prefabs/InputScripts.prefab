@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1928608662451544343}
   - component: {fileID: 4874257500684666933}
   m_Layer: 0
-  m_Name: InputPack
-  m_TagString: Untagged
+  m_Name: InputScripts
+  m_TagString: InputPack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,8 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ab34b29ee38fb498cde3b1af55dddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressure: 0
-  acceleration: 0
   pressureSlider: {fileID: 0}
   accelerationSlider: {fileID: 0}
   debug: 0

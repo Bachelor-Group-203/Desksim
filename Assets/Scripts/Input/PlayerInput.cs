@@ -5,20 +5,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerInputController : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
-
-    /***************\
-    | Static values |
-    \***************/
 
     /*************\
     | Core values |
     \*************/
+    public Vector2 movement
+    {   get { return userInputActions.Player.Movement.ReadValue<Vector2>(); }
+        set { return; } }
+    public Vector2 cameraDelta
+    {   get { return userInputActions.Player.Camera.ReadValue<Vector2>(); }
+        set { return; } }
 
-    /***************\
-    | UI components |
-    \***************/
 
 
     /***************\
@@ -26,7 +25,7 @@ public class PlayerInputController : MonoBehaviour
     \***************/
     private bool hasBeenEnabled = false;
     [SerializeField]
-    private bool debug = true;
+    private bool debug = false;
     [SerializeField]
     private bool superDebug = false;
 
@@ -35,22 +34,8 @@ public class PlayerInputController : MonoBehaviour
     /********************\
     | Input action asset |
     \********************/
-    private UserInputActions userInputActions; // Not static or global, this is this scripts own instance of the input action asset
-
-    /*********************\
-    | TRAIN input actions |
-    \*********************/
-    private InputActionMap userInputActionMap_Player;
-
-    /**
-     * Called when object is instantiated (?), instantiates user input action asset
-     **/
-    private void Awake()
-    {
-        // Creating a new instance of our input action asset
-        // userInputActions = new UserInputActions();
-    }
-
+    private UserInputActions userInputActions; 
+    // Not static or global, this is this scripts own instance of the input action asset taken from the static instance in the InputManager
 
     /**
      * Called when object is enabled, checks if InputManager.userInputActions is ready.
@@ -93,7 +78,6 @@ public class PlayerInputController : MonoBehaviour
         userInputActions.Player.Movement.Enable();
         userInputActions.Player.EnterTrain.Enable();
         userInputActions.Player.RebindMenu.Enable();
-
     }
 
 
@@ -114,7 +98,7 @@ public class PlayerInputController : MonoBehaviour
 
 
     /**
-     * Called every *#!%(!#&#)
+     * 
      **/
     /**private void FixedUpdate()
     {

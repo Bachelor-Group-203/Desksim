@@ -1,7 +1,9 @@
+using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private UserInputActions userInput;
+    private PlayerInput input;
+
+    Vector3 newMoveDir;
+    Vector3 moveDir;
 
     [SerializeField] private LayerMask groundLayer;
     private float checkDistance = 50.0f;
@@ -19,8 +25,14 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        userInput = new UserInputActions();
-        userInput.PlayerAvatar.Enable();
+        if(GameObject.FindGameObjectWithTag("InputPack"))
+        {
+            input = GameObject.FindGameObjectWithTag("InputPack").GetComponent<PlayerInput>();
+        } else
+        {
+            Debug.LogWarning("!!! InputScripts game object not found !!!");
+        }
+
     }
 
     void Update()
@@ -31,12 +43,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Reading the input of the user multiple times each frame and turing it into the xz plane
-        Vector2 direction = userInput.PlayerAvatar.Movement.ReadValue<Vector2>();
-        Vector3 moveDir = new Vector3(direction.x, 0, direction.y).normalized;
+        // Reading the input of the user multiple times each frame and turning it into the xz 
+        moveDir = new Vector3(input.movement.x, 0, input.movement.y).normalized;
 
         //Debug.DrawLine(transform.position, transform.position + MovementVector(moveDir), Color.blue);
-        Vector3 newMoveDir = PlaneDownwardsDirection(moveDir);
+        newMoveDir = PlaneDownwardsDirection(moveDir);
 
         rb.velocity = newMoveDir * movementSpeed;
     }
