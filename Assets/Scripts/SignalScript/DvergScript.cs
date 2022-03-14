@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DvergScript : MonoBehaviour
+public class DvergScript : SignalScript
 {
     [SerializeField] private DvergSignal signalStatus;
-    [SerializeField] private Transform lights;
-    [SerializeField] private Material signalOffMaterial;
     [SerializeField] private Material signalOnMaterial;
-
-    private List<Transform> listOfLights = new List<Transform>();
 
     enum DvergSignal
     {
@@ -30,22 +26,10 @@ public class DvergScript : MonoBehaviour
         ActivateNewSignal((int)signalStatus);
     }
 
-    private void GetAllLights()
-    {
-        foreach (Transform light in lights)
-        {
-            light.GetComponent<MeshRenderer>().material = signalOffMaterial;
-            listOfLights.Add(light);
-        }
-    }
-
     private void ActivateNewSignal(int i)
     {
         // Turns off all the lights
-        foreach (Transform light in listOfLights)
-        {
-            light.GetComponent<MeshRenderer>().material = signalOffMaterial;
-        }
+        TurnOffAllLights();
 
         if (i != 0)
         {
