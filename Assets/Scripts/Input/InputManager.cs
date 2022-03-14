@@ -9,10 +9,42 @@ public class InputManager : MonoBehaviour
 {
     
     public static UserInputActions userInputActions; // Reference to input action asset
+    public static event Action<InputActionMap> actionMapChanged;
 
     public static event Action rebindComplete;
     public static event Action rebindCancelled;
     public static event Action<InputAction, int> rebindStarted;
+
+    
+    public static bool invertModifiers = false;
+    public static bool invertAbsoluteA = false;
+    public static bool invertAbsoluteP = false;
+
+    [SerializeField]
+    private static bool debug = false;
+
+    /***************\
+    | UI components |
+    \***************/
+    [SerializeField]
+    private static Toggle invertModifiersToggle;
+    [SerializeField]
+    private static Toggle invertAbsoluteAToggle;
+    [SerializeField]
+    private static Toggle invertAbsolutePToggle;
+
+
+    /**
+     * Called before the first frame
+     **/
+    private void Start()
+    {
+        userInputActions.Disable(); // Disable all action maps
+        userInputActions.Train.Disable();
+        userInputActions.Player.Disable();
+        SwitchToActionMap(userInputActions.Train);
+
+    }
 
     /**
      * 
@@ -26,15 +58,57 @@ public class InputManager : MonoBehaviour
         LoadAllBindingOverrides();
     }
 
+
+    /**
+     * 
+     **/
+    private static void SwitchToActionMap (InputActionMap actionMap)
+    {
+        if(debug) Debug.Log("<InputManager> \tSWITCHING TO ACTIONMAP: " + actionMap.name);
+        if (actionMap.enabled)
+        {
+            if(debug) Debug.Log("\t\t\t- RETURNING, action map is already enabled");
+            return;
+            // If the selected action is already enabled do nothing
+        }
+        if(debug) Debug.Log("\t\t\t- Disabling all action maps");
+        userInputActions.Disable(); // Disable all action maps
+        userInputActions.Train.Disable();
+        userInputActions.Player.Disable();
+
+        actionMapChanged?.Invoke(actionMap); // Triggers a c# event that can be subscribed to in other scripts to see the currently active action map, e.g. when invoked read its InputActionMap.name
+
+        if (debug) Debug.Log("\t\t\t- Enabling action map: is now "+actionMap.enabled);
+        actionMap.Enable(); // Enable new action map
+        if (debug) Debug.Log("\t\t\t- Enabled action map:  is now " + actionMap.enabled);
+        if (debug) Debug.Log("\t\t\t= Trainmap="+userInputActions.Train.enabled+"   Playermap="+userInputActions.Player.enabled);
+
+    }
+
+    // Use this when leaving the train, to change action maps. To keep it centralized
+    public static void ExitTrain()
+    {
+        Debug.Log("<InputManager> \tExitTrain() - Changing action map to Player");
+        SwitchToActionMap(userInputActions.Player);
+    }
+
+    // Use this when entering the train, to change action maps. To keep it centralized
+    public static void EnterTrain()
+    {
+        Debug.Log("<InputManager> \tEnterTrain() - Changing action map to Train");
+        SwitchToActionMap(userInputActions.Train);
+    }
+
+
     /**
      * Called by UI component
      * From Unity's rebinding sample
      **/
-    public static void StartRebind(string actionName, int bindingIndex, Text statusText, bool excludeMouse)
+    public static void StartRebind(string actionName, int bindingIndex, Text statusText)
     {
         InputAction action = userInputActions.asset.FindAction(actionName); // Find action by name from our input action asset instance
         if (action == null || action.bindings.Count <= bindingIndex) {
-            Debug.Log("Input: Couldn't find action or binding");
+            Debug.Log("<InputManager> \tCouldn't find action or binding");
             return;
         }
 
@@ -45,18 +119,18 @@ public class InputManager : MonoBehaviour
             // If not composite, rebind normally
             if (firstPartIndex < action.bindings.Count && action.bindings[firstPartIndex].isPartOfComposite)
             {
-                DoRebind(action, firstPartIndex, statusText, true, excludeMouse);
+                DoRebind(action, firstPartIndex, statusText, true);
             }
                 
         } // Else, rebind normally
-        else DoRebind(action, bindingIndex, statusText, false, excludeMouse);
+        else DoRebind(action, bindingIndex, statusText, false);
 
     }
 
     /**
      * 
      **/
-    private static void DoRebind(InputAction actionToRebind, int bindingIndex, Text statusText, bool allCompositeParts, bool excludeMouse) 
+    private static void DoRebind(InputAction actionToRebind, int bindingIndex, Text statusText, bool allCompositeParts) 
     {
         if (actionToRebind == null || bindingIndex < 0) return;
 
@@ -79,7 +153,7 @@ public class InputManager : MonoBehaviour
                 var nextBindingIndex = bindingIndex + 1;
                 // Recursively increase index until next binding isn't a composite
                 if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isPartOfComposite)
-                    DoRebind(actionToRebind, nextBindingIndex, statusText, allCompositeParts, excludeMouse);
+                    DoRebind(actionToRebind, nextBindingIndex, statusText, allCompositeParts);
             }
 
             SaveBindingOverride(actionToRebind);
@@ -99,7 +173,7 @@ public class InputManager : MonoBehaviour
         rebind.WithCancelingThrough("<Keyboard>/escape");
         rebind.WithCancelingThrough("<Mouse>/rightButton");
         rebind.WithCancelingThrough("<Mouse>/leftButton");
-        if (excludeMouse) rebind.WithControlsExcluding("Mouse");
+         rebind.WithControlsExcluding("Mouse");
 
         // Start the rebinding process
         rebindStarted?.Invoke(actionToRebind, bindingIndex);
@@ -191,5 +265,83 @@ public class InputManager : MonoBehaviour
 
         SaveBindingOverride(action);
     }
+
+
+
+
+
+
+
+
+    /**
+     * 
+     **/
+    public void OnInvertModifiersToggleValueChanged(bool value)
+    {
+        invertModifiers = value;
+        SaveExtraOptions();
+    }
+
+    /**
+     * 
+     **/
+    public void OninvertAbsoluteAToggleValueChanged(bool value)
+    {
+        invertAbsoluteA = value;
+        SaveExtraOptions();
+    }
+
+    /**
+     * 
+     **/
+    public void OninvertAbsolutePToggleValueChanged(bool value)
+    {
+        invertAbsoluteP = value;
+        SaveExtraOptions();
+    }
+
+    /**
+     * 
+     **/
+    public static void LoadExtraOptions()
+    {
+        Debug.Log("<InputManager> \tLoadExtraOptions called");
+        invertModifiers = PlayerPrefs.GetInt("invertModifiers") == 1 ? true : false;
+        invertAbsoluteA = PlayerPrefs.GetInt("invertAbsoluteA") == 1 ? true : false;
+        invertAbsoluteP = PlayerPrefs.GetInt("invertAbsoluteP") == 1 ? true : false;
+        // If a ui element for selecting modifierInvert exists, update it to reflect the saved setting
+        if (invertModifiersToggle != null) invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
+        if (invertAbsoluteAToggle != null) invertAbsoluteAToggle.GetComponent<Toggle>().isOn = invertAbsoluteA;
+        if (invertAbsolutePToggle != null) invertAbsolutePToggle.GetComponent<Toggle>().isOn = invertAbsoluteP;
+
+    }
+
+    /**
+     * 
+     * Called by the UI elements that change these options
+     **/
+    public static void SaveExtraOptions()
+    {
+        Debug.Log("<InputManager> \tSaveExtraOptions called");
+        PlayerPrefs.SetInt("invertModifiers", invertModifiers ? 1 : 0);
+        PlayerPrefs.SetInt("invertAbsoluteA", invertAbsoluteA ? 1 : 0);
+        PlayerPrefs.SetInt("invertAbsoluteP", invertAbsoluteP ? 1 : 0);
+    }
+
+    /**********************************************************************\
+    |                      SECTION: INPUT ACTION FUNCTIONS                 |
+    \**********************************************************************/
+    public static void Pause(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Input: Pause");
+
+    }
+    public static void RebindMenu(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Input: RebindMenu");
+    }
+
+
+
 
 }

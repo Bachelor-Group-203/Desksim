@@ -64,15 +64,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""c5eccd18-05cb-48ca-a4c1-b05f2e639dac"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Focus Panel"",
                     ""type"": ""Button"",
                     ""id"": ""ff850ff0-fb46-475a-b4f7-05dae7499649"",
@@ -82,9 +73,36 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Exit Train"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb043533-c691-4005-bfae-1d0f691651fa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Rebind Menu"",
                     ""type"": ""Button"",
-                    ""id"": ""a766732c-1ccf-416c-ab1c-38fec9f656a1"",
+                    ""id"": ""3e846cf3-7c9d-4777-9667-a2cd9527d067"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b7642e0-3a19-47f3-94f7-97038a278c88"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Change Perspective"",
+                    ""type"": ""Button"",
+                    ""id"": ""737fe307-3981-4f6a-a1b6-ff1aeccae8be"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -149,30 +167,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""dd80d316-717f-47ce-86c3-0e3b4546aed2"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8c134669-d072-496b-bf41-20bd1ee864a5"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""39497b13-f942-410f-b46b-3a614be55f63"",
-                    ""path"": ""<Gamepad>/select"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -270,7 +266,29 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""72fc7866-1f0a-4ff9-bd93-a5a20edefc44"",
+                    ""id"": ""7dbb4dfd-9754-4d61-8224-b427c8dd293e"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit Train"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82e4c611-185a-4c48-926b-7424c461cec6"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit Train"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ce6bca0-737c-4941-8ecd-d0dc89e4c17a"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -281,7 +299,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b5cb14a0-6b86-49bc-b1cb-5e1e4fb34962"",
+                    ""id"": ""1f198f1e-20e8-4a85-b963-5366d7fef78e"",
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -289,11 +307,262 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Rebind Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08657547-aebf-486f-ad51-0a123db2858a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95bfcc0e-5a7c-4d0e-9d91-81b2696813cb"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ccb1dcb-bb34-4f86-a2cd-edd4fd96d8ca"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Change Perspective"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06374f26-61a0-449f-8082-1d221b1c0649"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Change Perspective"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""UI"",
+            ""name"": ""Player"",
+            ""id"": ""a9e6506c-c1bf-4d85-8a8f-22ba5905ce03"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""eb44c0d4-c50b-4b43-9905-c73d6ebd4b65"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Camera"",
+                    ""type"": ""Value"",
+                    ""id"": ""3aaa53cd-9b20-4b81-bc04-100b49279eeb"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Enter Train"",
+                    ""type"": ""Button"",
+                    ""id"": ""50f8ca63-336a-419d-9494-85c9aa2d1c67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rebind Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""595df85c-f242-4939-9e96-33aa2d951084"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""d57fdddf-45df-4af9-9109-be8cca64b5ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1485c671-220e-4490-85dd-03612a1bc036"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""d8a84d37-1e87-43af-bdb1-069d7ab98728"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""b339b2ad-30d5-42be-ae9b-cc6254fe9058"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""966420cf-5e3e-4b92-b5d0-626a9f0dc314"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""47e55e95-244b-4c3c-ab48-a2fc55b08b85"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""df56d66d-1bab-4750-8787-5b6fef8bec45"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32f2d0a3-5a25-40a9-875d-c345ee781100"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""988ad5bf-2aa8-449e-a133-b98f02ec57b2"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd1f2cc6-203d-412a-a1cd-5ae1412d3e8c"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter Train"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a9b8bea-5df7-4559-99fd-753e9ce35c53"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter Train"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbb2fb10-5f87-45df-b7b1-c353c3d31a00"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rebind Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fe76bf6-f2ba-4733-a2cb-508483da9463"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rebind Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c8c9a4a-2338-44fc-af47-f10bff84811a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa982b6c-c86f-4b02-858b-7366358e7336"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI (Deprecated)"",
             ""id"": ""8ffd9810-9682-4f16-a0f0-0a8c86c5d16f"",
             ""actions"": [
                 {
@@ -595,120 +864,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""PlayerAvatar"",
-            ""id"": ""a9e6506c-c1bf-4d85-8a8f-22ba5905ce03"",
-            ""actions"": [
-                {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""eb44c0d4-c50b-4b43-9905-c73d6ebd4b65"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Camera"",
-                    ""type"": ""Value"",
-                    ""id"": ""3aaa53cd-9b20-4b81-bc04-100b49279eeb"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""1485c671-220e-4490-85dd-03612a1bc036"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""d8a84d37-1e87-43af-bdb1-069d7ab98728"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""b339b2ad-30d5-42be-ae9b-cc6254fe9058"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""966420cf-5e3e-4b92-b5d0-626a9f0dc314"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""47e55e95-244b-4c3c-ab48-a2fc55b08b85"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""df56d66d-1bab-4750-8787-5b6fef8bec45"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""32f2d0a3-5a25-40a9-875d-c345ee781100"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Camera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""988ad5bf-2aa8-449e-a133-b98f02ec57b2"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Camera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
@@ -719,21 +874,26 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         m_Train_PressureModifier = m_Train.FindAction("Pressure Modifier", throwIfNotFound: true);
         m_Train_AccelerationAbsolute = m_Train.FindAction("Acceleration Absolute", throwIfNotFound: true);
         m_Train_AccelerationModifier = m_Train.FindAction("Acceleration Modifier", throwIfNotFound: true);
-        m_Train_Menu = m_Train.FindAction("Menu", throwIfNotFound: true);
         m_Train_FocusPanel = m_Train.FindAction("Focus Panel", throwIfNotFound: true);
+        m_Train_ExitTrain = m_Train.FindAction("Exit Train", throwIfNotFound: true);
         m_Train_RebindMenu = m_Train.FindAction("Rebind Menu", throwIfNotFound: true);
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_MenuUp = m_UI.FindAction("Menu Up", throwIfNotFound: true);
-        m_UI_MenuDown = m_UI.FindAction("Menu Down", throwIfNotFound: true);
-        m_UI_MenuLeft = m_UI.FindAction("Menu Left", throwIfNotFound: true);
-        m_UI_MenuRight = m_UI.FindAction("Menu Right", throwIfNotFound: true);
-        m_UI_MenuConfirm = m_UI.FindAction("Menu Confirm", throwIfNotFound: true);
-        m_UI_MenuCancel = m_UI.FindAction("Menu Cancel", throwIfNotFound: true);
-        // PlayerAvatar
-        m_PlayerAvatar = asset.FindActionMap("PlayerAvatar", throwIfNotFound: true);
-        m_PlayerAvatar_Movement = m_PlayerAvatar.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerAvatar_Camera = m_PlayerAvatar.FindAction("Camera", throwIfNotFound: true);
+        m_Train_Menu = m_Train.FindAction("Menu", throwIfNotFound: true);
+        m_Train_ChangePerspective = m_Train.FindAction("Change Perspective", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
+        m_Player_EnterTrain = m_Player.FindAction("Enter Train", throwIfNotFound: true);
+        m_Player_RebindMenu = m_Player.FindAction("Rebind Menu", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        // UI (Deprecated)
+        m_UIDeprecated = asset.FindActionMap("UI (Deprecated)", throwIfNotFound: true);
+        m_UIDeprecated_MenuUp = m_UIDeprecated.FindAction("Menu Up", throwIfNotFound: true);
+        m_UIDeprecated_MenuDown = m_UIDeprecated.FindAction("Menu Down", throwIfNotFound: true);
+        m_UIDeprecated_MenuLeft = m_UIDeprecated.FindAction("Menu Left", throwIfNotFound: true);
+        m_UIDeprecated_MenuRight = m_UIDeprecated.FindAction("Menu Right", throwIfNotFound: true);
+        m_UIDeprecated_MenuConfirm = m_UIDeprecated.FindAction("Menu Confirm", throwIfNotFound: true);
+        m_UIDeprecated_MenuCancel = m_UIDeprecated.FindAction("Menu Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -797,9 +957,11 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Train_PressureModifier;
     private readonly InputAction m_Train_AccelerationAbsolute;
     private readonly InputAction m_Train_AccelerationModifier;
-    private readonly InputAction m_Train_Menu;
     private readonly InputAction m_Train_FocusPanel;
+    private readonly InputAction m_Train_ExitTrain;
     private readonly InputAction m_Train_RebindMenu;
+    private readonly InputAction m_Train_Menu;
+    private readonly InputAction m_Train_ChangePerspective;
     public struct TrainActions
     {
         private @UserInputActions m_Wrapper;
@@ -808,9 +970,11 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         public InputAction @PressureModifier => m_Wrapper.m_Train_PressureModifier;
         public InputAction @AccelerationAbsolute => m_Wrapper.m_Train_AccelerationAbsolute;
         public InputAction @AccelerationModifier => m_Wrapper.m_Train_AccelerationModifier;
-        public InputAction @Menu => m_Wrapper.m_Train_Menu;
         public InputAction @FocusPanel => m_Wrapper.m_Train_FocusPanel;
+        public InputAction @ExitTrain => m_Wrapper.m_Train_ExitTrain;
         public InputAction @RebindMenu => m_Wrapper.m_Train_RebindMenu;
+        public InputAction @Menu => m_Wrapper.m_Train_Menu;
+        public InputAction @ChangePerspective => m_Wrapper.m_Train_ChangePerspective;
         public InputActionMap Get() { return m_Wrapper.m_Train; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -832,15 +996,21 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @AccelerationModifier.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnAccelerationModifier;
                 @AccelerationModifier.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnAccelerationModifier;
                 @AccelerationModifier.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnAccelerationModifier;
-                @Menu.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
-                @Menu.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
-                @Menu.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
                 @FocusPanel.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusPanel;
                 @FocusPanel.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusPanel;
                 @FocusPanel.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusPanel;
+                @ExitTrain.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
+                @ExitTrain.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
+                @ExitTrain.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
                 @RebindMenu.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnRebindMenu;
                 @RebindMenu.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnRebindMenu;
                 @RebindMenu.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnRebindMenu;
+                @Menu.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
+                @ChangePerspective.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
+                @ChangePerspective.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
+                @ChangePerspective.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
             }
             m_Wrapper.m_TrainActionsCallbackInterface = instance;
             if (instance != null)
@@ -857,68 +1027,139 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @AccelerationModifier.started += instance.OnAccelerationModifier;
                 @AccelerationModifier.performed += instance.OnAccelerationModifier;
                 @AccelerationModifier.canceled += instance.OnAccelerationModifier;
-                @Menu.started += instance.OnMenu;
-                @Menu.performed += instance.OnMenu;
-                @Menu.canceled += instance.OnMenu;
                 @FocusPanel.started += instance.OnFocusPanel;
                 @FocusPanel.performed += instance.OnFocusPanel;
                 @FocusPanel.canceled += instance.OnFocusPanel;
+                @ExitTrain.started += instance.OnExitTrain;
+                @ExitTrain.performed += instance.OnExitTrain;
+                @ExitTrain.canceled += instance.OnExitTrain;
                 @RebindMenu.started += instance.OnRebindMenu;
                 @RebindMenu.performed += instance.OnRebindMenu;
                 @RebindMenu.canceled += instance.OnRebindMenu;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
+                @ChangePerspective.started += instance.OnChangePerspective;
+                @ChangePerspective.performed += instance.OnChangePerspective;
+                @ChangePerspective.canceled += instance.OnChangePerspective;
             }
         }
     }
     public TrainActions @Train => new TrainActions(this);
 
-    // UI
-    private readonly InputActionMap m_UI;
-    private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_MenuUp;
-    private readonly InputAction m_UI_MenuDown;
-    private readonly InputAction m_UI_MenuLeft;
-    private readonly InputAction m_UI_MenuRight;
-    private readonly InputAction m_UI_MenuConfirm;
-    private readonly InputAction m_UI_MenuCancel;
-    public struct UIActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Camera;
+    private readonly InputAction m_Player_EnterTrain;
+    private readonly InputAction m_Player_RebindMenu;
+    private readonly InputAction m_Player_Menu;
+    public struct PlayerActions
     {
         private @UserInputActions m_Wrapper;
-        public UIActions(@UserInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MenuUp => m_Wrapper.m_UI_MenuUp;
-        public InputAction @MenuDown => m_Wrapper.m_UI_MenuDown;
-        public InputAction @MenuLeft => m_Wrapper.m_UI_MenuLeft;
-        public InputAction @MenuRight => m_Wrapper.m_UI_MenuRight;
-        public InputAction @MenuConfirm => m_Wrapper.m_UI_MenuConfirm;
-        public InputAction @MenuCancel => m_Wrapper.m_UI_MenuCancel;
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public PlayerActions(@UserInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Camera => m_Wrapper.m_Player_Camera;
+        public InputAction @EnterTrain => m_Wrapper.m_Player_EnterTrain;
+        public InputAction @RebindMenu => m_Wrapper.m_Player_RebindMenu;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
-        public void SetCallbacks(IUIActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @MenuUp.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuUp;
-                @MenuUp.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuUp;
-                @MenuUp.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuUp;
-                @MenuDown.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuDown;
-                @MenuDown.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuDown;
-                @MenuDown.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuDown;
-                @MenuLeft.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuLeft;
-                @MenuLeft.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuLeft;
-                @MenuLeft.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuLeft;
-                @MenuRight.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuRight;
-                @MenuRight.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuRight;
-                @MenuRight.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuRight;
-                @MenuConfirm.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuConfirm;
-                @MenuConfirm.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuConfirm;
-                @MenuConfirm.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuConfirm;
-                @MenuCancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuCancel;
-                @MenuCancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuCancel;
-                @MenuCancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMenuCancel;
+                @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Camera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
+                @Camera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
+                @Camera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
+                @EnterTrain.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterTrain;
+                @EnterTrain.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterTrain;
+                @EnterTrain.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterTrain;
+                @RebindMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRebindMenu;
+                @RebindMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRebindMenu;
+                @RebindMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRebindMenu;
+                @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
             }
-            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @Camera.started += instance.OnCamera;
+                @Camera.performed += instance.OnCamera;
+                @Camera.canceled += instance.OnCamera;
+                @EnterTrain.started += instance.OnEnterTrain;
+                @EnterTrain.performed += instance.OnEnterTrain;
+                @EnterTrain.canceled += instance.OnEnterTrain;
+                @RebindMenu.started += instance.OnRebindMenu;
+                @RebindMenu.performed += instance.OnRebindMenu;
+                @RebindMenu.canceled += instance.OnRebindMenu;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
+            }
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
+
+    // UI (Deprecated)
+    private readonly InputActionMap m_UIDeprecated;
+    private IUIDeprecatedActions m_UIDeprecatedActionsCallbackInterface;
+    private readonly InputAction m_UIDeprecated_MenuUp;
+    private readonly InputAction m_UIDeprecated_MenuDown;
+    private readonly InputAction m_UIDeprecated_MenuLeft;
+    private readonly InputAction m_UIDeprecated_MenuRight;
+    private readonly InputAction m_UIDeprecated_MenuConfirm;
+    private readonly InputAction m_UIDeprecated_MenuCancel;
+    public struct UIDeprecatedActions
+    {
+        private @UserInputActions m_Wrapper;
+        public UIDeprecatedActions(@UserInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MenuUp => m_Wrapper.m_UIDeprecated_MenuUp;
+        public InputAction @MenuDown => m_Wrapper.m_UIDeprecated_MenuDown;
+        public InputAction @MenuLeft => m_Wrapper.m_UIDeprecated_MenuLeft;
+        public InputAction @MenuRight => m_Wrapper.m_UIDeprecated_MenuRight;
+        public InputAction @MenuConfirm => m_Wrapper.m_UIDeprecated_MenuConfirm;
+        public InputAction @MenuCancel => m_Wrapper.m_UIDeprecated_MenuCancel;
+        public InputActionMap Get() { return m_Wrapper.m_UIDeprecated; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIDeprecatedActions set) { return set.Get(); }
+        public void SetCallbacks(IUIDeprecatedActions instance)
+        {
+            if (m_Wrapper.m_UIDeprecatedActionsCallbackInterface != null)
+            {
+                @MenuUp.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuUp;
+                @MenuUp.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuUp;
+                @MenuUp.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuUp;
+                @MenuDown.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuDown;
+                @MenuDown.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuDown;
+                @MenuDown.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuDown;
+                @MenuLeft.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuLeft;
+                @MenuLeft.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuLeft;
+                @MenuLeft.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuLeft;
+                @MenuRight.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuRight;
+                @MenuRight.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuRight;
+                @MenuRight.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuRight;
+                @MenuConfirm.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuConfirm;
+                @MenuConfirm.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuConfirm;
+                @MenuConfirm.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuConfirm;
+                @MenuCancel.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuCancel;
+                @MenuCancel.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuCancel;
+                @MenuCancel.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuCancel;
+            }
+            m_Wrapper.m_UIDeprecatedActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @MenuUp.started += instance.OnMenuUp;
@@ -942,59 +1183,28 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
             }
         }
     }
-    public UIActions @UI => new UIActions(this);
-
-    // PlayerAvatar
-    private readonly InputActionMap m_PlayerAvatar;
-    private IPlayerAvatarActions m_PlayerAvatarActionsCallbackInterface;
-    private readonly InputAction m_PlayerAvatar_Movement;
-    private readonly InputAction m_PlayerAvatar_Camera;
-    public struct PlayerAvatarActions
-    {
-        private @UserInputActions m_Wrapper;
-        public PlayerAvatarActions(@UserInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_PlayerAvatar_Movement;
-        public InputAction @Camera => m_Wrapper.m_PlayerAvatar_Camera;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerAvatar; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerAvatarActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerAvatarActions instance)
-        {
-            if (m_Wrapper.m_PlayerAvatarActionsCallbackInterface != null)
-            {
-                @Movement.started -= m_Wrapper.m_PlayerAvatarActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_PlayerAvatarActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_PlayerAvatarActionsCallbackInterface.OnMovement;
-                @Camera.started -= m_Wrapper.m_PlayerAvatarActionsCallbackInterface.OnCamera;
-                @Camera.performed -= m_Wrapper.m_PlayerAvatarActionsCallbackInterface.OnCamera;
-                @Camera.canceled -= m_Wrapper.m_PlayerAvatarActionsCallbackInterface.OnCamera;
-            }
-            m_Wrapper.m_PlayerAvatarActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
-                @Camera.started += instance.OnCamera;
-                @Camera.performed += instance.OnCamera;
-                @Camera.canceled += instance.OnCamera;
-            }
-        }
-    }
-    public PlayerAvatarActions @PlayerAvatar => new PlayerAvatarActions(this);
+    public UIDeprecatedActions @UIDeprecated => new UIDeprecatedActions(this);
     public interface ITrainActions
     {
         void OnPressureAbsolute(InputAction.CallbackContext context);
         void OnPressureModifier(InputAction.CallbackContext context);
         void OnAccelerationAbsolute(InputAction.CallbackContext context);
         void OnAccelerationModifier(InputAction.CallbackContext context);
-        void OnMenu(InputAction.CallbackContext context);
         void OnFocusPanel(InputAction.CallbackContext context);
+        void OnExitTrain(InputAction.CallbackContext context);
         void OnRebindMenu(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
+        void OnChangePerspective(InputAction.CallbackContext context);
     }
-    public interface IUIActions
+    public interface IPlayerActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
+        void OnEnterTrain(InputAction.CallbackContext context);
+        void OnRebindMenu(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
+    }
+    public interface IUIDeprecatedActions
     {
         void OnMenuUp(InputAction.CallbackContext context);
         void OnMenuDown(InputAction.CallbackContext context);
@@ -1002,10 +1212,5 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         void OnMenuRight(InputAction.CallbackContext context);
         void OnMenuConfirm(InputAction.CallbackContext context);
         void OnMenuCancel(InputAction.CallbackContext context);
-    }
-    public interface IPlayerAvatarActions
-    {
-        void OnMovement(InputAction.CallbackContext context);
-        void OnCamera(InputAction.CallbackContext context);
     }
 }

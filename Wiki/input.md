@@ -8,13 +8,13 @@
 
 #### Scripts:
 
-- **UserInputController** - Manages and interprets the input action map and its actions
+- **TrainInputController** - Manages and interprets the input action map and its actions
 - **InputManager** - Deals with rebinding and presistent loading and storing of rebinds.
 - **RebindUI** - Attached to the Rebind Prefab, rebinds keys in coordination with InputManager
 
 #### Prefabs:
 
-- **InputPack** - Simplified way of importing inputs into a scene, has two objects with UserInputController and InputManager, everything necessary for input in a scene. 
+- **InputPack** - Simplified way of importing inputs into a scene, has two objects with TrainInputController and InputManager, everything necessary for input in a scene. 
 - **Rebind Prefab** - A rebinding prompt for a single binding, selected through the action range and binding index slider in the inspector
 - **Control Slider Prefab** - A slider used to show acceleration and pressure. To use, subscribe its OnChange Unity event to appropriate method under the scene's UserInput script
 
@@ -26,4 +26,4 @@
 ## Notes
 Input re-binding is made persistent by storing the the action-binding string to playerPrefs.
 Re-binding is done with the Rebind Prefab, other features are demonstrated in the Menu_RebindScreen scene.
-Import the InputPack prefab to use the input system, read its values using GetComponent<UserInputController> on the UserInput GameObject. Can also load the two scripts individually.
+Import the InputPack prefab to use the input system, read its values using GetComponent<TrainInputController> on the UserInput GameObject. Can also load the two scripts individually.
