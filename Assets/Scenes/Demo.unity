@@ -2112,6 +2112,7 @@ GameObject:
   - component: {fileID: 655134367064290060}
   - component: {fileID: 655134367064290062}
   - component: {fileID: 655134367064290098}
+  - component: {fileID: 655134367064290099}
   m_Layer: 0
   m_Name: Train
   m_TagString: Untagged
@@ -2154,6 +2155,21 @@ MonoBehaviour:
   reverseOffCollor: {r: 0.17895675, g: 1, b: 0, a: 1}
   reverseOnCollor: {r: 1, g: 0, b: 0, a: 1}
   angleDisplay: {fileID: 5939714247431970387}
+--- !u!114 &655134367064290099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655134367064290096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6df19930553154f9670bf0fca4ea4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  railLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &718002916301189767
 Transform:
   m_ObjectHideFlags: 0
