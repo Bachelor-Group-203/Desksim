@@ -107,7 +107,7 @@ namespace PathCreationEditor {
                 if (data.showPathOptions) {
                     bezierPath.Space = (PathSpace) EditorGUILayout.Popup ("Space", (int) bezierPath.Space, spaceNames);
                     bezierPath.ControlPointMode = (BezierPath.ControlMode) EditorGUILayout.EnumPopup (new GUIContent ("Control Mode"), bezierPath.ControlPointMode);
-                    bezierPath.Height = EditorGUILayout.Slider (new GUIContent ("Height over Terrain"), bezierPath.Height, 0, 100);
+                    bezierPath.Height = EditorGUILayout.FloatField(new GUIContent("Height over Terrain", "Use \"O\" and \"L\" buttons while holding an anchorpoint"), bezierPath.Height);
                     
                     if (bezierPath.ControlPointMode == BezierPath.ControlMode.Automatic) {
                         bezierPath.AutoControlLength = EditorGUILayout.Slider (new GUIContent ("Control Spacing"), bezierPath.AutoControlLength, 0, 1);
@@ -531,7 +531,7 @@ namespace PathCreationEditor {
             if (newHeight < 1f)
                 newHeight = 1f;
             bezierPath.Height = newHeight;
-            Debug.Log("New Height: " + newHeight + " Height: " + bezierPath.Height);
+            //Debug.Log("New Height: " + newHeight + " Height: " + bezierPath.Height);
 
             if (doTransformHandle) {
                 // Show normals rotate tool 

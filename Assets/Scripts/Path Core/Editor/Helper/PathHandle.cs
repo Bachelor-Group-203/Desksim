@@ -82,10 +82,16 @@ namespace PathCreationEditor
                 {
                     case EventType.KeyDown:
                         if (Event.current.keyCode == KeyCode.O) {
-                            newHeight += 1f;
+                            if (handleIndex == 3)
+                            {
+                                newHeight += 1f;
+                            }
                         }
                         else if (Event.current.keyCode == KeyCode.L) {
-                            newHeight -= 1f;
+                            if (handleIndex == 3)
+                            {
+                                newHeight -= 1f;
+                            }
                         }
                         break;
                     case EventType.MouseDown:
