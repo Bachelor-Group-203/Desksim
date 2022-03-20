@@ -7,40 +7,35 @@ public class Follower : MonoBehaviour
 {
     public PathCreator pathCreator;
     public EndOfPathInstruction end;
-    public Follower frontAttachment;
     float distanceTravelled;
-    public float dstOffset;
-    public float attachOffset;
+
     private TrainController trainController;
 
     private void Awake()
     {
-        if (frontAttachment == null) 
-        {
-            distanceTravelled += dstOffset;
-            trainController = GetComponent<TrainController>();
-        }
+        trainController = GetComponent<TrainController>();
     }
 
     void Update()
     {
-        if (pathCreator != null) {
-            if (frontAttachment != null)
+        if (trainController)
+        {
+            if (pathCreator != null) // if path exists
             {
-                distanceTravelled = frontAttachment.distanceTravelled - attachOffset;
-            }
-            else 
+                // Move and rotate game object to points of the path
                 distanceTravelled += trainController.Velocity * Time.deltaTime;
-            // Move and rotate game object to points of the path
-            transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, end);
-            Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
-            Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
-            transform.rotation = pathRotation * normalRotation;
-        }
-    }
+                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, end);
+                Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
+                Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
 
-    IEnumerator waiter()
-    {
-        yield return new WaitForSeconds(4);
+                transform.rotation = pathRotation * normalRotation;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("TrainController not set!");
+            trainController = GetComponent<TrainController>();
+        }
+        
     }
 }
