@@ -528,10 +528,7 @@ namespace PathCreationEditor {
             var cap = capFunctions[(isAnchorPoint) ? globalDisplaySettings.anchorShape : globalDisplaySettings.controlShape];
             PathHandle.HandleInputType handleInputType;
             handlePosition = PathHandle.DrawHandle (handlePosition, bezierPath.Space, isInteractive, handleSize, cap, handleColours, out handleInputType, i, bezierPath.Height, ref newHeight);
-            if (newHeight < 1f)
-                newHeight = 1f;
             bezierPath.Height = newHeight;
-            //Debug.Log("New Height: " + newHeight + " Height: " + bezierPath.Height);
 
             if (doTransformHandle) {
                 // Show normals rotate tool 
