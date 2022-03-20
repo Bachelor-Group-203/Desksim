@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5927373308280057168}
   - component: {fileID: 8228542769806886737}
   - component: {fileID: 1928608662451544343}
-  - component: {fileID: 4874257500684666933}
+  - component: {fileID: 5262371020666140537}
   m_Layer: 0
   m_Name: InputScripts
   m_TagString: InputPack
@@ -63,7 +63,7 @@ MonoBehaviour:
   accelerationSlider: {fileID: 0}
   debug: 0
   superDebug: 0
---- !u!114 &4874257500684666933
+--- !u!114 &5262371020666140537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

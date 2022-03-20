@@ -15,7 +15,8 @@ public class InputManager : MonoBehaviour
     public static event Action rebindCancelled;
     public static event Action<InputAction, int> rebindStarted;
 
-    
+    // User-changeable values, set by usingMultipleIdenticalSticksToggle
+    public static bool usingMultipleIdenticalSticks = false; 
     public static bool invertModifiers = false;
     public static bool invertAbsoluteA = false;
     public static bool invertAbsoluteP = false;
@@ -32,6 +33,8 @@ public class InputManager : MonoBehaviour
     private static Toggle invertAbsoluteAToggle;
     [SerializeField]
     private static Toggle invertAbsolutePToggle;
+    [SerializeField]
+    private static Toggle usingMultipleIdenticalSticksToggle;
 
 
     /**
@@ -43,8 +46,10 @@ public class InputManager : MonoBehaviour
         userInputActions.Train.Disable();
         userInputActions.Player.Disable();
         SwitchToActionMap(userInputActions.Train);
-
+        GetUIElements();
     }
+
+
 
     /**
      * 
@@ -55,6 +60,7 @@ public class InputManager : MonoBehaviour
         {
             userInputActions = new UserInputActions();
         }
+        GetUIElements();
         LoadAllBindingOverrides();
     }
 
@@ -247,7 +253,7 @@ public class InputManager : MonoBehaviour
         InputAction action = userInputActions.asset.FindAction(actionName);
         if (action == null || action.bindings.Count <= bindingIndex)
         {
-            Debug.Log("InputManager: Could not find action or binding");
+            Debug.Log("<InputManager> \tCould not find action or binding");
             return;
         }
 
@@ -303,17 +309,38 @@ public class InputManager : MonoBehaviour
     /**
      * 
      **/
+    public static void OnUsingMultipleIdenticalSticksToggleValueChanged(bool value)
+    {
+        usingMultipleIdenticalSticks = value;
+        SaveExtraOptions();
+    }
+
+
+    private static void GetUIElements()
+    {
+        if (invertModifiersToggle == null) invertModifiersToggle = GameObject.FindGameObjectWithTag("Rebinding_ToggleModifiers")    != null ? GameObject.FindGameObjectWithTag("Rebinding_ToggleModifiers").GetComponent<Toggle>() : null;
+        if (invertAbsoluteAToggle == null) invertAbsoluteAToggle = GameObject.FindGameObjectWithTag("Rebinding_ToggleAbsAcc")       != null ? GameObject.FindGameObjectWithTag("Rebinding_ToggleAbsAcc").GetComponent<Toggle>() : null;
+        if (invertAbsolutePToggle == null) invertAbsolutePToggle = GameObject.FindGameObjectWithTag("Rebinding_ToggleAbsPre")       != null ? GameObject.FindGameObjectWithTag("Rebinding_ToggleAbsPre").GetComponent<Toggle>() : null;
+        if (usingMultipleIdenticalSticksToggle == null) usingMultipleIdenticalSticksToggle = GameObject.FindGameObjectWithTag("Rebinding_ToggleMultipleIdenticalSticks") != null ? GameObject.FindGameObjectWithTag("Rebinding_ToggleMultipleIdenticalSticks").GetComponent<Toggle>() : null;
+    }
+
+    /**
+     * 
+     **/
     public static void LoadExtraOptions()
     {
+        GetUIElements();
         Debug.Log("<InputManager> \tLoadExtraOptions called");
         invertModifiers = PlayerPrefs.GetInt("invertModifiers") == 1 ? true : false;
         invertAbsoluteA = PlayerPrefs.GetInt("invertAbsoluteA") == 1 ? true : false;
         invertAbsoluteP = PlayerPrefs.GetInt("invertAbsoluteP") == 1 ? true : false;
+        usingMultipleIdenticalSticks = PlayerPrefs.GetInt("usingMultipleIdenticalSticks") == 1 ? true : false;
         // If a ui element for selecting modifierInvert exists, update it to reflect the saved setting
-        if (invertModifiersToggle != null) invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
-        if (invertAbsoluteAToggle != null) invertAbsoluteAToggle.GetComponent<Toggle>().isOn = invertAbsoluteA;
-        if (invertAbsolutePToggle != null) invertAbsolutePToggle.GetComponent<Toggle>().isOn = invertAbsoluteP;
-
+        if (invertModifiersToggle != null)              invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
+        if (invertAbsoluteAToggle != null)              invertAbsoluteAToggle.GetComponent<Toggle>().isOn = invertAbsoluteA;
+        if (invertAbsolutePToggle != null)              invertAbsolutePToggle.GetComponent<Toggle>().isOn = invertAbsoluteP;
+        if (usingMultipleIdenticalSticksToggle != null)    usingMultipleIdenticalSticksToggle.GetComponent<Toggle>().isOn = usingMultipleIdenticalSticks;
+        Debug.Log("<InputManager> \tLoadExtraOptions ended: invMods=" + invertModifiers + " invAbsA=" + invertAbsoluteA + " invAbsP=" + invertAbsoluteP + " usingMulti=" + usingMultipleIdenticalSticks);
     }
 
     /**
@@ -322,10 +349,12 @@ public class InputManager : MonoBehaviour
      **/
     public static void SaveExtraOptions()
     {
-        Debug.Log("<InputManager> \tSaveExtraOptions called");
+        GetUIElements();
+        Debug.Log("<InputManager> \tSaveExtraOptions called: invMods="+invertModifiers+" invAbsA="+invertAbsoluteA+" invAbsP="+invertAbsoluteP+" usingMulti="+usingMultipleIdenticalSticks);
         PlayerPrefs.SetInt("invertModifiers", invertModifiers ? 1 : 0);
         PlayerPrefs.SetInt("invertAbsoluteA", invertAbsoluteA ? 1 : 0);
         PlayerPrefs.SetInt("invertAbsoluteP", invertAbsoluteP ? 1 : 0);
+        PlayerPrefs.SetInt("usingMultipleIdenticalSticks", usingMultipleIdenticalSticks ? 1 : 0);
     }
 
     /**********************************************************************\

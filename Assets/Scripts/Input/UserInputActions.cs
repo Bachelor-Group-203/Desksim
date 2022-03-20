@@ -107,6 +107,24 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Saitek Left"",
+                    ""type"": ""Value"",
+                    ""id"": ""48c3fb3f-d142-4d10-90f3-3d4511eae76c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Saitek Right"",
+                    ""type"": ""Value"",
+                    ""id"": ""5dd4c33b-a2f4-4924-abc5-cbc8633ae527"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -349,6 +367,28 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Change Perspective"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c9073d5-1e25-46f4-a128-1f05a8e44f97"",
+                    ""path"": ""<Joystick>{RightHand}/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Saitek Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6309db0f-7b6a-4676-b0a1-05da3548775e"",
+                    ""path"": ""<Joystick>{LeftHand}/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Saitek Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -879,6 +919,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         m_Train_RebindMenu = m_Train.FindAction("Rebind Menu", throwIfNotFound: true);
         m_Train_Menu = m_Train.FindAction("Menu", throwIfNotFound: true);
         m_Train_ChangePerspective = m_Train.FindAction("Change Perspective", throwIfNotFound: true);
+        m_Train_SaitekLeft = m_Train.FindAction("Saitek Left", throwIfNotFound: true);
+        m_Train_SaitekRight = m_Train.FindAction("Saitek Right", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
@@ -962,6 +1004,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Train_RebindMenu;
     private readonly InputAction m_Train_Menu;
     private readonly InputAction m_Train_ChangePerspective;
+    private readonly InputAction m_Train_SaitekLeft;
+    private readonly InputAction m_Train_SaitekRight;
     public struct TrainActions
     {
         private @UserInputActions m_Wrapper;
@@ -975,6 +1019,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         public InputAction @RebindMenu => m_Wrapper.m_Train_RebindMenu;
         public InputAction @Menu => m_Wrapper.m_Train_Menu;
         public InputAction @ChangePerspective => m_Wrapper.m_Train_ChangePerspective;
+        public InputAction @SaitekLeft => m_Wrapper.m_Train_SaitekLeft;
+        public InputAction @SaitekRight => m_Wrapper.m_Train_SaitekRight;
         public InputActionMap Get() { return m_Wrapper.m_Train; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1011,6 +1057,12 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @ChangePerspective.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
                 @ChangePerspective.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
                 @ChangePerspective.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
+                @SaitekLeft.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekLeft;
+                @SaitekLeft.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekLeft;
+                @SaitekLeft.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekLeft;
+                @SaitekRight.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekRight;
+                @SaitekRight.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekRight;
+                @SaitekRight.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekRight;
             }
             m_Wrapper.m_TrainActionsCallbackInterface = instance;
             if (instance != null)
@@ -1042,6 +1094,12 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @ChangePerspective.started += instance.OnChangePerspective;
                 @ChangePerspective.performed += instance.OnChangePerspective;
                 @ChangePerspective.canceled += instance.OnChangePerspective;
+                @SaitekLeft.started += instance.OnSaitekLeft;
+                @SaitekLeft.performed += instance.OnSaitekLeft;
+                @SaitekLeft.canceled += instance.OnSaitekLeft;
+                @SaitekRight.started += instance.OnSaitekRight;
+                @SaitekRight.performed += instance.OnSaitekRight;
+                @SaitekRight.canceled += instance.OnSaitekRight;
             }
         }
     }
@@ -1195,6 +1253,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         void OnRebindMenu(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnChangePerspective(InputAction.CallbackContext context);
+        void OnSaitekLeft(InputAction.CallbackContext context);
+        void OnSaitekRight(InputAction.CallbackContext context);
     }
     public interface IPlayerActions
     {

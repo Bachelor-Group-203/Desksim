@@ -85,6 +85,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Saitek Left",
+                    "type": "Value",
+                    "id": "48c3fb3f-d142-4d10-90f3-3d4511eae76c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Saitek Right",
+                    "type": "Value",
+                    "id": "5dd4c33b-a2f4-4924-abc5-cbc8633ae527",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -327,6 +345,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Change Perspective",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c9073d5-1e25-46f4-a128-1f05a8e44f97",
+                    "path": "<Joystick>{RightHand}/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Saitek Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6309db0f-7b6a-4676-b0a1-05da3548775e",
+                    "path": "<Joystick>{LeftHand}/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Saitek Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
