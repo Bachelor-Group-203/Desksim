@@ -314,8 +314,13 @@ public class TrainInput : MonoBehaviour
     private void Train_FocusPanel(InputAction.CallbackContext obj)
     {
         Debug.Log("<InputController Train> \tFocusPanel");
+        Debug.Log("control \t\t\t" + obj.control);
+        Debug.Log("control.device \t\t" + obj.control.device);
+        Debug.Log("control.device.deviceId \t" + obj.control.device.deviceId);
+        Debug.Log("control.device.path     \t" + obj.control.device.path);
+        Debug.Log("control.displayname \t\t" + obj.control.displayName);
     }
-    
+
     /**
      * 
      **/
