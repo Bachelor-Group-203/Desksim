@@ -111,7 +111,7 @@ public class TrainUi : MonoBehaviour
             label.eulerAngles = new Vector3(0, 0, labelAngle);
 
             // Set the text to the apropriate number 
-            label.GetComponentInChildren<Text>().text = Mathf.RoundToInt(labelNormalized * maxLabelValue).ToString();
+            label.GetComponentInChildren<TMPro.TMP_Text>().text = Mathf.RoundToInt(labelNormalized * maxLabelValue).ToString();
             // Makes the numer not rotate with the tranform
             label.Find("Text").eulerAngles = Vector3.zero;
             // Activate the label so it is visible

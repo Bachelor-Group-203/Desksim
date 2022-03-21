@@ -25,11 +25,11 @@ public class RebindUI : MonoBehaviour
 
     [Header("UI Fields")]
     [SerializeField]
-    private Text actionText;
+    private TMPro.TMP_Text actionText;
     [SerializeField]
     private Button rebindButton;
     [SerializeField]
-    private Text rebindText;
+    private TMPro.TMP_Text rebindText;
     [SerializeField]
     private Button resetButton;
 

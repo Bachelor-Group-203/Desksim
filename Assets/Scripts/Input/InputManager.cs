@@ -110,7 +110,7 @@ public class InputManager : MonoBehaviour
      * Called by UI component
      * From Unity's rebinding sample
      **/
-    public static void StartRebind(string actionName, int bindingIndex, Text statusText)
+    public static void StartRebind(string actionName, int bindingIndex, TMPro.TMP_Text statusText)
     {
         InputAction action = userInputActions.asset.FindAction(actionName); // Find action by name from our input action asset instance
         if (action == null || action.bindings.Count <= bindingIndex) {
@@ -136,7 +136,7 @@ public class InputManager : MonoBehaviour
     /**
      * 
      **/
-    private static void DoRebind(InputAction actionToRebind, int bindingIndex, Text statusText, bool allCompositeParts) 
+    private static void DoRebind(InputAction actionToRebind, int bindingIndex, TMPro.TMP_Text statusText, bool allCompositeParts) 
     {
         if (actionToRebind == null || bindingIndex < 0) return;
 
