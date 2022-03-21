@@ -82,10 +82,16 @@ namespace PathCreationEditor
                 {
                     case EventType.KeyDown:
                         if (Event.current.keyCode == KeyCode.O) {
-                            newHeight += 1f;
+                            if (handleIndex == 3)
+                            {
+                                newHeight += 1f;
+                            }
                         }
                         else if (Event.current.keyCode == KeyCode.L) {
-                            newHeight -= 1f;
+                            if (handleIndex == 3)
+                            {
+                                newHeight -= 1f;
+                            }
                         }
                         break;
                     case EventType.MouseDown:
@@ -114,7 +120,6 @@ namespace PathCreationEditor
 
                             inputType = HandleInputType.LMBRelease;
 
-
                             if (Event.current.mousePosition == handleDragMouseStart)
                             {
                                 inputType = HandleInputType.LMBClick;
@@ -140,14 +145,12 @@ namespace PathCreationEditor
                                 {
                                     worldMouse = hit.point;
                                     worldMouse.y += height;
-                                    //worldMouse = Camera.current.transform.InverseTransformPoint(hit.point);
                                 }
                                 else worldMouse = new Vector3(0,0,0);
 
                                 position = Handles.matrix.inverse.MultiplyPoint(worldMouse);
 
                                 Debug.DrawRay(hit.point, Vector3.up * height, Color.blue, .005f);
-                                //Debug.Log("World Mouse: " + worldMouse);
                             }
                             // Handle is clamped to xy or xz plane
                             else
