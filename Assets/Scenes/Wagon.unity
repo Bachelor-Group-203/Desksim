@@ -649,7 +649,7 @@ MonoBehaviour:
   end: 2
   frontAttachment: {fileID: 1128005805}
   dstOffset: 0
-  attachOffset: 21
+  attachOffset: 23
 --- !u!54 &357677717
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   end: 2
   frontAttachment: {fileID: 4060923058667751022}
   dstOffset: 0
-  attachOffset: 22.9
+  attachOffset: 22.15
 --- !u!54 &1128005806
 Rigidbody:
   m_ObjectHideFlags: 0
