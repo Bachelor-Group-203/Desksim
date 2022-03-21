@@ -49,6 +49,7 @@ public class TrainInput : MonoBehaviour
     private float accelerationAbsolute_delta = 0;
     private float accelerationModifier_value;
     private bool hasBeenEnabled = false;
+    private bool multipleIdenticalSticks_areSetup = false;
     [SerializeField]
     private bool debug = false;
     [SerializeField]
@@ -71,6 +72,9 @@ public class TrainInput : MonoBehaviour
     private InputAction accelerationModifier; // For alternative inputs, keyboard & gamepads
     // TODO make acceleration controllable with in-game slider too
 
+    private InputAction leftStick;
+    private InputAction rightStick;
+
 
     /**
      * Called when object is instantiated
@@ -88,7 +92,7 @@ public class TrainInput : MonoBehaviour
     private void OnEnable()
     {
 
-        if(debug) Debug.Log("InputController: OnEnable called");
+        if(debug) Debug.Log("<InputController Train> \tOnEnable called");
 
         if (InputManager.userInputActions != null && userInputActions == null)
         {
@@ -105,7 +109,7 @@ public class TrainInput : MonoBehaviour
     private void Enable()
     {
         hasBeenEnabled = true;
-        if(debug) Debug.Log("InputController: Enable() called");
+        if(debug) Debug.Log("<InputController Train> \tEnable() called");
 
 
         // Caching input actions to local variables
@@ -135,6 +139,8 @@ public class TrainInput : MonoBehaviour
         userInputActions.Train.ChangePerspective.Enable();
 
         InputManager.LoadExtraOptions();
+
+        if(InputManager.usingMultipleIdenticalSticks) SetupMultipleIdenticalSticks();
 
     }
 
@@ -173,10 +179,15 @@ public class TrainInput : MonoBehaviour
             }
         }
         // All controller vector2/axis values are assumed to be from -1 to 1, or 0 to 1 for joysticks, this might vary from device to device, hopefully not. Can be checked in window->analysis->input 
+        if(multipleIdenticalSticks_areSetup && superDebug && InputManager.usingMultipleIdenticalSticks) Debug.Log(leftStick.ReadValue<Vector2>() + "     &&&&      "+ rightStick.ReadValue<Vector2>());
+        if(InputManager.usingMultipleIdenticalSticks && (!multipleIdenticalSticks_areSetup || (leftStick == null || rightStick == null)))
+        {
+            Debug.Log("<InputController Train> \tusingMultipleIdenticalSticks is true, but they're not set up properly or one or more of the sticks are null, trying to fix that.");
+            SetupMultipleIdenticalSticks();
+        }
 
+        //if (superDebug) Debug.Log("<InputController Train> \t--PRESSURE ABSOLUTE-- = " + pressureAbsolute.ReadValue<float>()+" | "+pressureAbsolute.GetBindingDisplayString() + " | " +pressureAbsolute.enabled);
 
-        if(superDebug) Debug.Log("<InputController Train> \t--PRESSURE ABSOLUTE-- = " + pressureAbsolute.ReadValue<float>()+" | "+pressureAbsolute.GetBindingDisplayString() + " | " +pressureAbsolute.enabled);
-        
 
         /**********\
         | PRESSURE |
@@ -184,8 +195,19 @@ public class TrainInput : MonoBehaviour
         // Check if absolute pressure input is available, if a compatible joystick is being used.
         // Should be bound in settings to ensure correct functionality, maybe a bool if custom joystick has been set in settings.
         pressureAbsolute_delta = pressureAbsolute_value - pressureAbsolute.ReadValue<float>();
-        pressureAbsolute_value = pressureAbsolute.ReadValue<float>();
         pressureModifier_value = pressureModifier.ReadValue<float>();
+
+        // If multiple identical sticks are enabled and recognized
+        if (InputManager.usingMultipleIdenticalSticks && multipleIdenticalSticks_areSetup)
+        {
+            // Read value from right stick
+            pressureAbsolute_value = rightStick.ReadValue<Vector2>().y;
+        } 
+        else
+        {
+            // Otherwise, read the value set in the rebinding menu
+            pressureAbsolute_value = pressureAbsolute.ReadValue<float>();
+        }
         if (pressureAbsolute_delta != 0) {
             // Absolute pressure input is available, and changed
             if(debug) Debug.Log("<InputController Train> \tpressureABSOLUTE value = " + pressureAbsolute_value + " -> " + (pressureAbsolute_value + 1) / 2 +""+ (InputManager.invertAbsoluteP ? " <inverted>" : ""));
@@ -208,8 +230,20 @@ public class TrainInput : MonoBehaviour
         // Check if absolute acceleration input is available, if a compatible joystick is being used.
         // Should be bound in settings to ensure correct functionality, maybe a bool if custom joystick has been set in settings.
         accelerationAbsolute_delta = accelerationAbsolute_value - accelerationAbsolute.ReadValue<float>();
-        accelerationAbsolute_value = accelerationAbsolute.ReadValue<float>();
         accelerationModifier_value = accelerationModifier.ReadValue<float>();
+
+        // If multiple identical sticks are enabled and recognized
+        if (InputManager.usingMultipleIdenticalSticks && multipleIdenticalSticks_areSetup)
+        {
+            // Read value from left stick
+            accelerationAbsolute_value = leftStick.ReadValue<Vector2>().y;
+        }
+        else
+        {
+            // Otherwise, read the value set in the rebinding menu
+            accelerationAbsolute_value = accelerationAbsolute.ReadValue<float>();
+        }
+
         // If absolute value has changed
         if (accelerationAbsolute_delta != 0) {
             // Absolute acceleration input is available, and changed
@@ -236,6 +270,28 @@ public class TrainInput : MonoBehaviour
 
     }
 
+
+    /**
+     * Creates aliases for the two first joysticks
+     **/
+    private void SetupMultipleIdenticalSticks()
+    {
+        Debug.Log("<InputController Train> \tTrying to set up for multiple identical sticks");
+        leftStick = new InputAction(binding: "<Joystick>{LeftHand}/stick");
+        rightStick = new InputAction(binding: "<Joystick>{RightHand}/stick");
+        leftStick.Enable();
+        rightStick.Enable();
+
+        if(Joystick.all.Count < 2)
+        {
+            Debug.LogWarning("<InputController Train> \tLess than two controllers attached, but the usingMultipleIdenticalSticks option is enabled! ");
+        } else {
+            InputSystem.AddDeviceUsage(Joystick.all[0], CommonUsages.LeftHand);
+            InputSystem.AddDeviceUsage(Joystick.all[1], CommonUsages.RightHand);
+            multipleIdenticalSticks_areSetup = true;
+        }
+    }
+
     /**
      * 
      **/
@@ -258,8 +314,13 @@ public class TrainInput : MonoBehaviour
     private void Train_FocusPanel(InputAction.CallbackContext obj)
     {
         Debug.Log("<InputController Train> \tFocusPanel");
+        Debug.Log("control \t\t\t" + obj.control);
+        Debug.Log("control.device \t\t" + obj.control.device);
+        Debug.Log("control.device.deviceId \t" + obj.control.device.deviceId);
+        Debug.Log("control.device.path     \t" + obj.control.device.path);
+        Debug.Log("control.displayname \t\t" + obj.control.displayName);
     }
-    
+
     /**
      * 
      **/

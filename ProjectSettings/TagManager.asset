@@ -6,6 +6,10 @@ TagManager:
   tags:
   - UI_SelectedByDefault
   - InputScripts
+  - Rebinding_ToggleAbsAcc
+  - Rebinding_ToggleAbsPre
+  - Rebinding_ToggleModifiers
+  - Rebinding_ToggleMultipleIdenticalSticks
   layers:
   - Default
   - TransparentFX
