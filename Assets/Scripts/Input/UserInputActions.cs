@@ -82,15 +82,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Rebind Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""3e846cf3-7c9d-4777-9667-a2cd9527d067"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""3b7642e0-3a19-47f3-94f7-97038a278c88"",
@@ -107,24 +98,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Saitek Left"",
-                    ""type"": ""Value"",
-                    ""id"": ""48c3fb3f-d142-4d10-90f3-3d4511eae76c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Saitek Right"",
-                    ""type"": ""Value"",
-                    ""id"": ""5dd4c33b-a2f4-4924-abc5-cbc8633ae527"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -306,28 +279,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7ce6bca0-737c-4941-8ecd-d0dc89e4c17a"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rebind Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1f198f1e-20e8-4a85-b963-5366d7fef78e"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rebind Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""08657547-aebf-486f-ad51-0a123db2858a"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -369,28 +320,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Change Perspective"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0c9073d5-1e25-46f4-a128-1f05a8e44f97"",
-                    ""path"": ""<Joystick>{RightHand}/stick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Saitek Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6309db0f-7b6a-4676-b0a1-05da3548775e"",
-                    ""path"": ""<Joystick>{LeftHand}/stick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Saitek Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -420,15 +349,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Enter Train"",
                     ""type"": ""Button"",
                     ""id"": ""50f8ca63-336a-419d-9494-85c9aa2d1c67"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Rebind Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""595df85c-f242-4939-9e96-33aa2d951084"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -557,28 +477,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fbb2fb10-5f87-45df-b7b1-c353c3d31a00"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rebind Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1fe76bf6-f2ba-4733-a2cb-508483da9463"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rebind Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""9c8c9a4a-2338-44fc-af47-f10bff84811a"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -600,310 +498,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""UI (Deprecated)"",
-            ""id"": ""8ffd9810-9682-4f16-a0f0-0a8c86c5d16f"",
-            ""actions"": [
-                {
-                    ""name"": ""Menu Up"",
-                    ""type"": ""Button"",
-                    ""id"": ""b61cbf3f-b2b7-4506-acc9-46850b7e2c8c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Menu Down"",
-                    ""type"": ""Button"",
-                    ""id"": ""f7b07bc1-ebc5-4e13-8289-c83bfe17e8c4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Menu Left"",
-                    ""type"": ""Button"",
-                    ""id"": ""a35521b7-15d8-49f4-b741-4467347f1654"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Menu Right"",
-                    ""type"": ""Button"",
-                    ""id"": ""5e3fec04-9222-47b6-8d2f-19e2ebe2ca7b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Menu Confirm"",
-                    ""type"": ""Button"",
-                    ""id"": ""9f1c625d-1536-4d18-944a-a88012919040"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Menu Cancel"",
-                    ""type"": ""Button"",
-                    ""id"": ""88dbd20f-69e8-40e1-be5f-ca979de13b37"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""6faaac0b-17c7-4a89-902e-4b170f620f9b"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Up"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0bf522e9-9a14-470e-ac86-a49ed056b3bf"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Up"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""92304551-870c-4609-87b8-851e53f0337a"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": ""AxisDeadzone(min=0.125,max=0.925)"",
-                    ""groups"": """",
-                    ""action"": ""Menu Up"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ada08735-84f4-4df1-8d45-55bee562e1e6"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Up"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""90a8da24-8518-4f12-ad7f-0405abbb8665"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""87f2559c-a76e-471e-86bd-4c583800792b"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0f9017e3-a652-4dc0-bedc-02f501aedd95"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": ""AxisDeadzone(min=0.125,max=0.925)"",
-                    ""groups"": """",
-                    ""action"": ""Menu Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c0dca23d-9dca-4f84-9ec3-1d6712be90df"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""384e12dd-cf8e-4524-8943-2a2e06f1dd32"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d099dc23-25cf-4534-a434-96ac1ec109e5"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8ab20b82-3c1c-485c-be07-b43b0b27be42"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": ""AxisDeadzone(min=0.125,max=0.925)"",
-                    ""groups"": """",
-                    ""action"": ""Menu Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""886b2678-aec1-44c3-8ee1-93f05526aa9d"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9c7053b6-0ee0-4846-a8ce-3f49839c1d59"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dee60699-52c6-48da-a748-6c2bb126fb53"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""079e5347-2050-4a85-ad58-a2000db67e7b"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""10d4b052-be4a-4961-b7ef-a15b40a70398"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": ""AxisDeadzone(min=0.125,max=0.925)"",
-                    ""groups"": """",
-                    ""action"": ""Menu Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ca81579f-6521-4a1e-a910-6183425dc820"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Confirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4ee11f12-68bd-4e4d-9819-2070e65bd203"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Confirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3c81df3c-19d3-4ee7-9019-d64ef9303fe5"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Confirm"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6d3b3bd0-3cf4-4d03-a443-d1584cb1fb84"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""941569fb-0d9d-48c3-8db1-a84717210151"",
-                    ""path"": ""<Keyboard>/backspace"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""afe36b12-edd3-45e4-8023-23d5deed29f9"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Menu Cancel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": []
@@ -916,26 +510,14 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         m_Train_AccelerationModifier = m_Train.FindAction("Acceleration Modifier", throwIfNotFound: true);
         m_Train_FocusPanel = m_Train.FindAction("Focus Panel", throwIfNotFound: true);
         m_Train_ExitTrain = m_Train.FindAction("Exit Train", throwIfNotFound: true);
-        m_Train_RebindMenu = m_Train.FindAction("Rebind Menu", throwIfNotFound: true);
         m_Train_Menu = m_Train.FindAction("Menu", throwIfNotFound: true);
         m_Train_ChangePerspective = m_Train.FindAction("Change Perspective", throwIfNotFound: true);
-        m_Train_SaitekLeft = m_Train.FindAction("Saitek Left", throwIfNotFound: true);
-        m_Train_SaitekRight = m_Train.FindAction("Saitek Right", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_EnterTrain = m_Player.FindAction("Enter Train", throwIfNotFound: true);
-        m_Player_RebindMenu = m_Player.FindAction("Rebind Menu", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
-        // UI (Deprecated)
-        m_UIDeprecated = asset.FindActionMap("UI (Deprecated)", throwIfNotFound: true);
-        m_UIDeprecated_MenuUp = m_UIDeprecated.FindAction("Menu Up", throwIfNotFound: true);
-        m_UIDeprecated_MenuDown = m_UIDeprecated.FindAction("Menu Down", throwIfNotFound: true);
-        m_UIDeprecated_MenuLeft = m_UIDeprecated.FindAction("Menu Left", throwIfNotFound: true);
-        m_UIDeprecated_MenuRight = m_UIDeprecated.FindAction("Menu Right", throwIfNotFound: true);
-        m_UIDeprecated_MenuConfirm = m_UIDeprecated.FindAction("Menu Confirm", throwIfNotFound: true);
-        m_UIDeprecated_MenuCancel = m_UIDeprecated.FindAction("Menu Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1001,11 +583,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Train_AccelerationModifier;
     private readonly InputAction m_Train_FocusPanel;
     private readonly InputAction m_Train_ExitTrain;
-    private readonly InputAction m_Train_RebindMenu;
     private readonly InputAction m_Train_Menu;
     private readonly InputAction m_Train_ChangePerspective;
-    private readonly InputAction m_Train_SaitekLeft;
-    private readonly InputAction m_Train_SaitekRight;
     public struct TrainActions
     {
         private @UserInputActions m_Wrapper;
@@ -1016,11 +595,8 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         public InputAction @AccelerationModifier => m_Wrapper.m_Train_AccelerationModifier;
         public InputAction @FocusPanel => m_Wrapper.m_Train_FocusPanel;
         public InputAction @ExitTrain => m_Wrapper.m_Train_ExitTrain;
-        public InputAction @RebindMenu => m_Wrapper.m_Train_RebindMenu;
         public InputAction @Menu => m_Wrapper.m_Train_Menu;
         public InputAction @ChangePerspective => m_Wrapper.m_Train_ChangePerspective;
-        public InputAction @SaitekLeft => m_Wrapper.m_Train_SaitekLeft;
-        public InputAction @SaitekRight => m_Wrapper.m_Train_SaitekRight;
         public InputActionMap Get() { return m_Wrapper.m_Train; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1048,21 +624,12 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @ExitTrain.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
                 @ExitTrain.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
                 @ExitTrain.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
-                @RebindMenu.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnRebindMenu;
-                @RebindMenu.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnRebindMenu;
-                @RebindMenu.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnRebindMenu;
                 @Menu.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnMenu;
                 @ChangePerspective.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
                 @ChangePerspective.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
                 @ChangePerspective.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnChangePerspective;
-                @SaitekLeft.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekLeft;
-                @SaitekLeft.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekLeft;
-                @SaitekLeft.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekLeft;
-                @SaitekRight.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekRight;
-                @SaitekRight.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekRight;
-                @SaitekRight.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnSaitekRight;
             }
             m_Wrapper.m_TrainActionsCallbackInterface = instance;
             if (instance != null)
@@ -1085,21 +652,12 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @ExitTrain.started += instance.OnExitTrain;
                 @ExitTrain.performed += instance.OnExitTrain;
                 @ExitTrain.canceled += instance.OnExitTrain;
-                @RebindMenu.started += instance.OnRebindMenu;
-                @RebindMenu.performed += instance.OnRebindMenu;
-                @RebindMenu.canceled += instance.OnRebindMenu;
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
                 @ChangePerspective.started += instance.OnChangePerspective;
                 @ChangePerspective.performed += instance.OnChangePerspective;
                 @ChangePerspective.canceled += instance.OnChangePerspective;
-                @SaitekLeft.started += instance.OnSaitekLeft;
-                @SaitekLeft.performed += instance.OnSaitekLeft;
-                @SaitekLeft.canceled += instance.OnSaitekLeft;
-                @SaitekRight.started += instance.OnSaitekRight;
-                @SaitekRight.performed += instance.OnSaitekRight;
-                @SaitekRight.canceled += instance.OnSaitekRight;
             }
         }
     }
@@ -1111,7 +669,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_EnterTrain;
-    private readonly InputAction m_Player_RebindMenu;
     private readonly InputAction m_Player_Menu;
     public struct PlayerActions
     {
@@ -1120,7 +677,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @EnterTrain => m_Wrapper.m_Player_EnterTrain;
-        public InputAction @RebindMenu => m_Wrapper.m_Player_RebindMenu;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -1140,9 +696,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @EnterTrain.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterTrain;
                 @EnterTrain.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterTrain;
                 @EnterTrain.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnterTrain;
-                @RebindMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRebindMenu;
-                @RebindMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRebindMenu;
-                @RebindMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRebindMenu;
                 @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
@@ -1159,9 +712,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @EnterTrain.started += instance.OnEnterTrain;
                 @EnterTrain.performed += instance.OnEnterTrain;
                 @EnterTrain.canceled += instance.OnEnterTrain;
-                @RebindMenu.started += instance.OnRebindMenu;
-                @RebindMenu.performed += instance.OnRebindMenu;
-                @RebindMenu.canceled += instance.OnRebindMenu;
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
@@ -1169,79 +719,6 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-
-    // UI (Deprecated)
-    private readonly InputActionMap m_UIDeprecated;
-    private IUIDeprecatedActions m_UIDeprecatedActionsCallbackInterface;
-    private readonly InputAction m_UIDeprecated_MenuUp;
-    private readonly InputAction m_UIDeprecated_MenuDown;
-    private readonly InputAction m_UIDeprecated_MenuLeft;
-    private readonly InputAction m_UIDeprecated_MenuRight;
-    private readonly InputAction m_UIDeprecated_MenuConfirm;
-    private readonly InputAction m_UIDeprecated_MenuCancel;
-    public struct UIDeprecatedActions
-    {
-        private @UserInputActions m_Wrapper;
-        public UIDeprecatedActions(@UserInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MenuUp => m_Wrapper.m_UIDeprecated_MenuUp;
-        public InputAction @MenuDown => m_Wrapper.m_UIDeprecated_MenuDown;
-        public InputAction @MenuLeft => m_Wrapper.m_UIDeprecated_MenuLeft;
-        public InputAction @MenuRight => m_Wrapper.m_UIDeprecated_MenuRight;
-        public InputAction @MenuConfirm => m_Wrapper.m_UIDeprecated_MenuConfirm;
-        public InputAction @MenuCancel => m_Wrapper.m_UIDeprecated_MenuCancel;
-        public InputActionMap Get() { return m_Wrapper.m_UIDeprecated; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UIDeprecatedActions set) { return set.Get(); }
-        public void SetCallbacks(IUIDeprecatedActions instance)
-        {
-            if (m_Wrapper.m_UIDeprecatedActionsCallbackInterface != null)
-            {
-                @MenuUp.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuUp;
-                @MenuUp.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuUp;
-                @MenuUp.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuUp;
-                @MenuDown.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuDown;
-                @MenuDown.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuDown;
-                @MenuDown.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuDown;
-                @MenuLeft.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuLeft;
-                @MenuLeft.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuLeft;
-                @MenuLeft.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuLeft;
-                @MenuRight.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuRight;
-                @MenuRight.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuRight;
-                @MenuRight.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuRight;
-                @MenuConfirm.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuConfirm;
-                @MenuConfirm.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuConfirm;
-                @MenuConfirm.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuConfirm;
-                @MenuCancel.started -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuCancel;
-                @MenuCancel.performed -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuCancel;
-                @MenuCancel.canceled -= m_Wrapper.m_UIDeprecatedActionsCallbackInterface.OnMenuCancel;
-            }
-            m_Wrapper.m_UIDeprecatedActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @MenuUp.started += instance.OnMenuUp;
-                @MenuUp.performed += instance.OnMenuUp;
-                @MenuUp.canceled += instance.OnMenuUp;
-                @MenuDown.started += instance.OnMenuDown;
-                @MenuDown.performed += instance.OnMenuDown;
-                @MenuDown.canceled += instance.OnMenuDown;
-                @MenuLeft.started += instance.OnMenuLeft;
-                @MenuLeft.performed += instance.OnMenuLeft;
-                @MenuLeft.canceled += instance.OnMenuLeft;
-                @MenuRight.started += instance.OnMenuRight;
-                @MenuRight.performed += instance.OnMenuRight;
-                @MenuRight.canceled += instance.OnMenuRight;
-                @MenuConfirm.started += instance.OnMenuConfirm;
-                @MenuConfirm.performed += instance.OnMenuConfirm;
-                @MenuConfirm.canceled += instance.OnMenuConfirm;
-                @MenuCancel.started += instance.OnMenuCancel;
-                @MenuCancel.performed += instance.OnMenuCancel;
-                @MenuCancel.canceled += instance.OnMenuCancel;
-            }
-        }
-    }
-    public UIDeprecatedActions @UIDeprecated => new UIDeprecatedActions(this);
     public interface ITrainActions
     {
         void OnPressureAbsolute(InputAction.CallbackContext context);
@@ -1250,27 +727,14 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         void OnAccelerationModifier(InputAction.CallbackContext context);
         void OnFocusPanel(InputAction.CallbackContext context);
         void OnExitTrain(InputAction.CallbackContext context);
-        void OnRebindMenu(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnChangePerspective(InputAction.CallbackContext context);
-        void OnSaitekLeft(InputAction.CallbackContext context);
-        void OnSaitekRight(InputAction.CallbackContext context);
     }
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnEnterTrain(InputAction.CallbackContext context);
-        void OnRebindMenu(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-    }
-    public interface IUIDeprecatedActions
-    {
-        void OnMenuUp(InputAction.CallbackContext context);
-        void OnMenuDown(InputAction.CallbackContext context);
-        void OnMenuLeft(InputAction.CallbackContext context);
-        void OnMenuRight(InputAction.CallbackContext context);
-        void OnMenuConfirm(InputAction.CallbackContext context);
-        void OnMenuCancel(InputAction.CallbackContext context);
     }
 }
