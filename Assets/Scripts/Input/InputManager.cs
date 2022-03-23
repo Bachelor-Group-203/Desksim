@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
+
 
 public class InputManager : MonoBehaviour
 {
-    
+    private static bool debug = false;
+
     public static UserInputActions userInputActions; // Reference to input action asset
     public static event Action<InputActionMap> actionMapChanged;
 
@@ -15,14 +18,20 @@ public class InputManager : MonoBehaviour
     public static event Action rebindCancelled;
     public static event Action<InputAction, int> rebindStarted;
 
-    // User-changeable values, set by usingMultipleIdenticalSticksToggle
+    // User-changeable values
     public static bool usingMultipleIdenticalSticks = false; 
     public static bool invertModifiers = false;
     public static bool invertAbsoluteA = false;
     public static bool invertAbsoluteP = false;
 
-    [SerializeField]
-    private static bool debug = false;
+    private static string actionMapEnabledBeforePause = "";
+    private static GameObject pauseMenu;
+    public static bool paused = false;
+    public static bool IsPaused {
+        get { return paused; }
+        set { }
+    }
+
 
     /***************\
     | UI components |
@@ -47,6 +56,7 @@ public class InputManager : MonoBehaviour
         userInputActions.Player.Disable();
         SwitchToActionMap(userInputActions.Train);
         GetUIElements();
+        if (inScenario()) tryGetPauseMenuObject(true);
     }
 
 
@@ -62,6 +72,7 @@ public class InputManager : MonoBehaviour
         }
         GetUIElements();
         LoadAllBindingOverrides();
+        if(inScenario()) tryGetPauseMenuObject(false);
     }
 
 
@@ -179,7 +190,7 @@ public class InputManager : MonoBehaviour
         rebind.WithCancelingThrough("<Keyboard>/escape");
         rebind.WithCancelingThrough("<Mouse>/rightButton");
         rebind.WithCancelingThrough("<Mouse>/leftButton");
-         rebind.WithControlsExcluding("Mouse");
+        rebind.WithControlsExcluding("Mouse");
 
         // Start the rebinding process
         rebindStarted?.Invoke(actionToRebind, bindingIndex);
@@ -336,11 +347,11 @@ public class InputManager : MonoBehaviour
         invertAbsoluteP = PlayerPrefs.GetInt("invertAbsoluteP") == 1 ? true : false;
         usingMultipleIdenticalSticks = PlayerPrefs.GetInt("usingMultipleIdenticalSticks") == 1 ? true : false;
         // If a ui element for selecting modifierInvert exists, update it to reflect the saved setting
-        if (invertModifiersToggle != null)              invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
-        if (invertAbsoluteAToggle != null)              invertAbsoluteAToggle.GetComponent<Toggle>().isOn = invertAbsoluteA;
-        if (invertAbsolutePToggle != null)              invertAbsolutePToggle.GetComponent<Toggle>().isOn = invertAbsoluteP;
-        if (usingMultipleIdenticalSticksToggle != null)    usingMultipleIdenticalSticksToggle.GetComponent<Toggle>().isOn = usingMultipleIdenticalSticks;
-        Debug.Log("<InputManager> \tLoadExtraOptions ended: invMods=" + invertModifiers + " invAbsA=" + invertAbsoluteA + " invAbsP=" + invertAbsoluteP + " usingMulti=" + usingMultipleIdenticalSticks);
+        if (invertModifiersToggle != null)                  invertModifiersToggle.GetComponent<Toggle>().isOn = invertModifiers;
+        if (invertAbsoluteAToggle != null)                  invertAbsoluteAToggle.GetComponent<Toggle>().isOn = invertAbsoluteA;
+        if (invertAbsolutePToggle != null)                  invertAbsolutePToggle.GetComponent<Toggle>().isOn = invertAbsoluteP;
+        if (usingMultipleIdenticalSticksToggle != null)     usingMultipleIdenticalSticksToggle.GetComponent<Toggle>().isOn = usingMultipleIdenticalSticks;
+        if(debug) Debug.Log("<InputManager> \tLoadExtraOptions ended: invMods=" + invertModifiers + " invAbsA=" + invertAbsoluteA + " invAbsP=" + invertAbsoluteP + " usingMulti=" + usingMultipleIdenticalSticks);
     }
 
     /**
@@ -357,14 +368,115 @@ public class InputManager : MonoBehaviour
         PlayerPrefs.SetInt("usingMultipleIdenticalSticks", usingMultipleIdenticalSticks ? 1 : 0);
     }
 
+    private static void tryGetPauseMenuObject(bool expected)
+    {
+        if (GameObject.FindGameObjectWithTag("PauseMenu"))
+        {
+            pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").transform.GetChild(0).gameObject;
+            
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            if (expected) Debug.LogWarning("<InputManager> \tGameObject with tag \"PauseMenu\" not found! Can't use pause menu, the prefab needs to be enabled in the scene when playing.");
+        }
+    }
+    private static bool inScenario()
+    {
+        bool inScenario = true;
+        var sceneName = SceneManager.GetActiveScene().name;
+        var nonScenarioSceneNames = new string[] { "M_Main", "M_Rebind" };
+        for (int i = 0; i < nonScenarioSceneNames.Length; i++)
+        {
+            if (sceneName == nonScenarioSceneNames[i]) inScenario = false;
+        }
+        return inScenario;
+    }
+
     /**********************************************************************\
     |                      SECTION: INPUT ACTION FUNCTIONS                 |
     \**********************************************************************/
-    public static void Pause(InputAction.CallbackContext obj)
+    public static void TogglePause(InputAction.CallbackContext obj)
     {
-        Debug.Log("Input: Pause");
+        // Only proceed if inside a scenario where the pause menu should be openable
+        if (inScenario())
+        {
+            Debug.Log("<InputManager> \tPause called, pausedvariable=" + paused + " & activeMap=" + (userInputActions.Player.enabled ? "player" : "train"));
+            if (paused)
+            {
+                Unpause();
+            } else {
 
+                Pause();
+            }
+        }
     }
+    public static void Pause()
+    {
+        Debug.Log("<InputManager> \tPausing");
+        // Pause
+        paused = true;
+        Time.timeScale = 0;
+
+        // Try to get and activate pause menu
+        if (pauseMenu)
+        {
+            pauseMenu.SetActive(true);
+            // pauseMenu.transform.localScale.Set(10, 10, 10);
+        }
+        else
+        {
+            tryGetPauseMenuObject(true);
+        }
+
+        // Disable all inputs
+        actionMapEnabledBeforePause = (userInputActions.Player.enabled ? "player" : "train");
+        userInputActions.Train.Disable();
+        userInputActions.Player.Disable();
+
+        // Re-enable "pause" input for current action map
+        if (actionMapEnabledBeforePause == "train")
+        {
+            Debug.Log("<InputManager> \tTrain action map was enabled before pausing, enabling the Menu input");
+            userInputActions.Train.Menu.Enable();
+        }
+        else
+        {
+            Debug.Log("<InputManager> \tPlayer action map was enabled before pausing, enabling the Menu input");
+            userInputActions.Player.Menu.Enable();
+        }
+    }
+    public static void Unpause()
+    {
+        Debug.Log("<InputManager> \tUnausing");
+        // Unpause
+        paused = false;
+        Time.timeScale = 1;
+
+        // Try to get and deactivate pause menu
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false);
+            // pauseMenu.transform.localScale.Set(0, 0, 0);
+        }
+        else
+        {
+            tryGetPauseMenuObject(true);
+        }
+
+        // Re-enable appropriate action map
+        if (actionMapEnabledBeforePause == "train")
+        {
+            Debug.Log("<InputManager> \tTrain action map was enabled before pausing, enabling the train action map");
+            userInputActions.Train.Enable();
+        }
+        else
+        {
+            Debug.Log("<InputManager> \tPlayer action map was enabled before pausing, enabling the player action map");
+            userInputActions.Player.Enable();
+        }
+    }
+
     public static void RebindMenu(InputAction.CallbackContext obj)
     {
         Debug.Log("Input: RebindMenu");

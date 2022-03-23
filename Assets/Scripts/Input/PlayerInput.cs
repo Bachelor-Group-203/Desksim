@@ -64,8 +64,7 @@ public class PlayerInput : MonoBehaviour
 
 
         // Subscribing actions to functions
-        userInputActions.Player.Menu.performed += InputManager.Pause;
-        userInputActions.Player.RebindMenu.performed += InputManager.RebindMenu;
+        userInputActions.Player.Menu.performed += InputManager.TogglePause;
         userInputActions.Player.EnterTrain.performed += Train_EnterTrain;
 
         // Movement & Camera are both vec2
@@ -77,7 +76,6 @@ public class PlayerInput : MonoBehaviour
         userInputActions.Player.Camera.Enable();
         userInputActions.Player.Movement.Enable();
         userInputActions.Player.EnterTrain.Enable();
-        userInputActions.Player.RebindMenu.Enable();
     }
 
 
@@ -93,7 +91,6 @@ public class PlayerInput : MonoBehaviour
         userInputActions.Player.Camera.Disable();
         userInputActions.Player.Movement.Disable();
         userInputActions.Player.EnterTrain.Disable();
-        userInputActions.Player.RebindMenu.Disable();
     }
 
 

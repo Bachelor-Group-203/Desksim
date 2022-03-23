@@ -230,7 +230,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 0.8820755, b: 0.8820755, a: 1}
     m_HighlightedColor: {r: 1, g: 0.5801887, b: 0.79174626, a: 1}

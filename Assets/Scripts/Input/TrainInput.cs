@@ -51,7 +51,7 @@ public class TrainInput : MonoBehaviour
     private bool hasBeenEnabled = false;
     private bool multipleIdenticalSticks_areSetup = false;
     [SerializeField]
-    private bool debug = false;
+    private bool debug = true;
     [SerializeField]
     private bool superDebug = false;
 
@@ -111,6 +111,8 @@ public class TrainInput : MonoBehaviour
         hasBeenEnabled = true;
         if(debug) Debug.Log("<InputController Train> \tEnable() called");
 
+        // Shouldn't have to do this but in case inputmanager has disabled the entire action map and it overrides something, doing this.
+        InputManager.EnterTrain();
 
         // Caching input actions to local variables
         pressureAbsolute = userInputActions.Train.PressureAbsolute;
@@ -120,8 +122,7 @@ public class TrainInput : MonoBehaviour
 
         // Subscribing input actions "performed" to functions
         userInputActions.Train.FocusPanel.performed += Train_FocusPanel;
-        userInputActions.Train.Menu.performed += InputManager.Pause;
-        userInputActions.Train.RebindMenu.performed += InputManager.RebindMenu;
+        userInputActions.Train.Menu.performed += InputManager.TogglePause;
         userInputActions.Train.ExitTrain.performed += Train_ExitTrain;
         userInputActions.Train.ChangePerspective.performed += ChangePerspective;
 
@@ -135,13 +136,13 @@ public class TrainInput : MonoBehaviour
         userInputActions.Train.FocusPanel.Enable();
         userInputActions.Train.ExitTrain.Enable();
         userInputActions.Train.Menu.Enable();
-        userInputActions.Train.RebindMenu.Enable();
         userInputActions.Train.ChangePerspective.Enable();
 
         InputManager.LoadExtraOptions();
 
         if(InputManager.usingMultipleIdenticalSticks) SetupMultipleIdenticalSticks();
 
+        if(InputManager.IsPaused) InputManager.Unpause();
     }
 
 
@@ -158,7 +159,6 @@ public class TrainInput : MonoBehaviour
         accelerationModifier.Disable();
         userInputActions.Train.Menu.Disable();
         userInputActions.Train.FocusPanel.Disable();
-        userInputActions.Train.RebindMenu.Disable();
         userInputActions.Train.ExitTrain.Disable();
         userInputActions.Train.ChangePerspective.Disable();
     }
@@ -334,9 +334,9 @@ public class TrainInput : MonoBehaviour
     /**
      * 
      **/
-    private void ChangePerspective(InputAction.CallbackContext obj)
+    private void ChangePerspective(InputAction.CallbackContext obj) 
     {
-        
+        Debug.Log("<InputController Train> \tChangePerspective");
     }
 
 }
