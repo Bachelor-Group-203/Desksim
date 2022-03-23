@@ -151,7 +151,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 276251653}
   - component: {fileID: 276251652}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text - Pressure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,8 +286,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 870, y: -282.08}
-  m_SizeDelta: {x: 66.2454, y: 18.2953}
+  m_AnchoredPosition: {x: 947, y: -286.5918}
+  m_SizeDelta: {x: 66.2454, y: 15.7117}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &276251652
 MonoBehaviour:
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -8.396793, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 642498661}
   - component: {fileID: 642498660}
   m_Layer: 0
-  m_Name: Slider Panel - Pre
+  m_Name: Slider Panel - Pressure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -799,7 +799,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 870, y: -366}
+  m_AnchoredPosition: {x: 947, y: -374.72006}
   m_SizeDelta: {x: 40, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &642498660
@@ -888,7 +888,7 @@ GameObject:
   - component: {fileID: 743668588}
   - component: {fileID: 743668587}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Text - Acceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,8 +910,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 944.9, y: -271.7}
-  m_SizeDelta: {x: 49.4025, y: 22.262}
+  m_AnchoredPosition: {x: 876.89984, y: -280.42007}
+  m_SizeDelta: {x: 61.679, y: 22.262}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &743668587
 MonoBehaviour:
@@ -2287,7 +2287,7 @@ GameObject:
   - component: {fileID: 1798644773}
   - component: {fileID: 1798644772}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas - Extra UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2389,7 +2389,7 @@ GameObject:
   - component: {fileID: 1889987351}
   - component: {fileID: 1889987350}
   m_Layer: 0
-  m_Name: Slider Panel - Acc
+  m_Name: Slider Panel - Acceleration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2412,7 +2412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 944.9, y: -366}
+  m_AnchoredPosition: {x: 876.8999, y: -374.72006}
   m_SizeDelta: {x: 40, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1889987350
