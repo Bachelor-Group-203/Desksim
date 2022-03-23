@@ -238,12 +238,20 @@ PrefabInstance:
       propertyPath: m_Text
       value: Acceleration Absolute
       objectReference: {fileID: 0}
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Acceleration Absolute
+      objectReference: {fileID: 0}
     - target: {fileID: 2373448502397415592, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_TagString
       value: UI_SelectedByDefault
       objectReference: {fileID: 0}
     - target: {fileID: 3899516976000469674, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_Text
+      value: rz
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
       value: rz
       objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
@@ -348,8 +356,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: Pressure Modifier
       objectReference: {fileID: 0}
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Pressure Modifier
+      objectReference: {fileID: 0}
     - target: {fileID: 3899516976000469674, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_Text
+      value: D/E
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
       value: D/E
       objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
@@ -1085,9 +1101,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1187077518}
     m_Modifications:
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Focus Panel
+      objectReference: {fileID: 0}
     - target: {fileID: 3183476612268599508, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Y
       objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -1151,7 +1175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6673711451625332542, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: inputBinding.m_Path
-      value: <Gamepad>/select
+      value: <Gamepad>/buttonNorth
       objectReference: {fileID: 0}
     - target: {fileID: 6673711451625332542, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: inputActionReference
@@ -2297,6 +2321,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1187077518}
     m_Modifications:
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Pressure Modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: RS/Y
+      objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -2359,7 +2391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6673711451625332542, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: inputBinding.m_Path
-      value: <Gamepad>/rightStick
+      value: <Gamepad>/rightStick/y
       objectReference: {fileID: 0}
     - target: {fileID: 6673711451625332542, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: inputActionReference
@@ -2779,8 +2811,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 8.594971}
-  m_SizeDelta: {x: -900, y: -396.042}
+  m_AnchoredPosition: {x: -1.9321289, y: 21.1445}
+  m_SizeDelta: {x: -876.8175, y: -370.943}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419887240
 MonoBehaviour:
@@ -2988,8 +3020,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000045776, y: 0.002429}
-  m_SizeDelta: {x: 1980, y: 1027}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1980, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1474154391
 MonoBehaviour:
@@ -3044,6 +3076,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1187077518}
     m_Modifications:
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Change Perspective
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: V
+      objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -3585,12 +3625,20 @@ PrefabInstance:
       propertyPath: m_Text
       value: Focus Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Focus Panel
+      objectReference: {fileID: 0}
     - target: {fileID: 3183476612268599508, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3899516976000469674, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_Text
+      value: Y
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
       value: Y
       objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
@@ -4188,6 +4236,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: A/Q
       objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: A/Q
+      objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -4370,9 +4422,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1187077518}
     m_Modifications:
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Pressure Absolute
+      objectReference: {fileID: 0}
     - target: {fileID: 3183476612268599508, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: z
       objectReference: {fileID: 0}
     - target: {fileID: 5890377461209091689, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -5323,6 +5383,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: Exit Train
       objectReference: {fileID: 0}
+    - target: {fileID: 2058626288587972569, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
+      value: Enter Train
+      objectReference: {fileID: 0}
     - target: {fileID: 2257450522359085758, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 34.285
@@ -5337,6 +5401,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3899516976000469674, guid: 3daed13440595584890a25599dbce3c6, type: 3}
       propertyPath: m_Text
+      value: Enter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613695819848582284, guid: 3daed13440595584890a25599dbce3c6, type: 3}
+      propertyPath: m_text
       value: Enter
       objectReference: {fileID: 0}
     - target: {fileID: 5393558237172594339, guid: 3daed13440595584890a25599dbce3c6, type: 3}
