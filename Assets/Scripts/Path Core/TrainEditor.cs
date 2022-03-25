@@ -15,17 +15,42 @@ public class TrainEditor : Editor
     PathCreationEditor.ScreenSpacePolyLine.MouseInfo pathMouseInfo;
     Tool LastTool = Tool.None;
     bool hasUpdatedScreenSpaceLine;
+    private float distanceTravelled;
+    private float newDstOffset;
     const float screenPolylineMaxAngleError = .3f;
     const float screenPolylineMinVertexDst = .01f;
     const float mouseDstToPathClamp = 30f;
-    //private Vector3 closestPosition;
 
     private void OnSceneGUI()
     {
-        trainOnPath = (TrainOnPath)target; 
-        objectMouseHover();
+        if (!Application.isPlaying)
+        {
+            trainOnPath = (TrainOnPath)target;
+
+            if (Application.isEditor && !trainOnPath.follower.frontAttachment)
+            {
+                if (trainOnPath.transform.position != pathCreator.transform.position)
+                {
+                    trainOnPath.transform.position = pathCreator.transform.position;
+                }
+                objectMouseHover(Event.current);
+            }
+        }
     }
-    private void objectMouseHover() {
+    private void OnEnable()
+    {
+        LastTool = Tools.current;
+        Tools.current = Tool.None;
+    }
+    private void OnDisable()
+    {
+        if (!Application.isPlaying)
+        {
+            Tools.current = LastTool;
+            trainOnPath.newDstOffset = newDstOffset;
+        }
+    }
+    private void objectMouseHover(Event e) {
         //TODO Add placement functionality and fix weird error
         if (trainOnPath != null)
         {
@@ -37,11 +62,19 @@ public class TrainEditor : Editor
             {
                 newPathPoint = MathUtility.InverseTransformPoint (newPathPoint, trainOnPath.transform, bezierPath.Space);
                 newPathPoint += pathCreator.transform.position;
-                train.transform.position = newPathPoint;
-                float distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(newPathPoint);
-                Quaternion normalRotation = Quaternion.Euler(180, 0, 90); 
-                Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
-                train.transform.rotation = pathRotation * normalRotation;
+                //Debug.Log("Pos: " + newPathPoint);
+                distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(newPathPoint);
+                if (distanceTravelled > 0f)
+                {
+                    Quaternion normalRotation = Quaternion.Euler(180, 0, 90); 
+                    Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
+                    train.transform.position = newPathPoint;
+                    train.transform.rotation = pathRotation * normalRotation;
+                }
+            }
+            if (e.type == EventType.MouseDown && distanceTravelled > 0f) 
+            {
+                newDstOffset = distanceTravelled;
             }
         }
     }
@@ -53,33 +86,22 @@ public class TrainEditor : Editor
         }
         pathMouseInfo = screenSpaceLine.CalculateMouseInfo ();
     }
- 
-    void OnEnable()
-    {
-        LastTool = Tools.current;
-        Tools.current = Tool.None;
-    }
- 
-    void OnDisable()
-    {
-        Tools.current = LastTool;
-    }
     BezierPath bezierPath 
     {
         get {
-            return trainOnPath.pathCreator.EditorData.bezierPath;
+            return trainOnPath.follower.pathCreator.EditorData.bezierPath;
         }
     }
     PathCreator pathCreator
     {
         get {
-            return trainOnPath.pathCreator;
+            return trainOnPath.follower.pathCreator;
         }
     }
     GameObject train
     {
         get {
-            return trainOnPath.train;
+            return trainOnPath.follower.train;
         }
     }
 }
