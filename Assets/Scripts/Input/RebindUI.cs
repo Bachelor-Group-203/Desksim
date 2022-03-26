@@ -25,11 +25,11 @@ public class RebindUI : MonoBehaviour
 
     [Header("UI Fields")]
     [SerializeField]
-    private Text actionText;
+    private TMPro.TMP_Text actionText;
     [SerializeField]
     private Button rebindButton;
     [SerializeField]
-    private Text rebindText;
+    private TMPro.TMP_Text rebindText;
     [SerializeField]
     private Button resetButton;
 
@@ -38,12 +38,15 @@ public class RebindUI : MonoBehaviour
      **/
     private void OnEnable()
     {
+
         rebindButton.onClick.AddListener(() => DoRebind());
         resetButton.onClick.AddListener(() => ResetBinding());
 
+        
         // Make sure values are represented correctly in play mode 
         if(inputActionReference != null)
         {
+            if (actionName == null) GetBindingInfo();
             InputManager.LoadBindingOverride(actionName);
             GetBindingInfo();
             UpdateUI();

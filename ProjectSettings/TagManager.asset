@@ -10,6 +10,8 @@ TagManager:
   - Rebinding_ToggleAbsPre
   - Rebinding_ToggleModifiers
   - Rebinding_ToggleMultipleIdenticalSticks
+  - InputPack
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
