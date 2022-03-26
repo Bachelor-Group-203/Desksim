@@ -10,33 +10,42 @@ namespace PathCreation {
         public event System.Action pathUpdated;
 
         [SerializeField, HideInInspector]
-        PathCreatorData editorData;
+        protected PathCreatorData editorData;
         [SerializeField, HideInInspector]
-        bool initialized;
+        protected bool initialized;
+        protected VertexPath data;
 
         GlobalDisplaySettings globalEditorDisplaySettings;
 
         // Vertex path created from the current bezier path
-        public VertexPath path {
-            get {
-                if (!initialized) {
-                    InitializeEditorData (false);
+        public VertexPath path
+        {
+            get
+            {
+                if (!initialized)
+                {
+                    InitializeEditorData(false);
                 }
                 return editorData.GetVertexPath(transform);
             }
         }
 
-        // The bezier path created in the editor
-        public BezierPath bezierPath {
-            get {
-                if (!initialized) {
-                    InitializeEditorData (false);
+        //// The bezier path created in the editor
+        public BezierPath bezierPath
+        {
+            get
+            {
+                if (!initialized)
+                {
+                    InitializeEditorData(false);
                 }
                 return editorData.bezierPath;
             }
-            set {
-                if (!initialized) {
-                    InitializeEditorData (false);
+            set
+            {
+                if (!initialized)
+                {
+                    InitializeEditorData(false);
                 }
                 editorData.bezierPath = value;
             }
@@ -45,27 +54,33 @@ namespace PathCreation {
         #region Internal methods
 
         /// Used by the path editor to initialise some data
-        public void InitializeEditorData (bool in2DMode) {
-            if (editorData == null) {
-                editorData = new PathCreatorData ();
+        public void InitializeEditorData(bool in2DMode)
+        {
+            if (editorData == null)
+            {
+                editorData = new PathCreatorData();
             }
             editorData.bezierOrVertexPathModified -= TriggerPathUpdate;
             editorData.bezierOrVertexPathModified += TriggerPathUpdate;
 
-            editorData.Initialize (in2DMode);
+            editorData.Initialize(in2DMode);
             initialized = true;
         }
 
-        public PathCreatorData EditorData {
-            get {
+        public PathCreatorData EditorData
+        {
+            get
+            {
                 return editorData;
             }
 
         }
 
-        public void TriggerPathUpdate () {
-            if (pathUpdated != null) {
-                pathUpdated ();
+        public void TriggerPathUpdate()
+        {
+            if (pathUpdated != null)
+            {
+                pathUpdated();
             }
         }
 
@@ -73,6 +88,8 @@ namespace PathCreation {
 
         // Draw the path when path objected is not selected (if enabled in settings)
         void OnDrawGizmos () {
+
+            data = path;
 
             // Only draw path gizmo if the path object is not selected
             // (editor script is resposible for drawing when selected)
@@ -89,7 +106,8 @@ namespace PathCreation {
                     if (globalEditorDisplaySettings.visibleWhenNotSelected) {
 
                         Gizmos.color = globalEditorDisplaySettings.bezierPath;
-
+                        
+                        // Draws the Bezier path
                         for (int i = 0; i < path.NumPoints; i++) {
                             int nextI = i + 1;
                             if (nextI >= path.NumPoints) {

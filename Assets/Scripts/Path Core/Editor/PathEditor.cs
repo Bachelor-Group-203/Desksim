@@ -100,7 +100,9 @@ namespace PathCreationEditor {
             }
         }
 
+        // This draws the Bezier Inspector view
         void DrawBezierPathInspector () {
+            // checks if any of the code was executed (if there was a change in the Bezier Inspector)
             using (var check = new EditorGUI.ChangeCheckScope ()) {
                 // Path options:
                 data.showPathOptions = EditorGUILayout.Foldout (data.showPathOptions, new GUIContent ("Bézier Path Options"), true, boldFoldoutStyle);
@@ -126,7 +128,7 @@ namespace PathCreationEditor {
                     // If a point has been selected
                     if (handleIndexToDisplayAsTransform != -1) {
                         EditorGUILayout.LabelField ("Selected Point:");
-
+                        // Indents the points
                         using (new EditorGUI.IndentLevelScope ()) {
                             var currentPosition = creator.bezierPath[handleIndexToDisplayAsTransform];
                             var newPosition = EditorGUILayout.Vector3Field ("Position", currentPosition);
@@ -220,6 +222,7 @@ namespace PathCreationEditor {
             }
         }
 
+        // This draws the Vertex path Inspector view
         void DrawVertexPathInspector () {
 
             GUILayout.Space (inspectorSectionSpacing);
@@ -274,6 +277,7 @@ namespace PathCreationEditor {
 
         #region Scene GUI
 
+        // Handles drawing in Scene view
         void OnSceneGUI () {
             if (!globalDisplaySettings.visibleBehindObjects) {
                 Handles.zTest = UnityEngine.Rendering.CompareFunction.LessEqual;
@@ -299,8 +303,9 @@ namespace PathCreationEditor {
                 }
 
                 // Don't allow clicking over empty space to deselect the object
-                if (eventType == EventType.Layout) {
-                    HandleUtility.AddDefaultControl (0);
+                if (eventType == EventType.Layout)
+                {
+                    HandleUtility.AddDefaultControl(0);
                 }
 
                 if (check.changed) {
