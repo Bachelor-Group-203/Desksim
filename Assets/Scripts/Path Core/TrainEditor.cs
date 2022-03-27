@@ -60,21 +60,19 @@ public class TrainEditor : Editor
 
         Vector3 newPathPoint = pathMouseInfo.closestWorldPointToMouse;
 
+        if (pathMouseInfo.mouseDstToLine > mouseDstToPathClamp)
+        {
+            GetLastPoint();
+            UpdateTrain(lastPoint);
+            return;
+        }
+        UpdateTrain(newPathPoint);
         if (e.type == EventType.MouseDown && distanceTravelled > 0f) 
         {
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             trainOnPath.follower.UpdateDstOffset(distanceTravelled);
             EditorPrefs.SetFloat("dstOffset", distanceTravelled);
             SetLastPoint(newPathPoint);
-        }
-        if (pathMouseInfo.mouseDstToLine <= mouseDstToPathClamp)
-        {
-            UpdateTrain(newPathPoint);
-        }
-        else 
-        {
-            GetLastPoint();
-            UpdateTrain(lastPoint);
         }
     }
 

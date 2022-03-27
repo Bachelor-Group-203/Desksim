@@ -228,7 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0e928981a265247b7d74a3a91dd0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newDstOffset: 0
   follower: {fileID: 5133084401205702315}
   space: 0
 --- !u!1 &146391697
@@ -4580,8 +4579,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5133084401083803738}
-  m_LocalRotation: {x: -0.0072478675, y: -0.99867105, z: -0.008603048, w: -0.050295133}
-  m_LocalPosition: {x: 561.6697, y: 16.54219, z: 654.96313}
+  m_LocalRotation: {x: 0.0006135739, y: -0.89210385, z: 0.0006848863, w: 0.4518295}
+  m_LocalPosition: {x: 237.46481, y: 0.79519653, z: 80.00253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6306672336163981651}
@@ -4705,7 +4704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 300987809}
-  dstOffset: 1073.8856
+  dstOffset: 389.07434
   frontAttachment: {fileID: 0}
   train: {fileID: 5133084401083803738}
   trainOnPath: {fileID: 65152807}
