@@ -29,7 +29,7 @@ public class TrainEditor : Editor
 
         trainOnPath = (TrainOnPath)target;
 
-        if (!Application.isEditor && trainOnPath.follower.frontAttachment)
+        if (!Application.isEditor || trainOnPath == null || trainOnPath.follower.frontAttachment)
             return;
 
         objectMouseHover(Event.current);
@@ -53,8 +53,6 @@ public class TrainEditor : Editor
         Tools.current = LastTool;
     }
     private void objectMouseHover(Event e) {
-        if (trainOnPath == null)
-            return;
         
         UpdatePathMouseInfo ();
 
@@ -81,7 +79,8 @@ public class TrainEditor : Editor
             screenSpaceLine = new PathCreationEditor.ScreenSpacePolyLine (bezierPath, trainOnPath.transform, screenPolylineMaxAngleError, screenPolylineMinVertexDst);
             hasUpdatedScreenSpaceLine = true;
         }
-        pathMouseInfo = screenSpaceLine.CalculateMouseInfo ();
+        if (screenSpaceLine != null)
+            pathMouseInfo = screenSpaceLine.CalculateMouseInfo ();
     }
     private void UpdateTrain (Vector3 point) {
         point = MathUtility.InverseTransformPoint (point, trainOnPath.transform, bezierPath.Space);
