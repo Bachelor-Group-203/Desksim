@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using UnityEngine;
+using UnityEditor;
 using PathCreation;
 
 public class Follower : MonoBehaviour
 {
     public PathCreator pathCreator;
+    TrainController trainController;
+    [SerializeField] public float dstOffset;
     [HideInInspector] public Follower frontAttachment;
     [HideInInspector] public GameObject train;
     [HideInInspector] public TrainOnPath trainOnPath;
-    TrainController trainController;
-    public float dstOffset;
     public float attachOffset;
     public EndOfPathInstruction end;
     float distanceTravelled;
@@ -24,13 +25,9 @@ public class Follower : MonoBehaviour
         {
             trainController = GetComponent<TrainController>();
             trainOnPath = GetComponent<TrainOnPath>();
-            dstOffset = trainOnPath.newDstOffset;
+            dstOffset = EditorPrefs.GetFloat("dstOffset", dstOffset);
             train.transform.position = this.transform.position = new Vector3(0, 0, 0);
             train.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (pathCreator == null)
-        {
-            pathCreator = frontAttachment.pathCreator;
         }
         distanceTravelled += dstOffset;
     }

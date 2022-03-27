@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class TrainOnPath : MonoBehaviour
 {
-    [HideInInspector] public float newDstOffset;
     public Follower follower;
     public PathSpace space;
     float distanceTravelled; 

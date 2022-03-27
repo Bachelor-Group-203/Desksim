@@ -5,23 +5,23 @@ using PathCreation;
 using UnityEngine;
 using UnityEditor.IMGUI.Controls;
 using UnityEditor; 
+using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(TrainOnPath))]
 public class TrainEditor : Editor
 {
-    public EndOfPathInstruction end;
-    private TrainOnPath trainOnPath;
+    EndOfPathInstruction end;
+    TrainOnPath trainOnPath;
     PathCreationEditor.ScreenSpacePolyLine screenSpaceLine;
     PathCreationEditor.ScreenSpacePolyLine.MouseInfo pathMouseInfo;
     Tool LastTool = Tool.None;
+    Vector3 lastPoint;
     bool hasUpdatedScreenSpaceLine;
-    private float distanceTravelled;
-    private float newDstOffset;
+    float distanceTravelled;
     const float screenPolylineMaxAngleError = .3f;
     const float screenPolylineMinVertexDst = .01f;
     const float mouseDstToPathClamp = 30f;
-
-    //TODO Load correct train position after sceneload
+    
     private void OnSceneGUI()
     {
         if (Application.isPlaying)
@@ -43,6 +43,7 @@ public class TrainEditor : Editor
     {
         LastTool = Tools.current;
         Tools.current = Tool.None;
+        GetLastPoint();
     }
     private void OnDisable()
     {
@@ -50,7 +51,6 @@ public class TrainEditor : Editor
             return;
 
         Tools.current = LastTool;
-        trainOnPath.newDstOffset = newDstOffset;
     }
     private void objectMouseHover(Event e) {
         if (trainOnPath == null)
@@ -62,30 +62,52 @@ public class TrainEditor : Editor
 
         if (e.type == EventType.MouseDown && distanceTravelled > 0f) 
         {
-            newDstOffset = distanceTravelled;
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            trainOnPath.follower.UpdateDstOffset(distanceTravelled);
+            EditorPrefs.SetFloat("dstOffset", distanceTravelled);
+            SetLastPoint(newPathPoint);
         }
         if (pathMouseInfo.mouseDstToLine <= mouseDstToPathClamp)
         {
-            newPathPoint = MathUtility.InverseTransformPoint (newPathPoint, trainOnPath.transform, bezierPath.Space);
-            newPathPoint += pathCreator.transform.position;
-            //Debug.Log("Pos: " + newPathPoint);
-            distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(newPathPoint);
-            if (distanceTravelled > 0f)
-            {
-                Quaternion normalRotation = Quaternion.Euler(180, 0, 90); 
-                Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
-                train.transform.position = newPathPoint;
-                train.transform.rotation = pathRotation * normalRotation;
-            }
+            UpdateTrain(newPathPoint);
+        }
+        else 
+        {
+            GetLastPoint();
+            UpdateTrain(lastPoint);
         }
     }
 
-    void UpdatePathMouseInfo () {
+    private void UpdatePathMouseInfo() {
         if (!hasUpdatedScreenSpaceLine || (screenSpaceLine != null && screenSpaceLine.TransformIsOutOfDate ())) {
             screenSpaceLine = new PathCreationEditor.ScreenSpacePolyLine (bezierPath, trainOnPath.transform, screenPolylineMaxAngleError, screenPolylineMinVertexDst);
             hasUpdatedScreenSpaceLine = true;
         }
         pathMouseInfo = screenSpaceLine.CalculateMouseInfo ();
+    }
+    private void UpdateTrain (Vector3 point) {
+        point = MathUtility.InverseTransformPoint (point, trainOnPath.transform, bezierPath.Space);
+        point += pathCreator.transform.position;
+        distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(point);
+        if (distanceTravelled > 0f)
+        {
+            Quaternion normalRotation = Quaternion.Euler(180, 0, 90); 
+            Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
+            train.transform.position = point;
+            train.transform.rotation = pathRotation * normalRotation;
+        }
+    }
+    private void GetLastPoint() {
+        float xstring = EditorPrefs.GetFloat("xfloat");
+        float ystring = EditorPrefs.GetFloat("yfloat");
+        float zstring = EditorPrefs.GetFloat("zfloat");
+        lastPoint = new Vector3(xstring, ystring, zstring);
+    }
+    private void SetLastPoint(Vector3 vec) {
+        EditorPrefs.SetFloat("xfloat", vec.x);
+        EditorPrefs.SetFloat("yfloat", vec.y);
+        EditorPrefs.SetFloat("zfloat", vec.z);
+        GetLastPoint();
     }
     BezierPath bezierPath 
     {
