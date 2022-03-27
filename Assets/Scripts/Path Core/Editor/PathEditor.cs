@@ -53,7 +53,8 @@ namespace PathCreationEditor {
         bool hasUpdatedScreenSpaceLine;
         bool hasUpdatedNormalsVertexPath;
         bool editingNormalsOld;
-
+        bool heightModEnabled;
+        bool heightKeyEnabled;
         Vector3 transformPos;
         Vector3 transformScale;
         Quaternion transformRot;
@@ -107,8 +108,12 @@ namespace PathCreationEditor {
                 if (data.showPathOptions) {
                     bezierPath.Space = (PathSpace) EditorGUILayout.Popup ("Space", (int) bezierPath.Space, spaceNames);
                     bezierPath.ControlPointMode = (BezierPath.ControlMode) EditorGUILayout.EnumPopup (new GUIContent ("Control Mode"), bezierPath.ControlPointMode);
-                    bezierPath.Height = EditorGUILayout.FloatField(new GUIContent("Height over Terrain", "Use \"O\" and \"L\" buttons while holding an anchorpoint"), bezierPath.Height);
-                    
+                    heightModEnabled = EditorGUILayout.Toggle("HeightModifier", heightModEnabled);
+                    EditorGUI.BeginDisabledGroup(heightModEnabled == false);
+                        bezierPath.Height = EditorGUILayout.FloatField(new GUIContent("Height over Terrain", "Use \"O\" and \"L\" buttons while holding an anchorpoint"), bezierPath.Height);
+                        heightKeyEnabled = EditorGUILayout.Toggle("Use \"O\"\\\"L\" Keys",heightKeyEnabled);
+                    EditorGUI.EndDisabledGroup();
+
                     if (bezierPath.ControlPointMode == BezierPath.ControlMode.Automatic) {
                         bezierPath.AutoControlLength = EditorGUILayout.Slider (new GUIContent ("Control Spacing"), bezierPath.AutoControlLength, 0, 1);
                     }
@@ -528,7 +533,8 @@ namespace PathCreationEditor {
             var cap = capFunctions[(isAnchorPoint) ? globalDisplaySettings.anchorShape : globalDisplaySettings.controlShape];
             PathHandle.HandleInputType handleInputType;
             handlePosition = PathHandle.DrawHandle (handlePosition, bezierPath.Space, isInteractive, handleSize, cap, handleColours, out handleInputType, i, bezierPath.Height, ref newHeight);
-            bezierPath.Height = newHeight;
+            if (heightKeyEnabled)
+                bezierPath.Height = newHeight;
 
             if (doTransformHandle) {
                 // Show normals rotate tool 
