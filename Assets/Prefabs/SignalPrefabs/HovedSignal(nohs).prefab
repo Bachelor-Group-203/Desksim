@@ -2539,7 +2539,7 @@ GameObject:
   - component: {fileID: 1530490824824543024}
   - component: {fileID: 2618298073815209904}
   m_Layer: 0
-  m_Name: Nohs
+  m_Name: HovedSignal(nohs)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
