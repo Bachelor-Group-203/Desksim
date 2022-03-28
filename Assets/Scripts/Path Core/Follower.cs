@@ -13,10 +13,10 @@ using PathCreation;
 public class Follower : MonoBehaviour
 {
     public PathCreator pathCreator;
+    public GameObject train;
     TrainController trainController;
     [SerializeField] public float dstOffset;
     [HideInInspector] public Follower frontAttachment;
-    [HideInInspector] public GameObject train;
     [HideInInspector] public ObjectOnPath trainOnPath;
     public float attachOffset;
     public EndOfPathInstruction end;
