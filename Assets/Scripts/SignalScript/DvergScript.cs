@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SignalEnum;
 
 public class DvergScript : SignalScript
 {
     [SerializeField] private DvergSignal signalStatus;
     [SerializeField] private Material signalOnMaterial;
 
-    enum DvergSignal
+    public int SignalStatus
     {
-        Av,
-        SkiftingForbudt,
-        VarsomSkifting,
-        SkiftingTillat,
-        FrigittSkifting
+        set
+        {
+            signalStatus = (DvergSignal)value;
+        }
     }
 
     private void Awake()

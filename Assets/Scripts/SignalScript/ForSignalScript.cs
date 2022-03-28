@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SignalEnum;
 
 public class ForSignalScript : SignalScript
 {
@@ -11,12 +12,12 @@ public class ForSignalScript : SignalScript
     private int activeSignal = 0;
     private Coroutine routine;
 
-    enum ForSignal
+    public int SignalStatus
     {
-        Av,
-        ForventStopp,
-        ForvendKjørRedusert,
-        ForventKjør,
+        set
+        {
+            signalStatus = (ForSignal)value;
+        }
     }
 
     private void Awake()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SignalEnum;
 
 public class HovedSignalScript : SignalScript
 {
@@ -11,14 +12,14 @@ public class HovedSignalScript : SignalScript
     private int activeSignal = 0;
     private Coroutine routine;
 
-    enum HovedSignal
+    public int SignalStatus
     {
-        Av,
-        Stop,
-        StopBlink,
-        KjørMedRedusertHastighet,
-        Kjør
+        set
+        {
+            signalStatus = (HovedSignal)value;
+        }
     }
+
 
     private void Awake()
     {
