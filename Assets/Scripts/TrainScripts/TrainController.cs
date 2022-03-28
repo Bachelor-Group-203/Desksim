@@ -81,31 +81,13 @@ public class TrainController : MonoBehaviour
      */
     void Update()
     {
-        /************************
-         * Acceleration conroller
-         ************************/
-        // Input train controller here 
-        // controller 0 - 100% * maxAcceleration = current acceleration 
+        // Acceleration force
         vel = Vector3.Magnitude(rBody.velocity) * force;
 
-        /******************
-         * Break controller
-         ******************/
-        // Breaks go from 0 to 5 bar
-        // controller 0 - 100% * maxBreakForce = current BreakForce
+        // Breaking force
         UpdatePressure();
 
-        /**************
-         * Slope finder
-         **************/
-        if (GetGroundAngle() >= 0)
-        {
-            slope = GetGroundAngle();
-        }
-
-        /***************
-         * Reverse train
-         ***************/
+        // Reverse train
         if (Mathf.Abs(vel) <= 0)
         {
             if (tUi.Reverse)
@@ -117,15 +99,6 @@ public class TrainController : MonoBehaviour
                 force = 1;
             }
         }
-
-        /******************
-         * Notes and uefull things
-         ******************/
-        // For tracking the speed of the train in km/h
-        //Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
-        //Debug.Log("\tBar: " + bar);
-        //Debug.Log("Acceleration: " + GetAccelerationForce() + "\tVelocity: " + Vector3.Magnitude(rBody.velocity) + "\tBar: " + pressure);
-
     }
 
     /*
@@ -133,9 +106,7 @@ public class TrainController : MonoBehaviour
      */
     private void FixedUpdate()
     {
-        /***************************
-         * Execute train acceleraton
-         ***************************/
+        // Train Acceleration
         if (pressure >= 5.0f)
         {
             if (Mathf.Abs(vel) >= tValues.MaxVelocity)
@@ -149,9 +120,7 @@ public class TrainController : MonoBehaviour
             }
         }
 
-        /**********************
-         * Execute train breaks
-         **********************/
+        // Train brakes
         if (pressure <= 4.5f)
         {
             if (Mathf.Abs(vel) <= 0.01f)
