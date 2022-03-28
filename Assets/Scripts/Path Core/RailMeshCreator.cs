@@ -2,15 +2,13 @@
 using PathCreation.Utility;
 using UnityEngine;
 
+/**
+ * RailMeshCreator creates the procedural mesh of bezierpath
+ */
 namespace PathCreation.Examples {
     public class RailMeshCreator : PathSceneTool {
         [Header ("Rail settings")]
         public float railWidth = .4f;
-        /** 
-         * @touched Michael-Angelo Karpowicz
-         * 
-         * Increased maximum range of thickness to serve as ground foundation for rails
-         */
         [Range (0, 200f)]
         public float thickness = 1.5f;
         public bool flattenSurface;
@@ -27,6 +25,9 @@ namespace PathCreation.Examples {
         MeshRenderer meshRenderer;
         Mesh mesh;
 
+        /**
+         * Creates and updates mesh if path exists
+         */
         protected override void PathUpdated () {
             if (pathCreator != null) {
                 AssignMeshComponents ();
@@ -35,6 +36,9 @@ namespace PathCreation.Examples {
             }
         }
 
+        /**
+         * Creates the procedural mesh for path
+         */
         void CreateRailMesh () {
             Vector3[] verts = new Vector3[path.NumPoints * 8];
             Vector2[] uvs = new Vector2[verts.Length];
@@ -122,7 +126,9 @@ namespace PathCreation.Examples {
             mesh.RecalculateBounds ();
         }
 
-        // Add MeshRenderer and MeshFilter components to this gameobject if not already attached
+        /**
+         * Assigns mesh components
+         */
         void AssignMeshComponents () {
 
             if (meshHolder == null) {
@@ -149,12 +155,14 @@ namespace PathCreation.Examples {
             meshFilter.sharedMesh = mesh;
         }
 
+        /**
+         * Assign materials of mesh
+         */
         void AssignMaterials () {
             if (railMaterial != null && undersideMaterial != null) {
                 meshRenderer.sharedMaterials = new Material[] { railMaterial, undersideMaterial, undersideMaterial };
                 meshRenderer.sharedMaterials[0].mainTextureScale = new Vector3 (1, textureTiling);
             }
         }
-
     }
 }
