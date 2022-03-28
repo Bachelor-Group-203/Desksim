@@ -11,7 +11,7 @@ public class SignalScript : MonoBehaviour
 
     protected List<Transform> listOfLights = new List<Transform>();
 
-    protected bool trainTrigger = false;
+    [SerializeField] protected bool trainTrigger = false;
 
     public bool TrainTrigger
     {

@@ -20,7 +20,6 @@ public class HovedSignalScript : SignalScript
         }
     }
 
-
     private void Awake()
     {
         GetAllLights();
