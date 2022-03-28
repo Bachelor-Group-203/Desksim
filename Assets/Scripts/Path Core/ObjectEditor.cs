@@ -7,11 +7,15 @@ using UnityEditor.IMGUI.Controls;
 using UnityEditor; 
 using UnityEditor.SceneManagement;
 
-[CustomEditor(typeof(TrainOnPath))]
-public class TrainEditor : Editor
+[CustomEditor(typeof(ObjectOnPath))]
+
+/**
+ * ObjectEditor allows for objects with "ObjectOnPath" scripts to easily place these objects on set path
+ */
+public class ObjectEditor : Editor
 {
     EndOfPathInstruction end;
-    TrainOnPath trainOnPath;
+    ObjectOnPath trainOnPath;
     PathCreationEditor.ScreenSpacePolyLine screenSpaceLine;
     PathCreationEditor.ScreenSpacePolyLine.MouseInfo pathMouseInfo;
     Tool LastTool = Tool.None;
@@ -22,29 +26,19 @@ public class TrainEditor : Editor
     const float screenPolylineMinVertexDst = .01f;
     const float mouseDstToPathClamp = 30f;
     
-    private void OnSceneGUI()
-    {
-        if (Application.isPlaying)
-            return;
-
-        trainOnPath = (TrainOnPath)target;
-
-        if (!Application.isEditor || trainOnPath == null || trainOnPath.follower.frontAttachment)
-            return;
-
-        objectMouseHover(Event.current);
-        
-        if (trainOnPath.transform.position == pathCreator.transform.position)
-            return;
-
-        trainOnPath.transform.position = pathCreator.transform.position;
-    }
+    /**
+     * When this script is enabled
+     */
     private void OnEnable()
     {
         LastTool = Tools.current;
         Tools.current = Tool.None;
         GetLastPoint();
     }
+
+    /**
+     * When this script is disabled
+     */
     private void OnDisable()
     {
         if (Application.isPlaying)
@@ -52,20 +46,49 @@ public class TrainEditor : Editor
 
         Tools.current = LastTool;
     }
-    private void objectMouseHover(Event e) {
+    
+    /**
+     * When on scene window
+     */
+    private void OnSceneGUI()
+    {
+        if (Application.isPlaying)
+            return;
+
+        trainOnPath = (ObjectOnPath)target;
+
+        if (!Application.isEditor || trainOnPath == null)
+            return;
+
+        objectMouseHover();
+        
+        if (trainOnPath.transform.position == pathCreator.transform.position)
+            return;
+
+        trainOnPath.transform.position = pathCreator.transform.position;
+    }
+
+    /**
+     * ObjectMouseHover defines what occurs whilst hovering mouse on path
+     */
+    private void objectMouseHover() {
         
         UpdatePathMouseInfo ();
 
         Vector3 newPathPoint = pathMouseInfo.closestWorldPointToMouse;
 
+        // If mouse is too far from path, then return train to last position
         if (pathMouseInfo.mouseDstToLine > mouseDstToPathClamp)
         {
             GetLastPoint();
             UpdateTrain(lastPoint);
             return;
         }
+
         UpdateTrain(newPathPoint);
-        if (e.type == EventType.MouseDown && distanceTravelled > 0f) 
+
+        // When clicking on path, place train and save last position
+        if (Event.current.type == EventType.MouseDown && distanceTravelled > 0f) 
         {
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             trainOnPath.follower.UpdateDstOffset(distanceTravelled);
@@ -74,6 +97,9 @@ public class TrainEditor : Editor
         }
     }
 
+    /**
+     * Updates mouse info relative to the path
+     */
     private void UpdatePathMouseInfo() {
         if (!hasUpdatedScreenSpaceLine || (screenSpaceLine != null && screenSpaceLine.TransformIsOutOfDate ())) {
             screenSpaceLine = new PathCreationEditor.ScreenSpacePolyLine (bezierPath, trainOnPath.transform, screenPolylineMaxAngleError, screenPolylineMinVertexDst);
@@ -82,6 +108,12 @@ public class TrainEditor : Editor
         if (screenSpaceLine != null)
             pathMouseInfo = screenSpaceLine.CalculateMouseInfo ();
     }
+
+    /**
+     * Updates train position
+     *
+     * @param       point       Vector3 point to place the train
+     */
     private void UpdateTrain (Vector3 point) {
         point = MathUtility.InverseTransformPoint (point, trainOnPath.transform, bezierPath.Space);
         point += pathCreator.transform.position;
@@ -94,18 +126,27 @@ public class TrainEditor : Editor
             train.transform.rotation = pathRotation * normalRotation;
         }
     }
+
+    /**
+     * Gets last point inside EditorPrefs
+     */
     private void GetLastPoint() {
         float xstring = EditorPrefs.GetFloat("xfloat");
         float ystring = EditorPrefs.GetFloat("yfloat");
         float zstring = EditorPrefs.GetFloat("zfloat");
         lastPoint = new Vector3(xstring, ystring, zstring);
     }
+
+    /**
+     * Sets last point inside EditorPrefs
+     */
     private void SetLastPoint(Vector3 vec) {
         EditorPrefs.SetFloat("xfloat", vec.x);
         EditorPrefs.SetFloat("yfloat", vec.y);
         EditorPrefs.SetFloat("zfloat", vec.z);
         GetLastPoint();
     }
+
     BezierPath bezierPath 
     {
         get {

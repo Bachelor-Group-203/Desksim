@@ -7,6 +7,9 @@ using UnityEngine;
 using UnityEditor;
 using PathCreation;
 
+/**
+ * Follower computes trains position onto path by distance of path
+ */
 public class Follower : MonoBehaviour
 {
     public PathCreator pathCreator;
@@ -14,17 +17,20 @@ public class Follower : MonoBehaviour
     [SerializeField] public float dstOffset;
     [HideInInspector] public Follower frontAttachment;
     [HideInInspector] public GameObject train;
-    [HideInInspector] public TrainOnPath trainOnPath;
+    [HideInInspector] public ObjectOnPath trainOnPath;
     public float attachOffset;
     public EndOfPathInstruction end;
     float distanceTravelled;
 
+    /**
+     * Called on the first frame this script is enabled
+     */
     private void Start()
     {
         if (frontAttachment == null && train != null && trainOnPath != null)
         {
             trainController = GetComponent<TrainController>();
-            trainOnPath = GetComponent<TrainOnPath>();
+            trainOnPath = GetComponent<ObjectOnPath>();
             dstOffset = EditorPrefs.GetFloat("dstOffset", dstOffset);
             train.transform.position = this.transform.position = new Vector3(0, 0, 0);
             train.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -32,6 +38,9 @@ public class Follower : MonoBehaviour
         distanceTravelled += dstOffset;
     }
 
+    /**
+     * Called every frame
+     */
     void Update()
     {
         if (pathCreator == null) {
@@ -42,12 +51,25 @@ public class Follower : MonoBehaviour
         else 
             distanceTravelled += trainController.Velocity * Time.deltaTime;
         // Move and rotate game object to points of the path
-        transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, end);
+        UpdateTrain(distanceTravelled);
+    }
+
+    /**
+     * Updates train position in relation to path
+     *
+     * @param       distance        placed distance of path
+     */
+    void UpdateTrain(float distance)
+    {
+        transform.position = pathCreator.path.GetPointAtDistance(distance, end);
         Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
-        Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
+        Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distance, end);
         transform.rotation = pathRotation * normalRotation;
     }
 
+    /**
+     * Update distance offset for Start() function
+     */
     public void UpdateDstOffset(float dst)
     {
         dstOffset = dst;

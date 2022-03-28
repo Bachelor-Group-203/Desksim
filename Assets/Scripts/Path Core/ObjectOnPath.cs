@@ -4,10 +4,14 @@ using PathCreation;
 using PathCreation.Utility;
 using System.Collections.Generic;
 using UnityEngine;
-public class TrainOnPath : MonoBehaviour
+
+/**
+ * ObjectOnPath is a tool for "ObjectEditor" to work on object with this component
+ */
+public class ObjectOnPath : MonoBehaviour
 {
+    [HideInInspector] public PathSpace space;
     public Follower follower;
-    public PathSpace space;
     float distanceTravelled; 
     Vector3 position;
     RaycastHit hit;
