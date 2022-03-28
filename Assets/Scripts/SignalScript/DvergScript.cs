@@ -50,4 +50,12 @@ public class DvergScript : SignalScript
         listOfLights[i].GetComponent<MeshRenderer>().material = signalOnMaterial;
         listOfLights[j].GetComponent<MeshRenderer>().material = signalOnMaterial;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Train")
+        {
+
+        }
+    }
 }

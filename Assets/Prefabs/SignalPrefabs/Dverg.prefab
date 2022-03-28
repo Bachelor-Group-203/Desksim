@@ -1089,6 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdde2cdb442978748b3f6636a905a65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  signalType: 0
   lights: {fileID: 6517047526015034059}
   signalOffMaterial: {fileID: 2100000, guid: 3c84172a34b07cb41930a31cb66a3cfb, type: 2}
   signalStatus: 0

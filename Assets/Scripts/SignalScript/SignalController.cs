@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SignalEnum;
 
 public class SignalController : MonoBehaviour
 {
     
     private List<Transform> listOfSignals = new List<Transform>();
 
-    enum SignalType
-    {
-        Dverg,
-        ForSignal,
-        HovedSignal
-    }
+    private int layer = 0;
 
     private void Awake()
     {
@@ -25,6 +21,65 @@ public class SignalController : MonoBehaviour
     private void Start()
     {
         
+    }
+
+    private void Update()
+    {
+        foreach (Transform item in listOfSignals)
+        {
+            int type = (int)item.GetComponent<SignalScript>().SignalType;
+            
+            switch (type)
+            {
+                case 0: if (item.GetComponent<DvergScript>().TrainTrigger)
+                    {
+                        test();
+                        item.GetComponent<DvergScript>().TrainTrigger = false;
+                    }
+                    break;
+                case 1: if (item.GetComponent<ForSignalScript>().TrainTrigger)
+                    {
+                        test();
+                        item.GetComponent<ForSignalScript>().TrainTrigger = false;
+                    }
+                    break;
+                case 2: if (item.GetComponent<HovedSignalScript>().TrainTrigger)
+                    {
+                        test();
+                        item.GetComponent<HovedSignalScript>().TrainTrigger = false;
+                    }
+                    break;
+                default: Debug.LogError("Not a valid sign number: " + type); break;
+            }
+        }
+    }
+
+    private void InitalizeSignalState()
+    {
+        // initial signals
+        ChangeSignalStatus(listOfSignals[0], SignalType.HovedSignal, (int)HovedSignal.Stop);
+        ChangeSignalStatus(listOfSignals[1], SignalType.HovedSignal, (int)HovedSignal.KjørMedRedusertHastighet);
+        ChangeSignalStatus(listOfSignals[2], SignalType.HovedSignal, (int)HovedSignal.Stop);
+    }
+
+
+    private void test()
+    {
+        if (layer == 0)
+        {
+            ChangeSignalStatusTime(listOfSignals[0], SignalType.HovedSignal, (int)HovedSignal.Kjør, 10.0f);
+            layer++;
+        }
+        if (layer == 1)
+        {
+            ChangeSignalStatusTime(listOfSignals[0], SignalType.HovedSignal, (int)HovedSignal.Kjør, 10.0f);
+            layer++;
+        }
+    }
+
+    private bool TrainIsHere()
+    {
+        return true;
     }
 
     /*
@@ -57,26 +112,26 @@ public class SignalController : MonoBehaviour
     {
         switch ((int)signalType)
         {
-            case 0: StartCoroutine(ChangeDvergTime(signal, lightPattern, time)); break;
-            case 1: StartCoroutine(ChangeForSignalTime(signal, lightPattern, time)); break;
-            case 2: StartCoroutine(ChangeHovedSignalTime(signal, lightPattern, time)); break;
+            case 0: StartCoroutine(DvergChangeTime(signal, lightPattern, time)); break;
+            case 1: StartCoroutine(ForSignalChangeTime(signal, lightPattern, time)); break;
+            case 2: StartCoroutine(HovedSignalChangeTime(signal, lightPattern, time)); break;
             default: Debug.LogError("Not a valid sign number: " + (int)signalType); break;
         }
     }
 
-    IEnumerator ChangeDvergTime(Transform signal, int lightPattern, float time)
+    IEnumerator DvergChangeTime(Transform signal, int lightPattern, float time)
     {
         yield return new WaitForSeconds(time);
         signal.GetComponent<DvergScript>().SignalStatus = lightPattern;
     }
 
-    IEnumerator ChangeForSignalTime(Transform signal, int lightPattern, float time)
+    IEnumerator ForSignalChangeTime(Transform signal, int lightPattern, float time)
     {
         yield return new WaitForSeconds(time);
         signal.GetComponent<ForSignalScript>().SignalStatus = lightPattern;
     }
 
-    IEnumerator ChangeHovedSignalTime(Transform signal, int lightPattern, float time)
+    IEnumerator HovedSignalChangeTime(Transform signal, int lightPattern, float time)
     {
         yield return new WaitForSeconds(time);
         signal.GetComponent<HovedSignalScript>().SignalStatus = lightPattern;

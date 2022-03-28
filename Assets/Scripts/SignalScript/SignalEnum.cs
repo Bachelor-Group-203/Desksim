@@ -29,4 +29,11 @@ public class SignalEnum : MonoBehaviour
         KjørMedRedusertHastighet,
         Kjør
     }
+
+    public enum SignalType
+    {
+        Dverg,
+        ForSignal,
+        HovedSignal
+    }
 }

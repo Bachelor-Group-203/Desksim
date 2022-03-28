@@ -1,13 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SignalEnum;
 
 public class SignalScript : MonoBehaviour
 {
+    [SerializeField] private SignalType signalType;
     [SerializeField] protected Transform lights;
     [SerializeField] protected Material signalOffMaterial;
 
     protected List<Transform> listOfLights = new List<Transform>();
+
+    protected bool trainTrigger = false;
+
+    public bool TrainTrigger
+    {
+        get
+        {
+            return trainTrigger;
+        }
+        set
+        {
+            trainTrigger = value;
+        }
+    }
+
+    public SignalType SignalType
+    {
+        get
+        {
+            return signalType;
+        }
+    }
 
     /*
      * Turns off all the lights on the object
