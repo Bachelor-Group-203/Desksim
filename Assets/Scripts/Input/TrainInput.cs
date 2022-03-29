@@ -206,7 +206,7 @@ public class TrainInput : MonoBehaviour
         if (multipleIdenticalSticks_areSetup && superDebug && InputManager.usingMultipleIdenticalSticks) Debug.Log(leftStick.ReadValue<Vector2>() + "     &&&&      " + rightStick.ReadValue<Vector2>());
         if (InputManager.usingMultipleIdenticalSticks && (!multipleIdenticalSticks_areSetup || (leftStick == null || rightStick == null)))
         {
-            Debug.Log("<InputController Train> \tusingMultipleIdenticalSticks is true, but they're not set up properly or one or more of the sticks are null, trying to fix that.");
+            if (debug) Debug.Log("<InputController Train> \tusingMultipleIdenticalSticks is true, but they're not set up properly or one or more of the sticks are null, trying to fix that.");
             SetupMultipleIdenticalSticks();
         }
 
@@ -325,7 +325,7 @@ public class TrainInput : MonoBehaviour
      **/
     private void SetupMultipleIdenticalSticks()
     {
-        Debug.Log("<InputController Train> \tTrying to set up for multiple identical sticks");
+        if (debug) Debug.Log("<InputController Train> \tTrying to set up for multiple identical sticks");
         leftStick = new InputAction(binding: "<Joystick>{LeftHand}/stick");
         rightStick = new InputAction(binding: "<Joystick>{RightHand}/stick");
         leftStick.Enable();
@@ -349,7 +349,6 @@ public class TrainInput : MonoBehaviour
     public void OnSliderAccelerationValueChanged(System.Single value)
     {
         a = value;
-        Debug.Log("\t\t\t\tAcceler slider changed: " + a + " (should be " + value + ")");
     }
 
     /**
@@ -358,7 +357,6 @@ public class TrainInput : MonoBehaviour
     public void OnSliderPressureValueChanged(System.Single value)
     {
         p = value;
-        Debug.Log("\t\t\t\tPressur slider changed: " + p + " (should be " + value + ")");
     }
 
     /**
@@ -367,7 +365,7 @@ public class TrainInput : MonoBehaviour
     private void Train_ExitTrain(InputAction.CallbackContext obj)
     {
         // Do checks like, only leaving if the train is standing still, here
-        Debug.Log("<InputController Train> \tExitTrain");
+        if (debug) Debug.Log("<InputController Train> \tExitTrain");
         InputManager.ExitTrain();
     }
 
@@ -377,7 +375,7 @@ public class TrainInput : MonoBehaviour
     private void ChangePerspective(InputAction.CallbackContext obj)
     {
         if (!allowThirdPerson) return;
-        Debug.Log("<InputController Train> \tChangePerspective");
+        if (debug) Debug.Log("<InputController Train> \tChangePerspective");
 
         if(debug) Debug.Log("Begin [1P=" + camera_1P.activeSelf + " 3P=" + camera_3P.activeSelf + " 3Penabled=" + allowThirdPerson + "]");
 
@@ -406,7 +404,7 @@ public class TrainInput : MonoBehaviour
 
     private void InitiatePerspective()
     {
-        Debug.Log("<InputController Train> \tInitiatePerspective");
+        if (debug) Debug.Log("<InputController Train> \tInitiatePerspective");
         camera_3P = GameObject.FindGameObjectWithTag("Camera_3P");
         camera_1P = GameObject.FindGameObjectWithTag("Camera_1P");
         camera_FocusOnPanel = GameObject.FindGameObjectWithTag("Camera_FocusOnPanel");
@@ -426,7 +424,7 @@ public class TrainInput : MonoBehaviour
 
     private void UpdateUI()
     {
-        Debug.Log("<InputController Train> \tUpdateUI");
+        if (debug) Debug.Log("<InputController Train> \tUpdateUI");
         if (!canvasUI_overlay)              canvasUI_overlay                = GameObject.FindGameObjectWithTag("UI_Train");
         if (!canvasUI_physical_interactive) canvasUI_physical_interactive   = GameObject.FindGameObjectWithTag("UI_Train_VR-interactive");
         if (!canvasUI_physical_decorative)  canvasUI_physical_decorative    = GameObject.FindGameObjectWithTag("UI_Train_VR-decorative");
@@ -446,7 +444,7 @@ public class TrainInput : MonoBehaviour
             canvasUI_overlay.SetActive(false);
             canvasUI_physical_interactive.SetActive(true);
             canvasUI_physical_decorative.SetActive(false);
-            Debug.Log("\t\t\t Disabling overlay & enabling interactive VR UI [1P=" + camera_1P.activeSelf + " 3P=" + camera_3P.activeSelf + " 3Penabled=" + allowThirdPerson + "]");
+            if(debug) Debug.Log("\t\t\t Disabling overlay & enabling interactive VR UI [1P=" + camera_1P.activeSelf + " 3P=" + camera_3P.activeSelf + " 3Penabled=" + allowThirdPerson + "]");
         }
         else if((camera_1P.activeSelf && !allowThirdPerson) || (camera_3P && camera_3P.activeSelf) || !allowThirdPerson)
         {
@@ -458,12 +456,7 @@ public class TrainInput : MonoBehaviour
             canvasUI_overlay.SetActive(true);
             canvasUI_physical_interactive.SetActive(false);
             canvasUI_physical_decorative.SetActive(true);
-            Debug.Log("\t\t\t Enabling overlay & disabling interactive VR UI [1P="+camera_1P.activeSelf+" 3P="+camera_3P.activeSelf+" 3Penabled="+allowThirdPerson+"]");
-        } 
-        else if(camera_1P.activeSelf && allowThirdPerson)
-        {
-
-            // Current state =
+            if (debug) Debug.Log("\t\t\t Enabling overlay & disabling interactive VR UI [1P="+camera_1P.activeSelf+" 3P="+camera_3P.activeSelf+" 3Penabled="+allowThirdPerson+"]");
         }
     }
 
