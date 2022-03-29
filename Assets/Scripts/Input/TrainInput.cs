@@ -483,6 +483,8 @@ public class TrainInput : MonoBehaviour
             camera_1P.SetActive(true);
             camera_FocusOnPanel.SetActive(false);
         }
+
+        UpdateUI();
     }
 
 }
