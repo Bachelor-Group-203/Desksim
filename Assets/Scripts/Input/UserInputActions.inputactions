@@ -42,7 +42,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Focus Panel",
+                    "name": "Focus On Panel",
                     "type": "Button",
                     "id": "ff850ff0-fb46-475a-b4f7-05dae7499649",
                     "expectedControlType": "Button",
@@ -141,7 +141,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Focus Panel",
+                    "action": "Focus On Panel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -152,7 +152,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Focus Panel",
+                    "action": "Focus On Panel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

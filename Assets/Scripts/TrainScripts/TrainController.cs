@@ -66,14 +66,15 @@ public class TrainController : MonoBehaviour
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
         tUi = GetComponent<TrainUi>();
-        if (GameObject.FindGameObjectWithTag("InputScripts"))
+        /*if (GameObject.FindGameObjectWithTag("InputScripts"))
         {
             input = GameObject.FindGameObjectWithTag("InputScripts").GetComponent<TrainInput>();
         }
         else
         {
             Debug.LogWarning("!!! InputScripts game object not found !!!");
-        }
+        }*/
+        input = GetComponent<TrainInput>(); // Changed TrainInput to be a component of the train prefab
     }
 
     /*
