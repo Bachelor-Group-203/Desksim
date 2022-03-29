@@ -63,7 +63,7 @@ public class TrainUi : MonoBehaviour
             velocityNeedleTransform.parent.Find("Labels").transform.localScale = new Vector3(-1f, 1f, 1f);
         } else {
             // Create in parent root
-            CreateLabels(maxViewPressure, maxViewPressure, velocityNeedleTransform.parent, 0);
+            CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent, 0);
         }
         velocityNeedleTransform.SetAsLastSibling();
 
