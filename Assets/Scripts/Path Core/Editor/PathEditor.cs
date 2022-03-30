@@ -53,7 +53,8 @@ namespace PathCreationEditor {
         bool hasUpdatedScreenSpaceLine;
         bool hasUpdatedNormalsVertexPath;
         bool editingNormalsOld;
-
+        bool heightModEnabled;
+        bool heightKeyEnabled;
         Vector3 transformPos;
         Vector3 transformScale;
         Quaternion transformRot;
@@ -100,15 +101,21 @@ namespace PathCreationEditor {
             }
         }
 
+        // This draws the Bezier Inspector view
         void DrawBezierPathInspector () {
+            // checks if any of the code was executed (if there was a change in the Bezier Inspector)
             using (var check = new EditorGUI.ChangeCheckScope ()) {
                 // Path options:
                 data.showPathOptions = EditorGUILayout.Foldout (data.showPathOptions, new GUIContent ("Bézier Path Options"), true, boldFoldoutStyle);
                 if (data.showPathOptions) {
                     bezierPath.Space = (PathSpace) EditorGUILayout.Popup ("Space", (int) bezierPath.Space, spaceNames);
                     bezierPath.ControlPointMode = (BezierPath.ControlMode) EditorGUILayout.EnumPopup (new GUIContent ("Control Mode"), bezierPath.ControlPointMode);
-                    bezierPath.Height = EditorGUILayout.FloatField(new GUIContent("Height over Terrain", "Use \"O\" and \"L\" buttons while holding an anchorpoint"), bezierPath.Height);
-                    
+                    heightModEnabled = EditorGUILayout.Toggle("HeightModifier", heightModEnabled);
+                    EditorGUI.BeginDisabledGroup(heightModEnabled == false);
+                        bezierPath.Height = EditorGUILayout.FloatField(new GUIContent("Height over Terrain", "Use \"O\" and \"L\" buttons while holding an anchorpoint"), bezierPath.Height);
+                        heightKeyEnabled = EditorGUILayout.Toggle("Use \"O\"\\\"L\" Keys",heightKeyEnabled);
+                    EditorGUI.EndDisabledGroup();
+
                     if (bezierPath.ControlPointMode == BezierPath.ControlMode.Automatic) {
                         bezierPath.AutoControlLength = EditorGUILayout.Slider (new GUIContent ("Control Spacing"), bezierPath.AutoControlLength, 0, 1);
                     }
@@ -126,7 +133,7 @@ namespace PathCreationEditor {
                     // If a point has been selected
                     if (handleIndexToDisplayAsTransform != -1) {
                         EditorGUILayout.LabelField ("Selected Point:");
-
+                        // Indents the points
                         using (new EditorGUI.IndentLevelScope ()) {
                             var currentPosition = creator.bezierPath[handleIndexToDisplayAsTransform];
                             var newPosition = EditorGUILayout.Vector3Field ("Position", currentPosition);
@@ -220,6 +227,7 @@ namespace PathCreationEditor {
             }
         }
 
+        // This draws the Vertex path Inspector view
         void DrawVertexPathInspector () {
 
             GUILayout.Space (inspectorSectionSpacing);
@@ -274,6 +282,7 @@ namespace PathCreationEditor {
 
         #region Scene GUI
 
+        // Handles drawing in Scene view
         void OnSceneGUI () {
             if (!globalDisplaySettings.visibleBehindObjects) {
                 Handles.zTest = UnityEngine.Rendering.CompareFunction.LessEqual;
@@ -299,8 +308,9 @@ namespace PathCreationEditor {
                 }
 
                 // Don't allow clicking over empty space to deselect the object
-                if (eventType == EventType.Layout) {
-                    HandleUtility.AddDefaultControl (0);
+                if (eventType == EventType.Layout)
+                {
+                    HandleUtility.AddDefaultControl(0);
                 }
 
                 if (check.changed) {
@@ -528,7 +538,8 @@ namespace PathCreationEditor {
             var cap = capFunctions[(isAnchorPoint) ? globalDisplaySettings.anchorShape : globalDisplaySettings.controlShape];
             PathHandle.HandleInputType handleInputType;
             handlePosition = PathHandle.DrawHandle (handlePosition, bezierPath.Space, isInteractive, handleSize, cap, handleColours, out handleInputType, i, bezierPath.Height, ref newHeight);
-            bezierPath.Height = newHeight;
+            if (heightKeyEnabled)
+                bezierPath.Height = newHeight;
 
             if (doTransformHandle) {
                 // Show normals rotate tool 

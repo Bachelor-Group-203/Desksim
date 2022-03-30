@@ -12,13 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/M_Rebind.unity
     guid: 1130edd8a2a3d8e4e9f0e5d0e8d4e3ce
   - enabled: 1
-    path: Assets/Scenes/Scenarios/Demo 1.unity
+    path: Assets/Scenes/Scenarios/Demo.unity
     guid: 73f8920380cef2f45b09d854ecc9fb44
-  - enabled: 1
-    path: Assets/Scenes/Scenarios/Template.unity
-    guid: 420d6d76db95c9244b43b7db8a812b86
-  - enabled: 1
-    path: Assets/Scenes/Scenarios/Demo 2 - MM 1.unity
-    guid: 72265b598f0fd6b4cb45ea0d4813feb8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6358c80467b354443adb667d8874e156, type: 2}

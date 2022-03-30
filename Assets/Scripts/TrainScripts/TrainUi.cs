@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 /*
  * This class contains all the HUD elements and visual displays that relays information to the user.
@@ -56,28 +55,12 @@ public class TrainUi : MonoBehaviour
 
         // Creates the labels for the Speedometer
         maxViewVelocity = ((int)((trainValues.MaxVelocity * 3.6 * 1.1f) / 20f)) * 20;
-        // Creates labels inside gameObject named "Labels" if found
-        if (velocityNeedleTransform.parent.Find("Labels")) {
-            // Create in container gameObject
-            CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent.Find("Labels"), 180);
-            velocityNeedleTransform.parent.Find("Labels").transform.localScale = new Vector3(-1f, 1f, 1f);
-        } else {
-            // Create in parent root
-            CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent, 0);
-        }
+        CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent);
         velocityNeedleTransform.SetAsLastSibling();
 
         // Creates the labels for the Barometer
         maxViewPressure = 8;
-        // Creates labels inside gameObject named "Labels" if found
-        if (pressureNeedleTransform.parent.Find("Labels")) {
-            // Create in container gameObject
-            CreateLabels(maxViewPressure, maxViewPressure, pressureNeedleTransform.parent.Find("Labels"), 180);
-            pressureNeedleTransform.parent.Find("Labels").transform.localScale = new Vector3(-1f, 1f, 1f);
-        } else {
-            // Create in parent root
-            CreateLabels(maxViewPressure, maxViewPressure, pressureNeedleTransform.parent, 0);
-        }
+        CreateLabels(maxViewPressure, maxViewPressure, pressureNeedleTransform.parent);
         pressureNeedleTransform.SetAsLastSibling();
     }
 
@@ -87,10 +70,10 @@ public class TrainUi : MonoBehaviour
     private void Update()
     {
         // Rotates the velocity needle
-        velocityNeedleTransform.localEulerAngles = new Vector3(0, 0, GetValueToAngle(Mathf.Abs(trainController.Velocity), maxViewVelocity / 3.6f));
+        velocityNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(Mathf.Abs(trainController.Velocity), maxViewVelocity / 3.6f));
 
         // Rotates the pressure needle
-        pressureNeedleTransform.localEulerAngles = new Vector3(0, 0, GetValueToAngle(trainController.Pressure, maxViewPressure));
+        pressureNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(trainController.Pressure, maxViewPressure));
     }
 
     /*
@@ -115,7 +98,7 @@ public class TrainUi : MonoBehaviour
      * @param       parent          The parent transform that contains the instatiated objects
      * @return                      Returns the angle to rotate the object
      */
-    private void CreateLabels(int labelAmount, float maxLabelValue, Transform parent, float offset)
+    private void CreateLabels(int labelAmount, float maxLabelValue, Transform parent)
     {
         for (int i = 0; i <= labelAmount; i++)
         {
@@ -125,10 +108,10 @@ public class TrainUi : MonoBehaviour
             // Find angle of the label and rotate it accordingly 
             float labelNormalized = (float)i / labelAmount;
             float labelAngle = START_LABEL_ANGLE - labelNormalized * totalAngleSize;
-            label.eulerAngles = new Vector3(0, 0, labelAngle + offset);
+            label.eulerAngles = new Vector3(0, 0, labelAngle);
 
             // Set the text to the apropriate number 
-            label.GetComponentInChildren<TMP_Text>().text = Mathf.RoundToInt(labelNormalized * maxLabelValue).ToString();
+            label.GetComponentInChildren<Text>().text = Mathf.RoundToInt(labelNormalized * maxLabelValue).ToString();
             // Makes the numer not rotate with the tranform
             label.Find("Text").eulerAngles = Vector3.zero;
             // Activate the label so it is visible

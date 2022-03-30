@@ -64,7 +64,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Focus On Panel"",
+                    ""name"": ""Focus Panel"",
                     ""type"": ""Button"",
                     ""id"": ""ff850ff0-fb46-475a-b4f7-05dae7499649"",
                     ""expectedControlType"": ""Button"",
@@ -163,7 +163,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Focus On Panel"",
+                    ""action"": ""Focus Panel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -174,7 +174,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Focus On Panel"",
+                    ""action"": ""Focus Panel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -508,7 +508,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         m_Train_PressureModifier = m_Train.FindAction("Pressure Modifier", throwIfNotFound: true);
         m_Train_AccelerationAbsolute = m_Train.FindAction("Acceleration Absolute", throwIfNotFound: true);
         m_Train_AccelerationModifier = m_Train.FindAction("Acceleration Modifier", throwIfNotFound: true);
-        m_Train_FocusOnPanel = m_Train.FindAction("Focus On Panel", throwIfNotFound: true);
+        m_Train_FocusPanel = m_Train.FindAction("Focus Panel", throwIfNotFound: true);
         m_Train_ExitTrain = m_Train.FindAction("Exit Train", throwIfNotFound: true);
         m_Train_Menu = m_Train.FindAction("Menu", throwIfNotFound: true);
         m_Train_ChangePerspective = m_Train.FindAction("Change Perspective", throwIfNotFound: true);
@@ -581,7 +581,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Train_PressureModifier;
     private readonly InputAction m_Train_AccelerationAbsolute;
     private readonly InputAction m_Train_AccelerationModifier;
-    private readonly InputAction m_Train_FocusOnPanel;
+    private readonly InputAction m_Train_FocusPanel;
     private readonly InputAction m_Train_ExitTrain;
     private readonly InputAction m_Train_Menu;
     private readonly InputAction m_Train_ChangePerspective;
@@ -593,7 +593,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         public InputAction @PressureModifier => m_Wrapper.m_Train_PressureModifier;
         public InputAction @AccelerationAbsolute => m_Wrapper.m_Train_AccelerationAbsolute;
         public InputAction @AccelerationModifier => m_Wrapper.m_Train_AccelerationModifier;
-        public InputAction @FocusOnPanel => m_Wrapper.m_Train_FocusOnPanel;
+        public InputAction @FocusPanel => m_Wrapper.m_Train_FocusPanel;
         public InputAction @ExitTrain => m_Wrapper.m_Train_ExitTrain;
         public InputAction @Menu => m_Wrapper.m_Train_Menu;
         public InputAction @ChangePerspective => m_Wrapper.m_Train_ChangePerspective;
@@ -618,9 +618,9 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @AccelerationModifier.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnAccelerationModifier;
                 @AccelerationModifier.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnAccelerationModifier;
                 @AccelerationModifier.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnAccelerationModifier;
-                @FocusOnPanel.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusOnPanel;
-                @FocusOnPanel.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusOnPanel;
-                @FocusOnPanel.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusOnPanel;
+                @FocusPanel.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusPanel;
+                @FocusPanel.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusPanel;
+                @FocusPanel.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnFocusPanel;
                 @ExitTrain.started -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
                 @ExitTrain.performed -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
                 @ExitTrain.canceled -= m_Wrapper.m_TrainActionsCallbackInterface.OnExitTrain;
@@ -646,9 +646,9 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
                 @AccelerationModifier.started += instance.OnAccelerationModifier;
                 @AccelerationModifier.performed += instance.OnAccelerationModifier;
                 @AccelerationModifier.canceled += instance.OnAccelerationModifier;
-                @FocusOnPanel.started += instance.OnFocusOnPanel;
-                @FocusOnPanel.performed += instance.OnFocusOnPanel;
-                @FocusOnPanel.canceled += instance.OnFocusOnPanel;
+                @FocusPanel.started += instance.OnFocusPanel;
+                @FocusPanel.performed += instance.OnFocusPanel;
+                @FocusPanel.canceled += instance.OnFocusPanel;
                 @ExitTrain.started += instance.OnExitTrain;
                 @ExitTrain.performed += instance.OnExitTrain;
                 @ExitTrain.canceled += instance.OnExitTrain;
@@ -725,7 +725,7 @@ public partial class @UserInputActions : IInputActionCollection2, IDisposable
         void OnPressureModifier(InputAction.CallbackContext context);
         void OnAccelerationAbsolute(InputAction.CallbackContext context);
         void OnAccelerationModifier(InputAction.CallbackContext context);
-        void OnFocusOnPanel(InputAction.CallbackContext context);
+        void OnFocusPanel(InputAction.CallbackContext context);
         void OnExitTrain(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnChangePerspective(InputAction.CallbackContext context);

@@ -12,12 +12,6 @@ TagManager:
   - Rebinding_ToggleMultipleIdenticalSticks
   - InputPack
   - PauseMenu
-  - Camera_1P
-  - Camera_3P
-  - Camera_FocusOnPanel
-  - UI_Train
-  - UI_Train_VR-decorative
-  - UI_Train_VR-interactive
   layers:
   - Default
   - TransparentFX
