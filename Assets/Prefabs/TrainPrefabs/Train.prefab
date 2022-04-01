@@ -8534,10 +8534,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
-  end: 2
-  frontAttachment: {fileID: 0}
   dstOffset: 0
+  frontAttachment: {fileID: 0}
+  train: {fileID: 0}
+  trainOnPath: {fileID: 0}
   attachOffset: 0
+  end: 2
 --- !u!114 &5133084402935493566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8552,7 +8554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityNeedleTransform: {fileID: 2037309895033755408}
   pressureNeedleTransform: {fileID: 2037309895114541516}
-  labelTransform: {fileID: 3033108836591761262, guid: 5872c6179a0c0424c99a06eb0ad582a3, type: 3}
+  labelTransform: {fileID: 3033108836591761262, guid: 24e9ac13daaf1ac4486cdf6dddc55bbe, type: 3}
   reverseBackground: {fileID: 2037309896364688979}
   reverseOffCollor: {r: 0.17895675, g: 1, b: 0, a: 1}
   reverseOnCollor: {r: 1, g: 0, b: 0, a: 1}

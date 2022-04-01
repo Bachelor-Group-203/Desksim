@@ -107,6 +107,7 @@ public class InputManager : MonoBehaviour
     {
         Debug.Log("<InputManager> \tExitTrain() - Changing action map to Player");
         SwitchToActionMap(userInputActions.Player);
+        if (GameObject.FindGameObjectWithTag("UI_Train")) GameObject.FindGameObjectWithTag("UI_Train").SetActive(false);
     }
 
     // Use this when entering the train, to change action maps. To keep it centralized
@@ -114,6 +115,7 @@ public class InputManager : MonoBehaviour
     {
         Debug.Log("<InputManager> \tEnterTrain() - Changing action map to Train");
         SwitchToActionMap(userInputActions.Train);
+        if(GameObject.FindGameObjectWithTag("UI_Train")) GameObject.FindGameObjectWithTag("UI_Train").SetActive(true);
     }
 
 
