@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*
+/**
  * This class contains all the HUD elements and visual displays that relays information to the user.
  */
 public class TrainUi : MonoBehaviour
@@ -30,9 +30,6 @@ public class TrainUi : MonoBehaviour
 
     private bool reverse = false;
 
-    /*
-     * Get method for reverse
-     */
     public bool Reverse
     {
         get
@@ -41,7 +38,7 @@ public class TrainUi : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Awake is called first when the object is instantiated
      */
     private void Awake()
@@ -64,7 +61,7 @@ public class TrainUi : MonoBehaviour
         pressureNeedleTransform.SetAsLastSibling();
     }
 
-    /*
+    /**
      * Update is called once per frame
      */
     private void Update()
@@ -76,7 +73,7 @@ public class TrainUi : MonoBehaviour
         pressureNeedleTransform.eulerAngles = new Vector3(0, 0, GetValueToAngle(trainController.Pressure, maxViewPressure));
     }
 
-    /*
+    /**
      * This converts the velocity from the train into degrees for rotating the needle
      * 
      * @param       currentValue    The value that the needel should point to
@@ -90,7 +87,7 @@ public class TrainUi : MonoBehaviour
         return START_LABEL_ANGLE - valueNormalized * totalAngleSize;
     }
 
-    /*
+    /**
      * This converts the velocity from the train into degrees for rotating the needle
      * 
      * @param       labelAmount     The amount of labels on the gauge
@@ -119,7 +116,7 @@ public class TrainUi : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * This function swithes the moving direction of the train and the color of the button.
      * Called by Unity event under UI -> ReverseButton in hierarchy
      */

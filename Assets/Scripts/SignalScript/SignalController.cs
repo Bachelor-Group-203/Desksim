@@ -3,127 +3,130 @@ using System.Collections.Generic;
 using UnityEngine;
 using static SignalEnum;
 
+/**
+ * This class controlls the behaviour of all the signals for this senario
+ */
 public class SignalController : MonoBehaviour
 {
     private List<Transform> listOfSignals = new List<Transform>();
+    private List<int> listOfSignalType = new List<int>();
 
-    private int layer = 0;
-
+    /**
+     * This function starts first when the object is compiled and initializes values
+     */
     private void Awake()
     {
-        foreach (Transform signal in this.transform)
+        foreach (Transform signal in transform)
         {
             listOfSignals.Add(signal);
+            listOfSignalType.Add((int)signal.GetComponent<SignalScript>().SignalType);
         }
 
         InitalizeSignalState();
     }
 
+    /**
+     * This function runns per frame
+     */
     private void Update()
     {
-        foreach (Transform item in listOfSignals)
+        // Checks if one of the lights in has been triggered
+        for (int i = 0; i < listOfSignals.Count; i++)
         {
-            int type = (int)item.GetComponent<SignalScript>().SignalType;
-            
+            int type = listOfSignalType[i];
+
+            Transform signal = listOfSignals[i];
+
+            // If the signal has a detection mode then test if the appropriate signal has been triggered
+            if (signal.GetComponent<SignalScript>().TrainDetectionType != DetectTrain.Ingen)
+            {
+                switch (type)
+                {
+                    case 0:
+                        if (signal.GetComponent<DvergScript>().TrainTrigger)
+                        {
+                            SenarioManager(signal, type);
+                            signal.GetComponent<DvergScript>().TrainTrigger = false;
+                        }
+                        break;
+                    case 1:
+                        if (signal.GetComponent<ForSignalScript>().TrainTrigger)
+                        {
+                            SenarioManager(signal, type);
+                            signal.GetComponent<ForSignalScript>().TrainTrigger = false;
+                        }
+                        break;
+                    case 2:
+                        if (signal.GetComponent<HovedSignalScript>().TrainTrigger)
+                        {
+                            SenarioManager(signal, type);
+                            signal.GetComponent<HovedSignalScript>().TrainTrigger = false;
+                        }
+                        break;
+                    default: Debug.LogError("Not a valid sign number: " + type); break;
+                }
+            }
+        }
+    }
+
+    /**
+     * This function gives all the signals their starting signalpattern
+     * (Here the "For Signal" signal mimicks the hovedsignal after it. 
+     * That is how i asume it works but can also be manually set by changing the code)
+     */
+    private void InitalizeSignalState()
+    {
+        for (int i = 0; i < listOfSignals.Count; i++)
+        {
+            int type = listOfSignalType[i];
+
+            Transform signal = listOfSignals[i];
+
             switch (type)
             {
-                case 0: if (item.GetComponent<DvergScript>().TrainTrigger)
-                    {
-                        SenarioManager();
-                        item.GetComponent<DvergScript>().TrainTrigger = false;
-                    }
-                    break;
-                case 1: if (item.GetComponent<ForSignalScript>().TrainTrigger)
-                    {
-                        SenarioManager();
-                        item.GetComponent<ForSignalScript>().TrainTrigger = false;
-                    }
-                    break;
-                case 2: if (item.GetComponent<HovedSignalScript>().TrainTrigger)
-                    {
-                        SenarioManager();
-                        item.GetComponent<HovedSignalScript>().TrainTrigger = false;
-                    }
-                    break;
+                case 0: signal.GetComponent<DvergScript>().SignalStatus = (int)signal.GetComponent<DvergScript>().StartStatus; break;
+                case 1: signal.GetComponent<ForSignalScript>().SignalStatus = (int)listOfSignals[i+1].GetComponent<HovedSignalScript>().StartStatus - 1; break;
+                case 2: signal.GetComponent<HovedSignalScript>().SignalStatus = (int)signal.GetComponent<HovedSignalScript>().StartStatus; break;
                 default: Debug.LogError("Not a valid sign number: " + type); break;
             }
         }
     }
 
     /**
-     * Describes the initial values of the signals and has to be manualy edited
-     */
-    private void InitalizeSignalState()
-    {
-        // initial signals
-        ChangeSignalStatus(listOfSignals[0], (int)HovedSignal.Stop);
-        ChangeSignalStatus(listOfSignals[1], (int)HovedSignal.KjørMedRedusertHastighet);
-        ChangeSignalStatus(listOfSignals[2], (int)HovedSignal.Stop);
-    }
-
-    /**
-     * Describes what the signal is supposed to do after getting triggered and has to be manualy edited
-     */
-    private void SenarioManager()
-    {
-        if (layer == 2)
-        {
-            ChangeSignalStatusTime(listOfSignals[1], (int)HovedSignal.StopBlink, 2.0f);
-            layer++;
-        }
-        if (layer == 1)
-        {
-            ChangeSignalStatusTime(listOfSignals[1], (int)HovedSignal.StopBlink, 2.0f);
-            layer++;
-        }
-        if (layer == 0)
-        {
-            ChangeSignalStatusTime(listOfSignals[0], (int)HovedSignal.Kjør, 2.0f);
-            layer++;
-        }
-    }
-
-    /**
-     * Changes the signal state of the selected signal
+     * This function changes the signalpattern of the signal 
      * 
      * @param       signal          The signal that should change
-     * @param       lightPattern    The signal pattern that the signal should change to
+     * @param       type            The signal type 
      */
-    private void ChangeSignalStatus(Transform signal, int lightPattern)
+    private void SenarioManager(Transform signal, int type)
     {
-        int type = (int)signal.GetComponent<SignalScript>().SignalType;
+        int time = signal.GetComponent<SignalScript>().Timer;
 
-        switch (type)
+        if (time <= 0)
         {
-            case 0: signal.GetComponent<DvergScript>().SignalStatus = lightPattern; break;
-            case 1: signal.GetComponent<ForSignalScript>().SignalStatus = lightPattern; break;
-            case 2: signal.GetComponent<HovedSignalScript>().SignalStatus = lightPattern; break;
-            default: Debug.LogError("Not a valid sign number: " + type); break;
+            switch (type)
+            {
+                case 0: signal.GetComponent<DvergScript>().SignalStatus = (int)signal.GetComponent<DvergScript>().EndStatus; break;
+                case 1: signal.GetComponent<ForSignalScript>().SignalStatus = (int)signal.GetComponent<ForSignalScript>().EndStatus; break;
+                case 2: signal.GetComponent<HovedSignalScript>().SignalStatus = (int)signal.GetComponent<HovedSignalScript>().EndStatus; break;
+                default: Debug.LogError("Not a valid sign number: " + type); break;
+            }
         }
+        else
+        {
+            switch (type)
+            {
+                case 0: StartCoroutine(DvergChangeTime(signal, (int)signal.GetComponent<DvergScript>().EndStatus, time)); break;
+                case 1: StartCoroutine(ForSignalChangeTime(signal, (int)signal.GetComponent<ForSignalScript>().EndStatus, time)); break;
+                case 2: StartCoroutine(HovedSignalChangeTime(signal, (int)signal.GetComponent<HovedSignalScript>().EndStatus, time)); break;
+                default: Debug.LogError("Not a valid sign number: " + type); break;
+            }
+        }
+       
     }
 
     /**
-     * Changes the signal state of the selected signal after some time
-     * 
-     * @param       signal          The signal that should change
-     * @param       lightPattern    The signal pattern that the signal should change to
-     * @param       time            The time before changing 
-     */
-    private void ChangeSignalStatusTime(Transform signal, int lightPattern, float time)
-    {
-        int type = (int)signal.GetComponent<SignalScript>().SignalType;
-
-        switch (type)
-        {
-            case 0: StartCoroutine(DvergChangeTime(signal, lightPattern, time)); break;
-            case 1: StartCoroutine(ForSignalChangeTime(signal, lightPattern, time)); break;
-            case 2: StartCoroutine(HovedSignalChangeTime(signal, lightPattern, time)); break;
-            default: Debug.LogError("Not a valid sign number: " + type); break;
-        }
-    }
-
-    /**
-     * Changes the signal state of the selected signal after some time for dverg signals
+     * Changes the signal state of the selected signal after some time for "Dverg Signal" signals
      * 
      * @param       signal          The signal that should change
      * @param       lightPattern    The signal pattern that the signal should change to
@@ -136,7 +139,7 @@ public class SignalController : MonoBehaviour
     }
 
     /**
-     * Changes the signal state of the selected signal after some time for for signals
+     * Changes the signal state of the selected signal after some time for "For Signal" signals
      * 
      * @param       signal          The signal that should change
      * @param       lightPattern    The signal pattern that the signal should change to
@@ -149,7 +152,7 @@ public class SignalController : MonoBehaviour
     }
 
     /**
-     * Changes the signal state of the selected signal after some time for hoved signals
+     * Changes the signal state of the selected signal after some time for "Hoved Signal" signals
      * 
      * @param       signal          The signal that should change
      * @param       lightPattern    The signal pattern that the signal should change to

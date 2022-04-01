@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * This class contains enums used to earier understand the selection of signaltype, signalstatus/signalpattern 
+ * and mwthod of detecting the train. 
+ */
 public class SignalEnum : MonoBehaviour
 {
     public enum DvergSignal
@@ -17,15 +21,15 @@ public class SignalEnum : MonoBehaviour
     {
         Av,
         ForventStopp,
-        ForvendKjørRedusert,
+        ForventKjørRedusert,
         ForventKjør,
     }
 
     public enum HovedSignal
     {
         Av,
-        Stop,
         StopBlink,
+        Stop,
         KjørMedRedusertHastighet,
         Kjør
     }
@@ -35,5 +39,12 @@ public class SignalEnum : MonoBehaviour
         Dverg,
         ForSignal,
         HovedSignal
+    }
+
+    public enum DetectTrain
+    {
+        Ingen,
+        ForanSkilt,
+        PasserSkilt
     }
 }

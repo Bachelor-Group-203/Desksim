@@ -12,6 +12,7 @@ TagManager:
   - Rebinding_ToggleMultipleIdenticalSticks
   - InputPack
   - PauseMenu
+  - Train
   layers:
   - Default
   - TransparentFX
