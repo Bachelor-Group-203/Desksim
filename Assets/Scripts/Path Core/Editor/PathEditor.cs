@@ -55,6 +55,7 @@ namespace PathCreationEditor {
         bool editingNormalsOld;
         bool heightModEnabled;
         bool heightKeyEnabled;
+        bool drawPathEnabled;
         Vector3 transformPos;
         Vector3 transformScale;
         Quaternion transformRot;
@@ -110,6 +111,7 @@ namespace PathCreationEditor {
                 if (data.showPathOptions) {
                     bezierPath.Space = (PathSpace) EditorGUILayout.Popup ("Space", (int) bezierPath.Space, spaceNames);
                     bezierPath.ControlPointMode = (BezierPath.ControlMode) EditorGUILayout.EnumPopup (new GUIContent ("Control Mode"), bezierPath.ControlPointMode);
+                    drawPathEnabled = EditorGUILayout.Toggle("Draw Path in Editor", drawPathEnabled);
                     heightModEnabled = EditorGUILayout.Toggle("HeightModifier", heightModEnabled);
                     EditorGUI.BeginDisabledGroup(heightModEnabled == false);
                         bezierPath.Height = EditorGUILayout.FloatField(new GUIContent("Height over Terrain", "Use \"O\" and \"L\" buttons while holding an anchorpoint"), bezierPath.Height);
@@ -450,7 +452,7 @@ namespace PathCreationEditor {
             bool displayControlPoints = data.displayControlPoints && (bezierPath.ControlPointMode != BezierPath.ControlMode.Automatic || !globalDisplaySettings.hideAutoControls);
             Bounds bounds = bezierPath.CalculateBoundsWithTransform (creator.transform);
 
-            if (Event.current.type == EventType.Repaint) {
+            if (Event.current.type == EventType.Repaint && drawPathEnabled) {
                 for (int i = 0; i < bezierPath.NumSegments; i++) {
                     Vector3[] points = bezierPath.GetPointsInSegment (i);
                     for (int j = 0; j < points.Length; j++) {
