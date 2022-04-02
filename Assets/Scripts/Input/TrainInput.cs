@@ -308,12 +308,12 @@ public class TrainInput : MonoBehaviour
         // Update value of sliders (Sliders update the value in separate OnValueChanged event attached to them)
         if (accelerationSliders.Length > 0) {
             for (int i = 0; i < accelerationSliders.Length; i++)
-            { accelerationSliders[i].value = a; } // Set slider value to current acceleration
+            { if(accelerationSliders[i]) accelerationSliders[i].value = a; } // Set slider value to current acceleration
         }
 
         if (pressureSliders.Length > 0) {
             for (int i = 0; i < pressureSliders.Length; i++) 
-            { pressureSliders[i].value = p; } // Set slider value to current pressure
+            { if(accelerationSliders[i]) pressureSliders[i].value = p; } // Set slider value to current pressure
         }
         // May cause jittering, if so only update this when the value wasn't changed by the slider
 
