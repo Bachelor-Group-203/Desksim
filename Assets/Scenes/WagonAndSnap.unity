@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   space: 0
+  objectOffset: {x: 0, y: 0, z: 0}
   follower: {fileID: 5133084401205702315}
 --- !u!1 &146391697
 GameObject:
@@ -293,10 +294,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
+  model: {fileID: 0}
   dstOffset: 0
   frontAttachment: {fileID: 0}
-  train: {fileID: 0}
-  trainOnPath: {fileID: 0}
+  objectOnPath: {fileID: 0}
+  objectOffset: {x: 0, y: 0, z: 0}
   attachOffset: 22
   end: 2
 --- !u!54 &171214009
@@ -991,10 +993,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
+  model: {fileID: 1666587063}
   dstOffset: 0
   frontAttachment: {fileID: 0}
-  train: {fileID: 0}
-  trainOnPath: {fileID: 0}
+  objectOnPath: {fileID: 0}
+  objectOffset: {x: 0, y: 0, z: 0}
   attachOffset: 23
   end: 2
 --- !u!54 &687632637
@@ -2399,10 +2402,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
+  model: {fileID: 0}
   dstOffset: 0
   frontAttachment: {fileID: 0}
-  train: {fileID: 0}
-  trainOnPath: {fileID: 0}
+  objectOnPath: {fileID: 0}
+  objectOffset: {x: 0, y: 0, z: 0}
   attachOffset: 22.15
   end: 2
 --- !u!54 &1666587065
@@ -4785,8 +4789,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5133084401083803738}
-  m_LocalRotation: {x: 0.017749218, y: -0.9331008, z: 0.027929766, w: 0.3580891}
-  m_LocalPosition: {x: 320.44656, y: 2.3908997, z: 160.72919}
+  m_LocalRotation: {x: 0.002242381, y: -0.7712114, z: 0.002484072, w: 0.6365704}
+  m_LocalPosition: {x: 117.59842, y: 0.10749817, z: 35.431976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6306672336163981651}
@@ -4910,10 +4914,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 300987809}
-  dstOffset: 504.13156
+  model: {fileID: 5133084401083803738}
+  dstOffset: 261.29617
   frontAttachment: {fileID: 0}
-  train: {fileID: 5133084401083803738}
-  trainOnPath: {fileID: 65152807}
+  objectOnPath: {fileID: 0}
+  objectOffset: {x: 0, y: 0, z: 0}
   attachOffset: 0
   end: 2
 --- !u!4 &5133084401205702319

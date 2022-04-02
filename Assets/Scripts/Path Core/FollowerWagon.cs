@@ -13,7 +13,7 @@ public class FollowerWagon : MonoBehaviour
     /**
      * Called on the first frame this script is enabled
      */
-    void Start()
+    void Awake()
     {
         parent = this.transform.parent;
         

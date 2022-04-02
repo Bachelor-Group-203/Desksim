@@ -13,11 +13,11 @@ using PathCreation;
 public class Follower : MonoBehaviour
 {
     public PathCreator pathCreator;
-    TrainController trainController;
+    public GameObject model;
+    public TrainController trainController;
     [SerializeField] public float dstOffset;
     [HideInInspector] public Follower frontAttachment;
-    public GameObject train;
-    [HideInInspector] public ObjectOnPath trainOnPath;
+    [HideInInspector] public ObjectOnPath objectOnPath;
     public float attachOffset;
     public EndOfPathInstruction end;
     float distanceTravelled;
@@ -27,21 +27,20 @@ public class Follower : MonoBehaviour
      */
     private void Start()
     {
-        if (frontAttachment == null && train != null && trainOnPath != null)
+        distanceTravelled += dstOffset;
+        if (frontAttachment == null)
         {
             trainController = GetComponent<TrainController>();
-            trainOnPath = GetComponent<ObjectOnPath>();
             dstOffset = EditorPrefs.GetFloat("dstOffset", dstOffset);
-            train.transform.position = this.transform.position = new Vector3(0, 0, 0);
-            train.transform.rotation = Quaternion.Euler(0, 0, 0);
+            model.transform.position = transform.position = new Vector3(0, 0, 0);
+            model.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        distanceTravelled += dstOffset;
     }
 
     /**
      * Called every frame
      */
-    void Update()
+    void FixedUpdate()
     {
         if (pathCreator == null) {
             return;
@@ -50,6 +49,7 @@ public class Follower : MonoBehaviour
             distanceTravelled = frontAttachment.distanceTravelled - attachOffset;
         else 
             distanceTravelled += trainController.Velocity * Time.deltaTime;
+
         // Move and rotate game object to points of the path
         UpdateTrain(distanceTravelled);
     }
