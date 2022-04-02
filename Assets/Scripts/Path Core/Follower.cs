@@ -16,7 +16,7 @@ public class Follower : MonoBehaviour
     TrainController trainController;
     [SerializeField] public float dstOffset;
     [HideInInspector] public Follower frontAttachment;
-    [HideInInspector] public GameObject train;
+    public GameObject train;
     [HideInInspector] public ObjectOnPath trainOnPath;
     public float attachOffset;
     public EndOfPathInstruction end;
