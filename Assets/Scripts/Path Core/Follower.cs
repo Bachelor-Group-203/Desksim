@@ -18,7 +18,6 @@ public class Follower : MonoBehaviour
     [SerializeField] public float dstOffset;
     [HideInInspector] public Follower frontAttachment;
     [HideInInspector] public ObjectOnPath objectOnPath;
-    [SerializeField, HideInInspector] Vector3 objectOffset;
     public float attachOffset;
     public EndOfPathInstruction end;
     float distanceTravelled;
@@ -82,15 +81,6 @@ public class Follower : MonoBehaviour
         }
         set {
             pathCreator = value;
-        }
-    }
-    public Vector3 ObjectOffset
-    {
-        get {
-            return objectOffset;
-        }
-        set {
-            objectOffset = value;
         }
     }
 }
