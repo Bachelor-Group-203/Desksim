@@ -61,6 +61,7 @@ public class TrainUi : MonoBehaviour
             // Create in container gameObject
             CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent.Find("Labels"), 180);
             velocityNeedleTransform.parent.Find("Labels").transform.localScale = new Vector3(-1f, 1f, 1f);
+            velocityNeedleTransform.parent.Find("Labels").transform.localEulerAngles = new Vector3(0f, 90f, 0f);
         } else {
             // Create in parent root
             CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent, 0);
@@ -74,6 +75,7 @@ public class TrainUi : MonoBehaviour
             // Create in container gameObject
             CreateLabels(maxViewPressure, maxViewPressure, pressureNeedleTransform.parent.Find("Labels"), 180);
             pressureNeedleTransform.parent.Find("Labels").transform.localScale = new Vector3(-1f, 1f, 1f);
+            pressureNeedleTransform.parent.Find("Labels").transform.localEulerAngles = new Vector3(0f, 90f, 0f);
         } else {
             // Create in parent root
             CreateLabels(maxViewPressure, maxViewPressure, pressureNeedleTransform.parent, 0);
