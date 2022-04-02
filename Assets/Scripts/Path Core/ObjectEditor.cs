@@ -15,7 +15,7 @@ using UnityEditor.SceneManagement;
 public class ObjectEditor : Editor
 {
     EndOfPathInstruction end;
-    ObjectOnPath trainOnPath;
+    ObjectOnPath objectOnPath;
     PathCreationEditor.ScreenSpacePolyLine screenSpaceLine;
     PathCreationEditor.ScreenSpacePolyLine.MouseInfo pathMouseInfo;
     Tool LastTool = Tool.None;
@@ -55,17 +55,17 @@ public class ObjectEditor : Editor
         if (Application.isPlaying)
             return;
 
-        trainOnPath = (ObjectOnPath)target;
+        objectOnPath = (ObjectOnPath)target;
 
-        if (!Application.isEditor || trainOnPath == null)
+        if (!Application.isEditor || objectOnPath == null)
             return;
 
         objectMouseHover();
         
-        if (trainOnPath.transform.position == pathCreator.transform.position)
+        if (objectOnPath.transform.position == pathCreator.transform.position)
             return;
 
-        trainOnPath.transform.position = pathCreator.transform.position;
+        objectOnPath.transform.position = pathCreator.transform.position;
     }
 
     /**
@@ -75,6 +75,8 @@ public class ObjectEditor : Editor
         
         UpdatePathMouseInfo ();
 
+        objectOnPath.follower.ObjectOffset = objectOnPath.objectOffset;
+        
         Vector3 newPathPoint = pathMouseInfo.closestWorldPointToMouse;
 
         // If mouse is too far from path, then return train to last position
@@ -91,7 +93,7 @@ public class ObjectEditor : Editor
         if (Event.current.type == EventType.MouseDown && distanceTravelled > 0f) 
         {
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-            trainOnPath.follower.UpdateDstOffset(distanceTravelled);
+            objectOnPath.follower.UpdateDstOffset(distanceTravelled);
             EditorPrefs.SetFloat("dstOffset", distanceTravelled);
             SetLastPoint(newPathPoint);
         }
@@ -102,7 +104,7 @@ public class ObjectEditor : Editor
      */
     private void UpdatePathMouseInfo() {
         if (!hasUpdatedScreenSpaceLine || (screenSpaceLine != null && screenSpaceLine.TransformIsOutOfDate ())) {
-            screenSpaceLine = new PathCreationEditor.ScreenSpacePolyLine (bezierPath, trainOnPath.transform, screenPolylineMaxAngleError, screenPolylineMinVertexDst);
+            screenSpaceLine = new PathCreationEditor.ScreenSpacePolyLine (bezierPath, objectOnPath.transform, screenPolylineMaxAngleError, screenPolylineMinVertexDst);
             hasUpdatedScreenSpaceLine = true;
         }
         if (screenSpaceLine != null)
@@ -115,15 +117,15 @@ public class ObjectEditor : Editor
      * @param       point       Vector3 point to place the train
      */
     private void UpdateTrain (Vector3 point) {
-        point = MathUtility.InverseTransformPoint (point, trainOnPath.transform, bezierPath.Space);
+        point = MathUtility.InverseTransformPoint (point, objectOnPath.transform, bezierPath.Space);
         point += pathCreator.transform.position;
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(point);
         if (distanceTravelled > 0f)
         {
             Quaternion normalRotation = Quaternion.Euler(180, 0, 90); 
             Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
-            train.transform.position = point;
-            train.transform.rotation = pathRotation * normalRotation;
+            model.transform.position = point;
+            model.transform.rotation = pathRotation * normalRotation;
         }
     }
 
@@ -150,19 +152,19 @@ public class ObjectEditor : Editor
     BezierPath bezierPath 
     {
         get {
-            return trainOnPath.follower.pathCreator.EditorData.bezierPath;
+            return objectOnPath.follower.pathCreator.EditorData.bezierPath;
         }
     }
     PathCreator pathCreator
     {
         get {
-            return trainOnPath.follower.pathCreator;
+            return objectOnPath.follower.pathCreator;
         }
     }
-    GameObject train
+    GameObject model
     {
         get {
-            return trainOnPath.follower.train;
+            return objectOnPath.follower.model;
         }
     }
 }

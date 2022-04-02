@@ -13,11 +13,12 @@ using PathCreation;
 public class Follower : MonoBehaviour
 {
     public PathCreator pathCreator;
-    TrainController trainController;
+    public GameObject model;
+    public TrainController trainController;
     [SerializeField] public float dstOffset;
     [HideInInspector] public Follower frontAttachment;
-    [HideInInspector] public GameObject train;
-    [HideInInspector] public ObjectOnPath trainOnPath;
+    [HideInInspector] public ObjectOnPath objectOnPath;
+    [SerializeField, HideInInspector] Vector3 objectOffset;
     public float attachOffset;
     public EndOfPathInstruction end;
     float distanceTravelled;
@@ -27,15 +28,22 @@ public class Follower : MonoBehaviour
      */
     private void Start()
     {
-        if (frontAttachment == null && train != null && trainOnPath != null)
+        distanceTravelled += dstOffset;
+        if (model == null)
+        {
+            return;
+        }
+        if (frontAttachment == null)
         {
             trainController = GetComponent<TrainController>();
-            trainOnPath = GetComponent<ObjectOnPath>();
             dstOffset = EditorPrefs.GetFloat("dstOffset", dstOffset);
-            train.transform.position = this.transform.position = new Vector3(0, 0, 0);
-            train.transform.rotation = Quaternion.Euler(0, 0, 0);
+            model.transform.position = transform.position = new Vector3(0, 0, 0);
+            model.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        distanceTravelled += dstOffset;
+        else
+        {
+            distanceTravelled = frontAttachment.distanceTravelled - attachOffset;
+        }
     }
 
     /**
@@ -62,6 +70,7 @@ public class Follower : MonoBehaviour
     void UpdateTrain(float distance)
     {
         transform.position = pathCreator.path.GetPointAtDistance(distance, end);
+        transform.position += objectOffset;
         Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
         Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distance, end);
         transform.rotation = pathRotation * normalRotation;
@@ -81,6 +90,15 @@ public class Follower : MonoBehaviour
         }
         set {
             pathCreator = value;
+        }
+    }
+    public Vector3 ObjectOffset
+    {
+        get {
+            return objectOffset;
+        }
+        set {
+            objectOffset = value;
         }
     }
 }
