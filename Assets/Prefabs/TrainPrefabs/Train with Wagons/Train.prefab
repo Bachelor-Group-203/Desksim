@@ -197,8 +197,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214308312787842655}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -10.55}
-  m_LocalScale: {x: 0.008032708, y: 0.008032708, z: 0.008032708}
+  m_LocalPosition: {x: 0, y: 0, z: -10.549995}
+  m_LocalScale: {x: 0.0080327075, y: 0.008032709, z: 0.008032709}
   m_Children:
   - {fileID: 4582881346295260109}
   m_Father: {fileID: 7406961050938292600}
@@ -206,7 +206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.54}
+  m_AnchoredPosition: {x: 0, y: 2.5400002}
   m_SizeDelta: {x: 507.99994, y: 274.63748}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1358884657502823791
@@ -1186,7 +1186,7 @@ GameObject:
   - component: {fileID: 1633733434308414817}
   - component: {fileID: 2185330298153853924}
   m_Layer: 0
-  m_Name: Inne.001
+  m_Name: Right side (Inne.001)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2051,10 +2051,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
+  model: {fileID: 4473639274068513222}
+  trainController: {fileID: 0}
   dstOffset: 504.13156
   frontAttachment: {fileID: 0}
-  train: {fileID: 4473639274068513222}
-  trainOnPath: {fileID: 6247550337732435707}
+  objectOnPath: {fileID: 0}
   attachOffset: 0
   end: 2
 --- !u!114 &6247550337732435707
@@ -2070,6 +2071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   space: 0
+  objectOffset: {x: 0, y: 0, z: 0}
   follower: {fileID: 1265407039152920439}
 --- !u!114 &8122057858470024836
 MonoBehaviour:
@@ -3255,12 +3257,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125481728883177044}
-  m_LocalRotation: {x: 0.9080499, y: -0.004836784, z: -0.00045380462, w: 0.41883406}
-  m_LocalPosition: {x: -0.007, y: 2.755, z: -8.86}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.93824863, y: -0.0030992343, z: -0.003741011, w: -0.34592783}
+  m_LocalPosition: {x: 0.0002482684, y: 0.16338418, z: 0.0071850014}
+  m_LocalScale: {x: 0.010000001, y: 0.009999998, z: 0.009999997}
   m_Children: []
-  m_Father: {fileID: 2732384584203361884}
-  m_RootOrder: 2
+  m_Father: {fileID: 1142183160581666065}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 130.479, y: 0.42999268, z: 0.80900574}
 --- !u!108 &6022186830732500916
 Light:
@@ -3880,17 +3882,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2323971798694384554}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.00031829832, y: 0.07478433, z: -0.020365056}
+  m_LocalScale: {x: 0.010000001, y: 0.009999996, z: 0.009999996}
   m_Children:
   - {fileID: 775150707601380399}
   - {fileID: 8381025916034117135}
   - {fileID: 7674290857760444303}
   - {fileID: 5010504512712973643}
   - {fileID: 4505335379807246878}
-  m_Father: {fileID: 2732384584203361884}
-  m_RootOrder: 3
+  m_Father: {fileID: 1142183160581666065}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2347366550109903903
 GameObject:
@@ -5897,7 +5899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5219248047342398481}
   m_Layer: 0
-  m_Name: togsett_forerrom_inne
+  m_Name: Conductors room (togsett_forerrom_inne)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5910,15 +5912,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3283234900608385082}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.628, z: -6.554}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0.00031815364, y: 0.14032419, z: -0.014084987}
+  m_LocalScale: {x: 0.009999998, y: 0.009999997, z: 0.009999997}
   m_Children:
   - {fileID: 1580564314262368854}
   - {fileID: 4551353013976334}
   - {fileID: 6573734757225012923}
-  m_Father: {fileID: 2732384584203361884}
-  m_RootOrder: 1
+  m_Father: {fileID: 1142183160581666065}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &3362225366293445886
 GameObject:
@@ -7529,14 +7531,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4473639274068513222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -362.0062, y: -235, z: -409}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1142183160581666065}
-  - {fileID: 5219248047342398481}
-  - {fileID: 192516861246202466}
-  - {fileID: 7406961050938292600}
-  - {fileID: 108791622446226056}
   m_Father: {fileID: 1265407039152920435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8494,15 +8492,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5000607161730378545}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.000015258789, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.00031815364, y: 0.07478433, z: -0.020365208}
+  m_LocalScale: {x: 0.01, y: 0.009999997, z: 0.009999997}
   m_Children:
   - {fileID: 1356896804961535228}
   - {fileID: 909385997753199786}
   - {fileID: 727952775196453333}
-  m_Father: {fileID: 2732384584203361884}
-  m_RootOrder: 4
+  m_Father: {fileID: 1142183160581666065}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5028751459688089089
 GameObject:
@@ -10125,7 +10123,7 @@ GameObject:
   - component: {fileID: 6247550336112648293}
   - component: {fileID: 6247550336112648292}
   m_Layer: 0
-  m_Name: Wagon (1)
+  m_Name: Wagon 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10139,7 +10137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6247550336112648299}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -302.91824, y: 835.9727, z: -1463.3055}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6247550337998728798}
@@ -10175,10 +10173,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
+  model: {fileID: 0}
+  trainController: {fileID: 0}
   dstOffset: 0
   frontAttachment: {fileID: 0}
-  train: {fileID: 0}
-  trainOnPath: {fileID: 0}
+  objectOnPath: {fileID: 0}
   attachOffset: 22.15
   end: 2
 --- !u!1 &6247550336948546837
@@ -10206,7 +10205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6247550336948546837}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.08795, y: -1070.9727, z: 1080.9}
+  m_LocalPosition: {x: 0, y: 0, z: 28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6247550337872264550}
@@ -10284,7 +10283,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6247550337381009703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -302.91824, y: 835.9727, z: -1463.3055}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6247550337913338702}
@@ -10320,10 +10319,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
+  model: {fileID: 0}
+  trainController: {fileID: 0}
   dstOffset: 0
   frontAttachment: {fileID: 0}
-  train: {fileID: 0}
-  trainOnPath: {fileID: 0}
+  objectOnPath: {fileID: 0}
   attachOffset: 23
   end: 2
 --- !u!1 &6247550337872264555
@@ -10338,7 +10338,7 @@ GameObject:
   - component: {fileID: 6247550337872264549}
   - component: {fileID: 6247550337872264548}
   m_Layer: 0
-  m_Name: Wagon
+  m_Name: Wagon 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10352,7 +10352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6247550337872264555}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -302.91824, y: 835.9727, z: -1463.3055}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6247550337060529676}
@@ -10388,10 +10388,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
+  model: {fileID: 0}
+  trainController: {fileID: 0}
   dstOffset: 0
   frontAttachment: {fileID: 0}
-  train: {fileID: 0}
-  trainOnPath: {fileID: 0}
+  objectOnPath: {fileID: 0}
   attachOffset: 22
   end: 2
 --- !u!1 &6247550337913338701
@@ -11551,7 +11552,7 @@ GameObject:
   - component: {fileID: 1496371353543381428}
   - component: {fileID: 7335252194244628987}
   m_Layer: 0
-  m_Name: Inne
+  m_Name: Left side (Inne)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12143,7 +12144,7 @@ GameObject:
   - component: {fileID: 8065091702342671674}
   - component: {fileID: 7944724440548748205}
   m_Layer: 0
-  m_Name: type_76_cab_1
+  m_Name: Cab front (type_76_cab_1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12157,9 +12158,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048005027130388452}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.031815365, y: 2.0365062, z: 7.4784317}
+  m_LocalPosition: {x: 0, y: 2.1, z: 7.4}
   m_LocalScale: {x: 100, y: 100, z: 100}
-  m_Children: []
+  m_Children:
+  - {fileID: 108791622446226056}
+  - {fileID: 7406961050938292600}
+  - {fileID: 5219248047342398481}
+  - {fileID: 192516861246202466}
   m_Father: {fileID: 2732384584203361884}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -13879,7 +13884,7 @@ GameObject:
   - component: {fileID: 7100645020671171256}
   - component: {fileID: 7680406978866397362}
   m_Layer: 0
-  m_Name: Bord1
+  m_Name: Dashboard (Bord1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
