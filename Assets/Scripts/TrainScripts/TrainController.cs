@@ -137,7 +137,7 @@ public class TrainController : MonoBehaviour
         /***************************
          * Execute train acceleraton
          ***************************/
-        if (pressure >= 5.0f)
+        if (pressure >= 4.8f)
         {
             if (Mathf.Abs(vel) >= tValues.MaxVelocity)
             {
