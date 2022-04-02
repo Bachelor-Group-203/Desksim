@@ -66,14 +66,15 @@ public class TrainController : MonoBehaviour
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
         tUi = GetComponent<TrainUi>();
-        if (GameObject.FindGameObjectWithTag("InputScripts"))
+        /*if (GameObject.FindGameObjectWithTag("InputScripts"))
         {
             input = GameObject.FindGameObjectWithTag("InputScripts").GetComponent<TrainInput>();
         }
         else
         {
             Debug.LogWarning("!!! InputScripts game object not found !!!");
-        }
+        }*/
+        input = GetComponent<TrainInput>(); // Changed TrainInput to be a component of the train prefab
     }
 
     /*
@@ -81,13 +82,31 @@ public class TrainController : MonoBehaviour
      */
     void Update()
     {
-        // Acceleration force
+        /************************
+         * Acceleration conroller
+         ************************/
+        // Input train controller here 
+        // controller 0 - 100% * maxAcceleration = current acceleration 
         vel = Vector3.Magnitude(rBody.velocity) * force;
 
-        // Breaking force
+        /******************
+         * Break controller
+         ******************/
+        // Breaks go from 0 to 5 bar
+        // controller 0 - 100% * maxBreakForce = current BreakForce
         UpdatePressure();
 
-        // Reverse train
+        /**************
+         * Slope finder
+         **************/
+        if (GetGroundAngle() >= 0)
+        {
+            slope = GetGroundAngle();
+        }
+
+        /***************
+         * Reverse train
+         ***************/
         if (Mathf.Abs(vel) <= 0)
         {
             if (tUi.Reverse)
@@ -99,6 +118,15 @@ public class TrainController : MonoBehaviour
                 force = 1;
             }
         }
+
+        /******************
+         * Notes and uefull things
+         ******************/
+        // For tracking the speed of the train in km/h
+        //Debug.Log(Vector3.Magnitude(rigidbody.velocity) * 3.6 + " km/h");
+        //Debug.Log("\tBar: " + bar);
+        //Debug.Log("Acceleration: " + GetAccelerationForce() + "\tVelocity: " + Vector3.Magnitude(rBody.velocity) + "\tBar: " + pressure);
+
     }
 
     /*
@@ -106,7 +134,9 @@ public class TrainController : MonoBehaviour
      */
     private void FixedUpdate()
     {
-        // Train Acceleration
+        /***************************
+         * Execute train acceleraton
+         ***************************/
         if (pressure >= 5.0f)
         {
             if (Mathf.Abs(vel) >= tValues.MaxVelocity)
@@ -120,7 +150,9 @@ public class TrainController : MonoBehaviour
             }
         }
 
-        // Train brakes
+        /**********************
+         * Execute train breaks
+         **********************/
         if (pressure <= 4.5f)
         {
             if (Mathf.Abs(vel) <= 0.01f)
