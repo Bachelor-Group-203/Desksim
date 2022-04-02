@@ -13,7 +13,7 @@ public class FollowerWagon : MonoBehaviour
     /**
      * Called on the first frame this script is enabled
      */
-    void Start()
+    void Awake()
     {
         parent = this.transform.parent;
         
@@ -33,7 +33,6 @@ public class FollowerWagon : MonoBehaviour
             child.GetComponent<Follower>().frontAttachment = parent.GetComponent<Follower>();
         else 
             child.GetComponent<Follower>().frontAttachment = transform.GetChild(target).GetComponent<Follower>();
-            child.GetComponent<Follower>().trainController = parent.GetComponent<TrainController>();
 
         // assigns path
         child.GetComponent<Follower>().PathCreator = parent.GetComponent<Follower>().PathCreator;

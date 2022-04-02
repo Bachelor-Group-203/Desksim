@@ -29,10 +29,6 @@ public class Follower : MonoBehaviour
     private void Start()
     {
         distanceTravelled += dstOffset;
-        if (model == null)
-        {
-            return;
-        }
         if (frontAttachment == null)
         {
             trainController = GetComponent<TrainController>();
@@ -40,16 +36,12 @@ public class Follower : MonoBehaviour
             model.transform.position = transform.position = new Vector3(0, 0, 0);
             model.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else
-        {
-            distanceTravelled = frontAttachment.distanceTravelled - attachOffset;
-        }
     }
 
     /**
      * Called every frame
      */
-    void Update()
+    void FixedUpdate()
     {
         if (pathCreator == null) {
             return;
@@ -58,6 +50,7 @@ public class Follower : MonoBehaviour
             distanceTravelled = frontAttachment.distanceTravelled - attachOffset;
         else 
             distanceTravelled += trainController.Velocity * Time.deltaTime;
+
         // Move and rotate game object to points of the path
         UpdateTrain(distanceTravelled);
     }
@@ -70,7 +63,6 @@ public class Follower : MonoBehaviour
     void UpdateTrain(float distance)
     {
         transform.position = pathCreator.path.GetPointAtDistance(distance, end);
-        transform.position += objectOffset;
         Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
         Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distance, end);
         transform.rotation = pathRotation * normalRotation;
