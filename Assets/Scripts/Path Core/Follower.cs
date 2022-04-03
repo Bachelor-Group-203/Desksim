@@ -15,32 +15,34 @@ public class Follower : MonoBehaviour
     public PathCreator pathCreator;
     public GameObject model;
     public TrainController trainController;
-    [SerializeField] public float dstOffset;
+    [SerializeField] public float distanceOffset;
     [HideInInspector] public Follower frontAttachment;
     [HideInInspector] public ObjectOnPath objectOnPath;
     public float attachOffset;
     public EndOfPathInstruction end;
     float distanceTravelled;
+    [SerializeField] public Vector3 objectOffset;
 
     /**
      * Called on the first frame this script is enabled
      */
     private void Start()
     {
-        distanceTravelled += dstOffset;
         if (frontAttachment == null)
         {
             trainController = GetComponent<TrainController>();
-            dstOffset = EditorPrefs.GetFloat("dstOffset", dstOffset);
+            distanceOffset = EditorPrefs.GetFloat("dstOffset", distanceOffset);
             model.transform.position = transform.position = new Vector3(0, 0, 0);
             model.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+        GetObjectOffset();
+        distanceTravelled += distanceOffset;
     }
 
     /**
      * Called every frame
      */
-    void FixedUpdate()
+    void Update()
     {
         if (pathCreator == null) {
             return;
@@ -49,7 +51,6 @@ public class Follower : MonoBehaviour
             distanceTravelled = frontAttachment.distanceTravelled - attachOffset;
         else 
             distanceTravelled += trainController.Velocity * Time.deltaTime;
-
         // Move and rotate game object to points of the path
         UpdateTrain(distanceTravelled);
     }
@@ -61,19 +62,37 @@ public class Follower : MonoBehaviour
      */
     void UpdateTrain(float distance)
     {
-        transform.position = pathCreator.path.GetPointAtDistance(distance, end);
+        Debug.Log(objectOffset);
+        model.transform.position = pathCreator.path.GetPointAtDistance(distance, end);
+        if (objectOffset != new Vector3(0, 0, 0) && frontAttachment == null)
+            model.transform.position += objectOffset;
         Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
         Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distance, end);
-        transform.rotation = pathRotation * normalRotation;
+        model.transform.rotation = pathRotation * normalRotation;
     }
 
     /**
      * Update distance offset for Start() function
      */
-    public void UpdateDstOffset(float dst)
+    public void UpdateDistanceOffset(float dst)
     {
-        dstOffset = dst;
+        distanceOffset = dst;
     }
+
+    /**
+     * Sets offset of object on path (used for signals)
+     */
+    private void GetObjectOffset() {
+        Vector3 vec;
+        vec.x = EditorPrefs.GetFloat("xOffset");
+        vec.y = EditorPrefs.GetFloat("yOffset");
+        vec.z = EditorPrefs.GetFloat("zOffset");
+        objectOffset = new Vector3(vec.x, vec.y, vec.z);
+    }
+
+    /**
+     * Update distance offset for Start() function
+     */
     public PathCreator PathCreator
     {
         get {

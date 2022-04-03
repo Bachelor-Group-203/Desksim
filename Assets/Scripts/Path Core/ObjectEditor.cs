@@ -75,6 +75,8 @@ public class ObjectEditor : Editor
         
         UpdatePathMouseInfo ();
         
+        SetObjectOffset(objectOnPath.objectOffset);
+
         Vector3 newPathPoint = pathMouseInfo.closestWorldPointToMouse;
 
         // If mouse is too far from path, then return train to last position
@@ -91,7 +93,7 @@ public class ObjectEditor : Editor
         if (Event.current.type == EventType.MouseDown && distanceTravelled > 0f) 
         {
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-            objectOnPath.follower.UpdateDstOffset(distanceTravelled);
+            objectOnPath.follower.UpdateDistanceOffset(distanceTravelled);
             EditorPrefs.SetFloat("dstOffset", distanceTravelled);
             SetLastPoint(newPathPoint);
         }
@@ -131,9 +133,9 @@ public class ObjectEditor : Editor
      * Gets last point inside EditorPrefs
      */
     private void GetLastPoint() {
-        float xstring = EditorPrefs.GetFloat("xfloat");
-        float ystring = EditorPrefs.GetFloat("yfloat");
-        float zstring = EditorPrefs.GetFloat("zfloat");
+        float xstring = EditorPrefs.GetFloat("xLastPoint");
+        float ystring = EditorPrefs.GetFloat("yLastPoint");
+        float zstring = EditorPrefs.GetFloat("zLastPoint");
         lastPoint = new Vector3(xstring, ystring, zstring);
     }
 
@@ -141,10 +143,20 @@ public class ObjectEditor : Editor
      * Sets last point inside EditorPrefs
      */
     private void SetLastPoint(Vector3 vec) {
-        EditorPrefs.SetFloat("xfloat", vec.x);
-        EditorPrefs.SetFloat("yfloat", vec.y);
-        EditorPrefs.SetFloat("zfloat", vec.z);
+        EditorPrefs.SetFloat("xLastPoint", vec.x);
+        EditorPrefs.SetFloat("yLastPoint", vec.y);
+        EditorPrefs.SetFloat("zLastPoint", vec.z);
         GetLastPoint();
+    }
+
+    /**
+     * Sets offset of object on path (used for signals)
+     */
+    private void SetObjectOffset(Vector3 vec) {
+        EditorPrefs.SetFloat("xOffset", vec.x);
+        EditorPrefs.SetFloat("yOffset", vec.y);
+        EditorPrefs.SetFloat("zOffset", vec.z);
+        Debug.Log("" + vec);
     }
 
     BezierPath bezierPath 
