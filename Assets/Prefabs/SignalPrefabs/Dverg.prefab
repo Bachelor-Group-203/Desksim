@@ -1054,6 +1054,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8994301364322143391}
   - component: {fileID: 9152705630232530570}
+  - component: {fileID: 7671897579341170119}
+  - component: {fileID: 2850668550686884479}
   m_Layer: 0
   m_Name: Dverg
   m_TagString: Untagged
@@ -1089,7 +1091,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdde2cdb442978748b3f6636a905a65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  signalType: 0
   lights: {fileID: 6517047526015034059}
   signalOffMaterial: {fileID: 2100000, guid: 3c84172a34b07cb41930a31cb66a3cfb, type: 2}
+  trainDetectionType: 0
   signalStatus: 0
   signalOnMaterial: {fileID: 2100000, guid: e02dd86c507e25b40ad8532230d6f792, type: 2}
+--- !u!65 &7671897579341170119
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9152705630232530573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -2, y: 0.5, z: 0}
+--- !u!65 &2850668550686884479
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9152705630232530573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -2, y: 0.5, z: -2}

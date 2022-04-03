@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/*
+/**
  * This class is for controlling the train and contains all the logic for how the train moves
  */
 public class TrainController : MonoBehaviour
@@ -25,9 +25,6 @@ public class TrainController : MonoBehaviour
     private float pressure = 0;
     private float slope = 0;
 
-    /*
-     * Get method for slope
-     */
     public float Slope
     {
         get
@@ -36,9 +33,6 @@ public class TrainController : MonoBehaviour
         }
     }
 
-    /*
-     * Get method for velocity
-     */
     public float Velocity
     {
         get
@@ -47,9 +41,6 @@ public class TrainController : MonoBehaviour
         }
     }
 
-    /*
-     * Get method for pressure
-     */
     public float Pressure
     {
         get
@@ -58,7 +49,7 @@ public class TrainController : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Awake is called first when the object is instantiated
      */
     private void Awake()
@@ -77,7 +68,7 @@ public class TrainController : MonoBehaviour
         input = GetComponent<TrainInput>(); // Changed TrainInput to be a component of the train prefab
     }
 
-    /*
+    /**
      * Update is called once per frame
      */
     void Update()
@@ -129,7 +120,7 @@ public class TrainController : MonoBehaviour
 
     }
 
-    /*
+    /**
      * FixedUpdate is called many times per frame
      */
     private void FixedUpdate()
@@ -167,17 +158,17 @@ public class TrainController : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Calculates the force needed to stop the train as kinetic energy over time
      * 
-     * TODO!!! Maybe fix so that it is not dependent on time but on stick position. little force when close to 0
+     * @return                      Returns the break force
      */
     private float GetBreakForce()
     {
         return -tValues.MaxPullingForce * (1 - (pressure / 5)) / tValues.Mass;
     }
 
-    /*
+    /**
      * Calculates the acceleration force to be applied on the train
      * 
      * @return                      Returns the acceleration force
@@ -187,7 +178,7 @@ public class TrainController : MonoBehaviour
         return tValues.MaxPullingForce * input.acceleration / tValues.Mass;
     }
 
-    /*
+    /**
      * Adds or subtracts pressurevalues based on the input.
      */
     private void UpdatePressure()
@@ -202,7 +193,7 @@ public class TrainController : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Finds the slope-angle by finding the diffrence between the up vector and the plane normal
      * 
      * @return                      Retruns the angle of the slope if it can find the layer, if not retirns -1
@@ -223,6 +214,4 @@ public class TrainController : MonoBehaviour
         }
         return groundAngle;
     }
-
-
 }

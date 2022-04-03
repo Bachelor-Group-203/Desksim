@@ -2538,6 +2538,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1530490824824543024}
   - component: {fileID: 2618298073815209904}
+  - component: {fileID: 1532984050189341339}
+  - component: {fileID: -329944513604488843}
   m_Layer: 0
   m_Name: HovedSignal(nohs)
   m_TagString: Untagged
@@ -2573,11 +2575,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d408ee4d83bbe745ab62ed8cd4dc8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  signalType: 2
   lights: {fileID: 2930693733112023794}
   signalOffMaterial: {fileID: 2100000, guid: 3c84172a34b07cb41930a31cb66a3cfb, type: 2}
+  trainDetectionType: 0
   signalStatus: 0
   signalRedMaterial: {fileID: 2100000, guid: 2ce5ab5192f690b478037cfd12b474ef, type: 2}
   signalGreenMaterial: {fileID: 2100000, guid: a9dbcb360b2d5624193ed06a0cf42cbf, type: 2}
+--- !u!65 &1532984050189341339
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6404184368256902618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -2, y: 0.5, z: 0}
+--- !u!65 &-329944513604488843
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6404184368256902618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -2, y: 0.5, z: -2}
 --- !u!1 &6891398372269983099
 GameObject:
   m_ObjectHideFlags: 0
