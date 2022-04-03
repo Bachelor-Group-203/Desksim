@@ -74,6 +74,8 @@ public class ObjectEditor : Editor
     private void objectMouseHover() {
         
         UpdatePathMouseInfo ();
+
+        objectOnPath.follower.ObjectOffset = objectOnPath.objectOffset;
         
         Vector3 newPathPoint = pathMouseInfo.closestWorldPointToMouse;
 
