@@ -89,7 +89,7 @@ public class SignalScript : MonoBehaviour
      */
     protected void ActivateBoxColliders()
     {
-        listOfCollider = GetComponents<BoxCollider>();
+        listOfCollider = transform.GetChild(0).GetComponents<BoxCollider>();
 
         foreach (BoxCollider boxCollider in listOfCollider)
         {
@@ -115,18 +115,17 @@ public class SignalScript : MonoBehaviour
      */
     public void MoveBoxColliders(Vector3 newPos)
     {
-        listOfCollider[0].center = new Vector3(newPos.x, transform.position.y, transform.position.z);
-        listOfCollider[1].center = new Vector3(newPos.x, transform.position.y, newPos.z);
+        listOfCollider = transform.GetChild(0).GetComponents<BoxCollider>();
+
+        listOfCollider[0].center = new Vector3(newPos.x, transform.position.y + 1.0f, 0);
+        listOfCollider[1].center = new Vector3(newPos.x, transform.position.y + 1.0f, newPos.z);
     }
 
     /**
      * The function handles detecting the train when interacting with the signal
      */
-    private void OnCollisionEnter(Collision collision)
+    public void CollisionDetcted(CollisionDetection script)
     {
-        if (collision.collider.tag == "Train")
-        {
-            trainTrigger = true;
-        }
+        trainTrigger = true;
     }
 }

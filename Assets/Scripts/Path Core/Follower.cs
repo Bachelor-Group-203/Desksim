@@ -16,7 +16,7 @@ public class Follower : MonoBehaviour
     [SerializeField] public PathCreator pathCreator;
     [SerializeField] public GameObject model;
     [SerializeField] public TrainController trainController;
-    [SerializeField] bool isSignal;
+    [SerializeField] public bool isSignal;
     [SerializeField] public float distanceOffset;
 
     [Header("Modifiers")]

@@ -59,6 +59,8 @@ public class ObjectEditor : Editor
 
         if (!Application.isEditor || objectOnPath == null)
             return;
+        
+        if (pathCreator == null) return;
 
         objectMouseHover();
         
@@ -112,7 +114,7 @@ public class ObjectEditor : Editor
     }
 
     /**
-     * Updates train position
+     * Updates train position and signal position
      *
      * @param       point       Vector3 point to place the train
      */
@@ -125,9 +127,14 @@ public class ObjectEditor : Editor
             Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
             Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
             model.transform.position = point;
-            if (objectOnPath.objectOffset != new Vector3(0, 0, 0))
-                model.transform.position += objectOnPath.objectOffset;
             model.transform.rotation = pathRotation * normalRotation;
+            if (objectOnPath.follower.isSignal)
+            {
+                objectOnPath.objectOffset = pathCreator.path.GetNormalAtDistance(distanceTravelled);
+                model.transform.position += objectOnPath.objectOffset.normalized * objectOnPath.offsetDistance;
+                model.transform.rotation *= Quaternion.Euler(0, 180, 0);
+                model.GetComponentInParent<SignalScript>().MoveBoxColliders(new Vector3(-objectOnPath.offsetDistance, 0, -20));
+            }
         }
     }
 

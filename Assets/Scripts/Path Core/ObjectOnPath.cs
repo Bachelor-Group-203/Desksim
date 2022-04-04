@@ -12,6 +12,7 @@ public class ObjectOnPath : MonoBehaviour
 {
     [SerializeField] public Follower follower;
     [SerializeField] public Vector3 objectOffset;
+    [SerializeField] public float offsetDistance = 5;
     [SerializeField, HideInInspector] public PathSpace space;
     [SerializeField, HideInInspector] float distanceTravelled;
     [SerializeField, HideInInspector] RaycastHit hit;
