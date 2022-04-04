@@ -10,12 +10,12 @@ using UnityEngine;
  */
 public class ObjectOnPath : MonoBehaviour
 {
-    [HideInInspector] public PathSpace space;
+    [SerializeField] public Follower follower;
     [SerializeField] public Vector3 objectOffset;
-    public Follower follower;
-    float distanceTravelled; 
-    RaycastHit hit;
-    Vector3 position;
-    Vector3 worldMouse;
-    Ray mouseRay;
+    [SerializeField, HideInInspector] public PathSpace space;
+    [SerializeField, HideInInspector] float distanceTravelled;
+    [SerializeField, HideInInspector] RaycastHit hit;
+    [SerializeField, HideInInspector] Vector3 position;
+    [SerializeField, HideInInspector] Vector3 worldMouse;
+    [SerializeField, HideInInspector] Ray mouseRay;
 }

@@ -94,7 +94,7 @@ public class ObjectEditor : Editor
         {
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             objectOnPath.follower.UpdateDistanceOffset(distanceTravelled);
-            EditorPrefs.SetFloat("dstOffset", distanceTravelled);
+            EditorPrefs.SetFloat((string)objectOnPath.gameObject.name, distanceTravelled);
             SetLastPoint(newPathPoint);
         }
     }
@@ -122,9 +122,11 @@ public class ObjectEditor : Editor
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(point);
         if (distanceTravelled > 0f)
         {
-            Quaternion normalRotation = Quaternion.Euler(180, 0, 90); 
+            Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
             Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
             model.transform.position = point;
+            if (objectOnPath.objectOffset != new Vector3(0, 0, 0))
+                model.transform.position += objectOnPath.objectOffset;
             model.transform.rotation = pathRotation * normalRotation;
         }
     }
@@ -153,10 +155,9 @@ public class ObjectEditor : Editor
      * Sets offset of object on path (used for signals)
      */
     private void SetObjectOffset(Vector3 vec) {
-        EditorPrefs.SetFloat("xOffset", vec.x);
-        EditorPrefs.SetFloat("yOffset", vec.y);
-        EditorPrefs.SetFloat("zOffset", vec.z);
-        Debug.Log("" + vec);
+        EditorPrefs.SetFloat("x" + (string)objectOnPath.gameObject.name, vec.x);
+        EditorPrefs.SetFloat("y" + (string)objectOnPath.gameObject.name, vec.y);
+        EditorPrefs.SetFloat("z" + (string)objectOnPath.gameObject.name, vec.z);
     }
 
     BezierPath bezierPath 
