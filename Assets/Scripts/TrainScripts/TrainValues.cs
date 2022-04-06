@@ -8,13 +8,13 @@ using UnityEngine;
 public class TrainValues : MonoBehaviour
 {
     [Header("Mass of the Train in tonn")]
-    [SerializeField] private float mass = 1000.0f;                  // default 1000 ton
+    [SerializeField] private float mass = 100;                  // default 100 ton
     [Header("Max pulling force of the train in kN")]
-    [SerializeField] private float maxPullingForce = 5.0f;          // default 5 m/s
+    [SerializeField] private float maxPullingForce = 0;         // default 0 m/s
     [Header("Breaking force of the train in kN")]
-    [SerializeField] private float maxBreakForce = 50.0f;           // default 50 N
+    [SerializeField] private float maxBreakForce = 0;           // default 0 N
     [Header("Max velocity of the train in km/h")]
-    [SerializeField] private float maxVelocity = 120.0f;            // default 120 km/h
+    [SerializeField] private float maxVelocity = 0;             // default 0 km/h
 
     /*
      * Get method for mass

@@ -10,20 +10,22 @@ public class TrainController : MonoBehaviour
 {
 
     [SerializeField] private LayerMask railLayer;
+    [SerializeField] private Transform wagons;
 
     private TrainValues tValues;
     private Rigidbody rBody;
     private TrainInput input;
     private TrainUi tUi;
 
-
-    // TODO!!! Find out how to get the train head direction
     private Vector3 tDirection = new Vector3(1, 0, 0);
 
     private float force = 0;
     private float vel = 0;
     private float pressure = 0;
     private float slope = 0;
+
+    private float totalWagonMass = 0;
+    private float totalWagonBreakForce = 0;
 
     public float Slope
     {
@@ -57,15 +59,15 @@ public class TrainController : MonoBehaviour
         tValues = GetComponent<TrainValues>();
         rBody = GetComponent<Rigidbody>();
         tUi = GetComponent<TrainUi>();
-        /*if (GameObject.FindGameObjectWithTag("InputScripts"))
+        
+        input = GetComponent<TrainInput>();
+
+        foreach (Transform wagon in wagons)
         {
-            input = GameObject.FindGameObjectWithTag("InputScripts").GetComponent<TrainInput>();
+            TrainValues values = wagon.GetComponent<TrainValues>();
+            totalWagonMass += values.Mass;
+            totalWagonBreakForce += values.MaxBreakForce;
         }
-        else
-        {
-            Debug.LogWarning("!!! InputScripts game object not found !!!");
-        }*/
-        input = GetComponent<TrainInput>(); // Changed TrainInput to be a component of the train prefab
     }
 
     /**
@@ -146,7 +148,7 @@ public class TrainController : MonoBehaviour
          **********************/
         if (pressure <= 4.5f)
         {
-            if (Mathf.Abs(vel) <= 0.01f)
+            if (Mathf.Abs(vel) <= 0.05f)
             {
                 rBody.velocity = Vector3.zero;
                 rBody.AddForce(0, 0, 0);
@@ -165,7 +167,7 @@ public class TrainController : MonoBehaviour
      */
     private float GetBreakForce()
     {
-        return -tValues.MaxPullingForce * (1 - (pressure / 5)) / tValues.Mass;
+        return - ((tValues.MaxPullingForce + totalWagonBreakForce) * (1.0f - (pressure / 5.0f))) / (tValues.Mass + totalWagonMass);
     }
 
     /**
@@ -175,7 +177,7 @@ public class TrainController : MonoBehaviour
      */
     private float GetAccelerationForce()
     {
-        return tValues.MaxPullingForce * input.acceleration / tValues.Mass;
+        return tValues.MaxPullingForce * input.acceleration / (tValues.Mass + totalWagonMass);
     }
 
     /**
