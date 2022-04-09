@@ -19,6 +19,7 @@ public class TrainUi : MonoBehaviour
     [SerializeField] private Transform labelTransform;
     [Header("Reverse Button")]
     [SerializeField] private GameObject reverseBackground;
+    [SerializeField] private GameObject reverseBackground2;
     [SerializeField] private Color reverseOffCollor;
     [SerializeField] private Color reverseOnCollor;
 
@@ -144,12 +145,14 @@ public class TrainUi : MonoBehaviour
         if (reverse)
         {
             reverse = false;
-            reverseBackground.GetComponent<Image>().color = reverseOffCollor;
+            if(reverseBackground)  reverseBackground.GetComponent<Image>().color  = reverseOffCollor;
+            if(reverseBackground2) reverseBackground2.GetComponent<Image>().color = reverseOffCollor;
         }
         else
         {
             reverse = true;
-            reverseBackground.GetComponent<Image>().color = reverseOnCollor;
+            if(reverseBackground)  reverseBackground.GetComponent<Image>().color  = reverseOnCollor;
+            if(reverseBackground2) reverseBackground2.GetComponent<Image>().color = reverseOnCollor;
         }
     }
 
