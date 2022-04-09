@@ -6,6 +6,7 @@ namespace PathCreationEditor
 {
     public static class MouseUtility
     {
+        private const int raycastDepth = 99999;
         /// <summary>
 		/// Determines mouse position in world. If PathSpace is xy/xz, the position will be locked to that plane.
 		/// If PathSpace is xyz, then depthFor3DSpace will be used as distance from scene camera.
@@ -15,7 +16,7 @@ namespace PathCreationEditor
             Ray mouseRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
             RaycastHit hit;
             Vector3 worldMouse;
-            if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit, 999, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit, raycastDepth, LayerMask.GetMask("Ground")))
             {
                 worldMouse = hit.point;
                 //worldMouse = Camera.current.transform.InverseTransformPoint(hit.point);
