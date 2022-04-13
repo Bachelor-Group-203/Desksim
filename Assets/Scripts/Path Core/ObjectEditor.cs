@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using PathCreation.Utility;
 using PathCreation;
@@ -61,7 +61,18 @@ public class ObjectEditor : Editor
         if (!Application.isEditor || objectOnPath == null)
             return;
         
-        if (pathCreator == null) return;
+        if (pathCreator == null)
+        {
+            try
+            {
+                objectOnPath.follower.pathCreator = GameObject.FindGameObjectWithTag("Rail").GetComponent<PathCreator>();
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("No path in the Scene: " + e);
+                return;
+            }
+        } 
 
         objectMouseHover();
         
@@ -139,6 +150,7 @@ public class ObjectEditor : Editor
             if (objectOnPath.follower.isSignal)
             {
                 objectOnPath.objectOffset = pathCreator.path.GetNormalAtDistance(distanceTravelled);
+
                 model.transform.position += objectOnPath.objectOffset.normalized * objectOnPath.offsetDistance;
                 model.transform.rotation *= Quaternion.Euler(0, 180, 0);
                 model.GetComponentInParent<SignalScript>().MoveBoxColliders(new Vector3(-objectOnPath.offsetDistance, 0, -20));

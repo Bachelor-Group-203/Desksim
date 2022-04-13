@@ -59,7 +59,7 @@ public class SignalController : MonoBehaviour
                     case 2:
                         if (signal.GetComponent<HovedSignalScript>().TrainTrigger)
                         {
-                            SenarioManager(signal, type);
+                            SenarioManager(signal, type, i - 1);
                             signal.GetComponent<HovedSignalScript>().TrainTrigger = false;
                         }
                         break;
@@ -97,8 +97,9 @@ public class SignalController : MonoBehaviour
      * 
      * @param       signal          The signal that should change
      * @param       type            The signal type 
+     * @param       forIndex        The index of the signal before this object, if a forsignal infront of the hovedsignal 
      */
-    private void SenarioManager(Transform signal, int type)
+    private void SenarioManager(Transform signal, int type, int forIndex = -1)
     {
         int time = signal.GetComponent<SignalScript>().Timer;
 
@@ -108,7 +109,15 @@ public class SignalController : MonoBehaviour
             {
                 case 0: signal.GetComponent<DvergScript>().SignalStatus = (int)signal.GetComponent<DvergScript>().EndStatus; break;
                 case 1: signal.GetComponent<ForSignalScript>().SignalStatus = (int)signal.GetComponent<ForSignalScript>().EndStatus; break;
-                case 2: signal.GetComponent<HovedSignalScript>().SignalStatus = (int)signal.GetComponent<HovedSignalScript>().EndStatus; break;
+                case 2: 
+                    if (forIndex < 0)
+                        signal.GetComponent<HovedSignalScript>().SignalStatus = (int)signal.GetComponent<HovedSignalScript>().EndStatus;
+                    else
+                    {
+                        signal.GetComponent<HovedSignalScript>().SignalStatus = (int)signal.GetComponent<HovedSignalScript>().EndStatus;
+                        listOfSignals[forIndex].GetComponent<ForSignalScript>().SignalStatus = (int)signal.GetComponent<HovedSignalScript>().EndStatus - 1;
+                    } 
+                    break;
                 default: Debug.LogError("Not a valid sign number: " + type); break;
             }
         }

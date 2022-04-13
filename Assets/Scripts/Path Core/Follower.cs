@@ -35,6 +35,8 @@ public class Follower : MonoBehaviour
      */
     private void Start()
     {
+        if (pathCreator == null) objectOnPath.follower.pathCreator = GameObject.FindGameObjectWithTag("Rail").GetComponent<PathCreator>();
+
         // If object is front cab
         if (frontAttachment == null)
         {
