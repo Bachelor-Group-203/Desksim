@@ -9,6 +9,7 @@ namespace PathCreationEditor
     {
 
         public const float extraInputRadius = .005f;
+        private const int raycastDepth = 99999;
 
         static Vector2 handleDragMouseStart;
         static Vector2 handleDragMouseEnd;
@@ -141,7 +142,7 @@ namespace PathCreationEditor
                                 Ray mouseRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
                                 RaycastHit hit;
                                 Vector3 worldMouse;
-                                if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit, 999, LayerMask.GetMask("Ground")))
+                                if (Physics.Raycast(mouseRay.origin, mouseRay.direction, out hit, raycastDepth, LayerMask.GetMask("Ground")))
                                 {
                                     worldMouse = hit.point;
                                     worldMouse.y += height;
