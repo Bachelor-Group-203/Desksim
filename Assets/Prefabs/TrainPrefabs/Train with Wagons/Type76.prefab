@@ -1194,6 +1194,7 @@ MonoBehaviour:
   distanceTravelled: 0
   frontAttachment: {fileID: 0}
   objectOnPath: {fileID: 0}
+  signalOffsetPos: {x: 0, y: 0, z: 0}
 --- !u!114 &4779538345236423420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7280,7 +7281,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 10000
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -8890,6 +8891,7 @@ MonoBehaviour:
   distanceTravelled: 0
   frontAttachment: {fileID: 4779538345132441955}
   objectOnPath: {fileID: 0}
+  signalOffsetPos: {x: 0, y: 0, z: 0}
 --- !u!114 &4779538344706628719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9011,6 +9013,7 @@ MonoBehaviour:
   distanceTravelled: 0
   frontAttachment: {fileID: 389620587954711408}
   objectOnPath: {fileID: 0}
+  signalOffsetPos: {x: 0, y: 0, z: 0}
 --- !u!114 &4779538345132441967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9131,6 +9134,7 @@ MonoBehaviour:
   distanceTravelled: 0
   frontAttachment: {fileID: 4779538344706628707}
   objectOnPath: {fileID: 0}
+  signalOffsetPos: {x: 0, y: 0, z: 0}
 --- !u!114 &4779538345622680867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13066,7 +13070,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 10000
+  far clip plane: 1000
   field of view: 21.6
   orthographic: 0
   orthographic size: 5
@@ -14818,7 +14822,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 10000
+  far clip plane: 1000
   field of view: 55.8
   orthographic: 0
   orthographic size: 5

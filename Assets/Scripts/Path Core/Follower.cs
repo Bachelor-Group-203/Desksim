@@ -28,6 +28,7 @@ public class Follower : MonoBehaviour
     [SerializeField, HideInInspector] float distanceTravelled;
     [SerializeField, HideInInspector] public Follower frontAttachment;
     [SerializeField, HideInInspector] public ObjectOnPath objectOnPath;
+    [SerializeField, HideInInspector] public Vector3 signalOffsetPos;
 
     /**
      * Called on the first frame this script is enabled
@@ -78,12 +79,19 @@ public class Follower : MonoBehaviour
 
         // If object is every cab, else signal
         if (objectOffset == new Vector3(0, 0, 0) && !isSignal && frontAttachment != null)
+        {
+            // Rotation of the wagons
             normalRotation = Quaternion.Euler(180, 0, 90);
+        }
+        else if (isSignal)
+        {
+            // Rotation of the signal
+            normalRotation = Quaternion.Euler(0, 0, 90);
+        }
         else
         {
-            objectOnPath = GetComponent<ObjectOnPath>();
-            model.transform.position += objectOnPath.objectOffset.normalized * objectOnPath.offsetDistance;
-            normalRotation = Quaternion.Euler(0, 0, 90);
+            // Rotation of the driving cab
+            normalRotation = Quaternion.Euler(180, 0, 90);
         }
         
         // Rotate the object relative to point on path
