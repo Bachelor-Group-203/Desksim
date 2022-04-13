@@ -1100,7 +1100,6 @@ GameObject:
   - component: {fileID: 4779538345236423420}
   - component: {fileID: 7228503582784596611}
   - component: {fileID: 5084903479252850075}
-  - component: {fileID: 6901816152083868720}
   m_Layer: 0
   m_Name: Type76
   m_TagString: Train
@@ -1187,12 +1186,14 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   model: {fileID: 6342549392839827524}
   trainController: {fileID: 389620587954711411}
+  isSignal: 0
   distanceOffset: 327.32343
-  frontAttachment: {fileID: 0}
-  objectOnPath: {fileID: 0}
   attachOffset: 0
   end: 2
   objectOffset: {x: 0, y: 0, z: 0}
+  distanceTravelled: 0
+  frontAttachment: {fileID: 0}
+  objectOnPath: {fileID: 0}
 --- !u!114 &4779538345236423420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,9 +1206,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0e928981a265247b7d74a3a91dd0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  space: 0
-  objectOffset: {x: 0, y: 0, z: 0}
   follower: {fileID: 389620587954711408}
+  offsetDistance: 5
+  objectOffset: {x: 0, y: 0, z: 0}
+  space: 0
+  distanceTravelled: 0
+  position: {x: 0, y: 0, z: 0}
+  worldMouse: {x: 0, y: 0, z: 0}
 --- !u!114 &7228503582784596611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,25 +1252,6 @@ MonoBehaviour:
   reverseBackground: {fileID: 7742135409674224446}
   reverseBackground2: {fileID: 1283558922265334276}
   reverseOffCollor: {r: 0.17895675, g: 1, b: 0, a: 1}
-  reverseOnCollor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &6901816152083868720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389620587954711374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6593b7e6cd66254fa1ffd13eaa43f1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityNeedleTransform: {fileID: 1309331811378371927}
-  pressureNeedleTransform: {fileID: 6314401419197379854}
-  labelTransform: {fileID: 3033108836591761262, guid: 57f2d3b28339049449a0c38d8983f470, type: 3}
-  reverseBackground: {fileID: 0}
-  reverseBackground2: {fileID: 0}
-  reverseOffCollor: {r: 0.18039216, g: 1, b: 0, a: 1}
   reverseOnCollor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &408291155531635032
 GameObject:
@@ -8896,12 +8882,14 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   model: {fileID: 4779538345502708314}
   trainController: {fileID: 0}
+  isSignal: 0
   distanceOffset: 0
-  frontAttachment: {fileID: 4779538345132441955}
-  objectOnPath: {fileID: 0}
   attachOffset: 22
   end: 2
   objectOffset: {x: 0, y: 0, z: 0}
+  distanceTravelled: 0
+  frontAttachment: {fileID: 4779538345132441955}
+  objectOnPath: {fileID: 0}
 --- !u!114 &4779538344706628719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9015,12 +9003,14 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   model: {fileID: 4779538344295553556}
   trainController: {fileID: 0}
+  isSignal: 0
   distanceOffset: 0
-  frontAttachment: {fileID: 389620587954711408}
-  objectOnPath: {fileID: 0}
   attachOffset: 21.7
   end: 2
   objectOffset: {x: 0, y: 0, z: 0}
+  distanceTravelled: 0
+  frontAttachment: {fileID: 389620587954711408}
+  objectOnPath: {fileID: 0}
 --- !u!114 &4779538345132441967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9133,12 +9123,14 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   model: {fileID: 4779538345090287434}
   trainController: {fileID: 0}
+  isSignal: 0
   distanceOffset: 0
-  frontAttachment: {fileID: 4779538344706628707}
-  objectOnPath: {fileID: 0}
   attachOffset: 22.9
   end: 2
   objectOffset: {x: 0, y: 0, z: 0}
+  distanceTravelled: 0
+  frontAttachment: {fileID: 4779538344706628707}
+  objectOnPath: {fileID: 0}
 --- !u!114 &4779538345622680867
 MonoBehaviour:
   m_ObjectHideFlags: 0
