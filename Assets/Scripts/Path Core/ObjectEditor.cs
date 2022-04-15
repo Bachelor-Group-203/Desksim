@@ -61,6 +61,7 @@ public class ObjectEditor : Editor
         if (!Application.isEditor || objectOnPath == null)
             return;
         
+        // Cheks if the item has a pathcreator object if not finds the path object and assigns it
         if (pathCreator == null)
         {
             try
