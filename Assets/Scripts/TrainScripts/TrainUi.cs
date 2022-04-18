@@ -13,6 +13,7 @@ public class TrainUi : MonoBehaviour
     private const float START_LABEL_ANGLE = 230;
 
     [Header("UI Objects")]
+    [SerializeField] private bool disableLabelGeneration = false;
     [Header("Velocity and pressure")]
     [SerializeField] private Transform velocityNeedleTransform;
     [SerializeField] private Transform pressureNeedleTransform;
@@ -22,6 +23,7 @@ public class TrainUi : MonoBehaviour
     [SerializeField] private GameObject reverseBackground2;
     [SerializeField] private Color reverseOffCollor;
     [SerializeField] private Color reverseOnCollor;
+
 
     private TrainController trainController;
     private TrainValues trainValues;
@@ -48,6 +50,8 @@ public class TrainUi : MonoBehaviour
         // Gets the refrence to components needed
         trainController = GetComponent<TrainController>();
         trainValues = GetComponent<TrainValues>();
+
+        if (disableLabelGeneration) return;
 
         // Finds the total angle to use on the gauge
         totalAngleSize = START_LABEL_ANGLE - END_LABEL_ANGLE;
