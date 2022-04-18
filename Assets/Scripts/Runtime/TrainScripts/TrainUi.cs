@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 /**
  * This class contains all the HUD elements and visual displays that relays information to the user.
@@ -132,7 +131,7 @@ public class TrainUi : MonoBehaviour
             label.eulerAngles = new Vector3(0, 0, labelAngle + offset);
 
             // Set the text to the apropriate number 
-            label.GetComponentInChildren<TMP_Text>().text = Mathf.RoundToInt(labelNormalized * maxLabelValue).ToString();
+            label.GetComponentInChildren<Text>().text = Mathf.RoundToInt(labelNormalized * maxLabelValue).ToString();
             // Makes the numer not rotate with the tranform
             label.Find("Text").eulerAngles = Vector3.zero;
             // Activate the label so it is visible
