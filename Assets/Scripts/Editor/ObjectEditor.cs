@@ -122,7 +122,7 @@ namespace PathCreationEditor
             {
                 EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                 objectOnPath.follower.distanceOffset = distanceTravelled;
-                objectOnPath.follower.distanceOffset = EditorGUILayout.FloatField("distanceOffset", distanceTravelled);
+                EditorPrefs.SetFloat((string)objectOnPath.gameObject.name, distanceTravelled);
                 SetLastPoint(newPathPoint);
             }
         }

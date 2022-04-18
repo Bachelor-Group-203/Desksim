@@ -4588,7 +4588,6 @@ GameObject:
   - component: {fileID: 2378298504171517213}
   - component: {fileID: 5807324487831957731}
   - component: {fileID: 3135654178144654486}
-  - component: {fileID: 1540516662457947363}
   m_Layer: 0
   m_Name: Type76
   m_TagString: Train
@@ -4744,26 +4743,6 @@ MonoBehaviour:
   reverseBackground2: {fileID: 1590799577559852105}
   reverseOffCollor: {r: 0.17895675, g: 1, b: 0, a: 1}
   reverseOnCollor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &1540516662457947363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742503882005361461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6593b7e6cd66254fa1ffd13eaa43f1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disableLabelGeneration: 1
-  velocityNeedleTransform: {fileID: 2378692904186173101}
-  pressureNeedleTransform: {fileID: 8851117590123305730}
-  labelTransform: {fileID: 3033108836591761262, guid: 57f2d3b28339049449a0c38d8983f470, type: 3}
-  reverseBackground: {fileID: 0}
-  reverseBackground2: {fileID: 0}
-  reverseOffCollor: {r: 0, g: 0, b: 0, a: 0}
-  reverseOnCollor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1759569349754058034
 GameObject:
   m_ObjectHideFlags: 0
