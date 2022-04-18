@@ -35,10 +35,27 @@ public class Follower : MonoBehaviour
      */
     private void Start()
     {
-        if (pathCreator == null) objectOnPath.follower.pathCreator = GameObject.FindGameObjectWithTag("Rail").GetComponent<PathCreator>();
+        // Cheks if the item has a pathcreator object if not finds the path object and assigns it
+        if (pathCreator == null && !isSignal)
+        {
+            try
+            {
+                PathCreator path = GameObject.FindGameObjectWithTag("Rail").GetComponent<PathCreator>();
+
+                if (path == null) throw new Exception();
+
+                objectOnPath.follower.pathCreator = path;
+                pathCreator = path;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("No path in the Scene: " + e);
+                return;
+            }
+        }
 
         // If object is front cab
-        if (frontAttachment == null)
+        if (frontAttachment == null && !isSignal)
         {
             trainController = GetComponent<TrainController>();
             distanceOffset = EditorPrefs.GetFloat((string)gameObject.name, distanceOffset);
