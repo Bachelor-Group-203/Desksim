@@ -82,8 +82,8 @@ public class HovedSignalScript : SignalScript
             switch (i)
             {
                 case 0: break;
-                case 1: ActiveSignal(1, signalRedMaterial); break;
-                case 2: Blink(1, signalRedMaterial); break;
+                case 1: Blink(1, signalRedMaterial); break;
+                case 2: ActiveSignal(1, signalRedMaterial); break;
                 case 3: ActiveSignal(2, signalGreenMaterial); break;
                 case 4: ActiveSignal(0, signalGreenMaterial, 2); break;
                 default: Debug.LogError("Not a valid sign number: " + i); break;

@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using PathCreation.Utility;
 using PathCreation;
@@ -55,16 +55,32 @@ public class ObjectEditor : Editor
         if (Application.isPlaying)
             return;
 
+        // Get selected object that contains "ObjectOnPath.cs" script
         objectOnPath = (ObjectOnPath)target;
 
         if (!Application.isEditor || objectOnPath == null)
             return;
+        
+        // Cheks if the item has a pathcreator object if not finds the path object and assigns it
+        if (pathCreator == null)
+        {
+            try
+            {
+                objectOnPath.follower.pathCreator = GameObject.FindGameObjectWithTag("Rail").GetComponent<PathCreator>();
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("No path in the Scene: " + e);
+                return;
+            }
+        } 
 
         objectMouseHover();
         
         if (objectOnPath.transform.position == pathCreator.transform.position)
             return;
 
+        // Set offset of objectOnPath to paths' offset for correct position
         objectOnPath.transform.position = pathCreator.transform.position;
     }
 
@@ -73,9 +89,8 @@ public class ObjectEditor : Editor
      */
     private void objectMouseHover() {
         
+        //Get relative mouse position inside editor window
         UpdatePathMouseInfo ();
-        
-        SetObjectOffset(objectOnPath.objectOffset);
 
         Vector3 newPathPoint = pathMouseInfo.closestWorldPointToMouse;
 
@@ -83,18 +98,19 @@ public class ObjectEditor : Editor
         if (pathMouseInfo.mouseDstToLine > mouseDstToPathClamp)
         {
             GetLastPoint();
-            UpdateTrain(lastPoint);
+            UpdateObject(lastPoint);
             return;
         }
 
-        UpdateTrain(newPathPoint);
+        // Updates position of object used in Follower script
+        UpdateObject(newPathPoint);
 
         // When clicking on path, place train and save last position
         if (Event.current.type == EventType.MouseDown && distanceTravelled > 0f) 
         {
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
             objectOnPath.follower.UpdateDistanceOffset(distanceTravelled);
-            EditorPrefs.SetFloat("dstOffset", distanceTravelled);
+            EditorPrefs.SetFloat((string)objectOnPath.gameObject.name, distanceTravelled);
             SetLastPoint(newPathPoint);
         }
     }
@@ -112,20 +128,34 @@ public class ObjectEditor : Editor
     }
 
     /**
-     * Updates train position
+     * Updates train position and signal position
      *
      * @param       point       Vector3 point to place the train
      */
-    private void UpdateTrain (Vector3 point) {
+    private void UpdateObject (Vector3 point) {
+
+        // Transform objects' position to mouse position
         point = MathUtility.InverseTransformPoint (point, objectOnPath.transform, bezierPath.Space);
         point += pathCreator.transform.position;
+
+        // Get distance between mouse and path
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(point);
         if (distanceTravelled > 0f)
         {
-            Quaternion normalRotation = Quaternion.Euler(180, 0, 90); 
+            Quaternion normalRotation = Quaternion.Euler(180, 0, 90);
             Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, end);
             model.transform.position = point;
             model.transform.rotation = pathRotation * normalRotation;
+
+            //if object is signal instead of train
+            if (objectOnPath.follower.isSignal)
+            {
+                objectOnPath.objectOffset = pathCreator.path.GetNormalAtDistance(distanceTravelled);
+
+                model.transform.position += objectOnPath.objectOffset.normalized * objectOnPath.offsetDistance;
+                model.transform.rotation *= Quaternion.Euler(0, 180, 0);
+                model.GetComponentInParent<SignalScript>().MoveBoxColliders(new Vector3(-objectOnPath.offsetDistance, 0, -20));
+            }
         }
     }
 
@@ -147,16 +177,6 @@ public class ObjectEditor : Editor
         EditorPrefs.SetFloat("yLastPoint", vec.y);
         EditorPrefs.SetFloat("zLastPoint", vec.z);
         GetLastPoint();
-    }
-
-    /**
-     * Sets offset of object on path (used for signals)
-     */
-    private void SetObjectOffset(Vector3 vec) {
-        EditorPrefs.SetFloat("xOffset", vec.x);
-        EditorPrefs.SetFloat("yOffset", vec.y);
-        EditorPrefs.SetFloat("zOffset", vec.z);
-        Debug.Log("" + vec);
     }
 
     BezierPath bezierPath 
