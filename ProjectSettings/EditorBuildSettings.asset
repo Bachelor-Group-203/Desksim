@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Scenarios/Demo 5 MM.unity
     guid: abed7bce2adeb3b43a5a40dffd533c5e
+  - enabled: 1
+    path: Assets/Scenes/Scenarios/Demo 4 - OSLO.unity
+    guid: 160ae09aa694b594b8a9462162363c09
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6358c80467b354443adb667d8874e156, type: 2}
