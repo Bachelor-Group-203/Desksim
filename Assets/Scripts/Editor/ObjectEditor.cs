@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEditor.IMGUI.Controls;
 using UnityEditor; 
 using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 namespace PathCreationEditor
 {
@@ -120,9 +121,12 @@ namespace PathCreationEditor
             // When clicking on path, place train and save last position
             if (Event.current.type == EventType.MouseDown && distanceTravelled > 0f) 
             {
-                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
                 objectOnPath.follower.distanceOffset = distanceTravelled;
-                EditorPrefs.SetFloat((string)objectOnPath.gameObject.name, distanceTravelled);
+                EditorUtility.SetDirty(objectOnPath.follower.GetGameObject());
+                PrefabUtility.ApplyPrefabInstance(objectOnPath.follower.GetGameObject(), InteractionMode.AutomatedAction);
+                var scene = SceneManager.GetActiveScene();
+                EditorSceneManager.MarkSceneDirty(scene);
+                EditorSceneManager.SaveScene(scene);
                 SetLastPoint(newPathPoint);
             }
         }

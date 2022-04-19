@@ -4602,7 +4602,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742503882005361461}
-  m_LocalRotation: {x: 0.000000025320336, y: -0.000000022141423, z: 0.000000015666503, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.09442139, y: 0.0011062649, z: 0.0036773724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4675,7 +4675,7 @@ MonoBehaviour:
   model: {fileID: 8507043503330303159}
   trainController: {fileID: 4129187858180185128}
   isSignal: 0
-  distanceOffset: 16.68095
+  distanceOffset: 144.16426
   attachOffset: 0
   end: 2
   objectOffset: {x: 0, y: 0, z: 0}
@@ -25347,8 +25347,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8507043503330303159}
-  m_LocalRotation: {x: 0.0006468277, y: -0.7128266, z: 0.00065489876, w: 0.7013398}
-  m_LocalPosition: {x: 235.72612, y: 235.31038, z: 433.42493}
+  m_LocalRotation: {x: 0.014542435, y: -0.7712583, z: -0.016362054, w: -0.6361458}
+  m_LocalPosition: {x: 544.96313, y: 71.395355, z: -362.63824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 934784809690792892}

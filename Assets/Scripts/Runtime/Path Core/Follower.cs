@@ -58,12 +58,9 @@ public class Follower : MonoBehaviour
         if (frontAttachment == null && !isSignal)
         {
             trainController = GetComponent<TrainController>();
-            distanceOffset = EditorPrefs.GetFloat("distanceOffset", distanceOffset);
             model.transform.position = transform.position = new Vector3(0, 0, 0);
             model.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-
-        // distanceOffset = 100;
 
         // Place object to correct path distance set in editor
         distanceTravelled += distanceOffset;
@@ -118,6 +115,16 @@ public class Follower : MonoBehaviour
         // Rotate the object relative to point on path
         Quaternion pathRotation = pathCreator.path.GetRotationAtDistance(distance, end);
         model.transform.rotation = pathRotation * normalRotation;
+    }
+
+    /**
+     * Returns itself as a gameobject
+     * 
+     * @return                      Returns itself as a gameobject
+     */
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 
     /**
