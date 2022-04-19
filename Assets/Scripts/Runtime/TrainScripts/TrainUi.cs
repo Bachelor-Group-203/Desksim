@@ -50,13 +50,17 @@ public class TrainUi : MonoBehaviour
         trainController = GetComponent<TrainController>();
         trainValues = GetComponent<TrainValues>();
 
-        if (disableLabelGeneration) return;
+
+        maxViewVelocity = ((int)((trainValues.MaxVelocity * 3.6 * 1.1f) / 20f)) * 20;
+        maxViewPressure = 8;
+
 
         // Finds the total angle to use on the gauge
         totalAngleSize = START_LABEL_ANGLE - END_LABEL_ANGLE;
 
-        // Creates the labels for the Speedometer
-        maxViewVelocity = ((int)((trainValues.MaxVelocity * 3.6 * 1.1f) / 20f)) * 20;
+        if (disableLabelGeneration) return;
+
+        //// Creates the labels for the Speedometer ////
         // Creates labels inside gameObject named "Labels" if found
         if (velocityNeedleTransform.parent.Find("Labels")) {
             // Create in container gameObject
@@ -65,12 +69,11 @@ public class TrainUi : MonoBehaviour
             velocityNeedleTransform.parent.Find("Labels").transform.localEulerAngles = new Vector3(0f, 90f, 0f);
         } else {
             // Create in parent root
-            CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent, 0);
+            CreateLabels(maxViewVelocity / 20, maxViewVelocity, velocityNeedleTransform.parent, 0); 
         }
         velocityNeedleTransform.SetAsLastSibling();
 
-        // Creates the labels for the Barometer
-        maxViewPressure = 8;
+        //// Creates the labels for the Barometer ////
         // Creates labels inside gameObject named "Labels" if found
         if (pressureNeedleTransform.parent.Find("Labels")) {
             // Create in container gameObject
@@ -105,7 +108,7 @@ public class TrainUi : MonoBehaviour
      */
     private float GetValueToAngle(float currentValue, float maxValue)
     {
-        float valueNormalized = currentValue / maxValue;
+        float valueNormalized = currentValue / maxValue; 
 
         return START_LABEL_ANGLE - valueNormalized * totalAngleSize;
     }
