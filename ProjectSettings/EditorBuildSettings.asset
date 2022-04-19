@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Scenarios/Demo 3 Heightmap.unity
     guid: 03268983b9162a242a1bbff954c618cc
   - enabled: 0
-    path: Assets/Scenes/Scenarios/Demo 4 MM.unity
+    path: Assets/Scenes/Scenarios/Demo 5 MM.unity
     guid: abed7bce2adeb3b43a5a40dffd533c5e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6358c80467b354443adb667d8874e156, type: 2}
