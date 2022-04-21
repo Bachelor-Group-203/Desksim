@@ -1030,8 +1030,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5135849250078140805}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.000541292, y: -0.30317515, z: 0.013747544, w: 0.95283556}
+  m_LocalPosition: {x: 143.76367, y: 55.681957, z: -115.05939}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5410171387805308233}
@@ -1072,7 +1072,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: -5, y: 1, z: 0}
 --- !u!65 &4817046358195753730
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1085,7 +1085,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
-  m_Center: {x: 0, y: 2, z: -15}
+  m_Center: {x: -5, y: 1, z: -20}
 --- !u!114 &1245920169663743684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2139,8 +2139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 811410523844784906}
-  objectOffset: {x: 0, y: 0, z: 0}
   offsetDistance: 5
+  objectOffset: {x: 0.8157813, y: 0.025869725, z: 0.5777595}
   space: 0
   distanceTravelled: 0
   position: {x: 0, y: 0, z: 0}
@@ -2161,10 +2161,11 @@ MonoBehaviour:
   model: {fileID: 5135849250078140805}
   trainController: {fileID: 0}
   isSignal: 1
-  distanceOffset: 1462.6212
+  distanceOffset: 634.137
   attachOffset: 0
   end: 2
   objectOffset: {x: 0, y: 0, z: 0}
   distanceTravelled: 0
   frontAttachment: {fileID: 0}
   objectOnPath: {fileID: 0}
+  signalOffsetPos: {x: 0, y: 0, z: 0}

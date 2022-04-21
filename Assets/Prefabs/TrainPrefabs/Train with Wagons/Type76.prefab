@@ -3870,7 +3870,7 @@ MonoBehaviour:
   model: {fileID: 8507043503330303159}
   trainController: {fileID: 4129187858180185128}
   isSignal: 0
-  distanceOffset: 82.58793
+  distanceOffset: 129.44234
   attachOffset: 0
   end: 2
   objectOffset: {x: 0, y: 0, z: 0}
@@ -20255,8 +20255,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8507043503330303159}
-  m_LocalRotation: {x: -0.008118305, y: 0.42726856, z: -0.0038185462, w: -0.9040803}
-  m_LocalPosition: {x: 4650.117, y: 86.2109, z: 9273.627}
+  m_LocalRotation: {x: 0.01453978, y: -0.7689643, z: -0.01648251, w: -0.6389138}
+  m_LocalPosition: {x: 559.4126, y: 72.04077, z: -365.38156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 934784809690792892}
