@@ -1653,7 +1653,7 @@ PrefabInstance:
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1929205884}
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1664,7 +1664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UserInputController, Assembly-CSharp
+      value: TrainInput, Input
       objectReference: {fileID: 0}
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4105,7 +4105,7 @@ PrefabInstance:
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1929205884}
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -4116,7 +4116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UserInputController, Assembly-CSharp
+      value: TrainInput, Input
       objectReference: {fileID: 0}
     - target: {fileID: 7941628012489120712, guid: 3de16f7c802f8c0468ddbee5ff2a2aae, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5026,6 +5026,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923280789}
   m_CullTransparentMesh: 1
+--- !u!1 &1929205883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1929205885}
+  - component: {fileID: 1929205884}
+  m_Layer: 0
+  m_Name: TrainInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1929205884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929205883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ab34b29ee38fb498cde3b1af55dddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressureSliders:
+  - {fileID: 1646114707}
+  accelerationSliders:
+  - {fileID: 1504230667}
+  debug: 0
+  superDebug: 0
+  allowThirdPerson: 0
+--- !u!4 &1929205885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929205883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 423.44257, y: 196.51031, z: -48.64902}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1935988480
 GameObject:
   m_ObjectHideFlags: 0
