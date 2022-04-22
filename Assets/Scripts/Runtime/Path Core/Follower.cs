@@ -64,18 +64,15 @@ public class Follower : MonoBehaviour
 
         if (gameObject.tag == "Train")
         {
-            distanceTravelled = PlayerPrefs.GetFloat(gameObject.name);
+            distanceOffset = PlayerPrefs.GetFloat(gameObject.name);
         }
 
         if (isSignal)
         {
-            distanceTravelled = PlayerPrefs.GetFloat(gameObject.name);
+            distanceOffset = PlayerPrefs.GetFloat(gameObject.name);
         }
 
-        Debug.Log(gameObject.name + "\t" + distanceOffset);
-
-        // Place object to correct path distance set in editor
-        //distanceTravelled += distanceOffset;
+        distanceTravelled += distanceOffset;
     }
 
     /**
