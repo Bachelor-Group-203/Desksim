@@ -624,10 +624,10 @@ namespace PathCreationEditor {
 
         void OnDisable () {
             Tools.hidden = false;
-
         }
 
         void OnEnable () {
+            creator = (PathCreator) target;
             bool in2DEditorMode = EditorSettings.defaultBehaviorMode == EditorBehaviorMode.Mode2D;
             creator.InitializeEditorData (in2DEditorMode);
 
