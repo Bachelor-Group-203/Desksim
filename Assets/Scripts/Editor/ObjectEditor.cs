@@ -121,13 +121,8 @@ namespace PathCreationEditor
             // When clicking on path, place train and save last position
             if (Event.current.type == EventType.MouseDown && distanceTravelled > 0f) 
             {
-                objectOnPath.follower.distanceOffset = distanceTravelled;
-                EditorUtility.SetDirty(objectOnPath.follower.GetGameObject());
-                PrefabUtility.ApplyPrefabInstance(objectOnPath.follower.GetGameObject(), InteractionMode.AutomatedAction);
-                var scene = SceneManager.GetActiveScene();
-                EditorSceneManager.MarkSceneDirty(scene);
-                EditorSceneManager.SaveScene(scene);
                 SetLastPoint(newPathPoint);
+                PlayerPrefs.SetFloat(objectOnPath.gameObject.name, distanceTravelled);
             }
         }
 

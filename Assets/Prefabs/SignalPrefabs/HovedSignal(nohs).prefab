@@ -674,8 +674,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2262061112202720390}
-  m_LocalRotation: {x: -0.02447214, y: -0.17180216, z: 0.0053950497, w: 0.9848127}
-  m_LocalPosition: {x: 74.498535, y: 58.926907, z: 15.101196}
+  m_LocalRotation: {x: 0.014553095, y: -0.5941852, z: 0.014559039, w: 0.80406487}
+  m_LocalPosition: {x: 423.4536, y: 66.04499, z: -328.09146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1384448969418098762}
@@ -2179,7 +2179,7 @@ GameObject:
   - component: {fileID: 3382836600531923558}
   m_Layer: 0
   m_Name: HovedSignal(nohs)
-  m_TagString: Untagged
+  m_TagString: Signal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   follower: {fileID: 3382836600531923558}
   offsetDistance: 5
-  objectOffset: {x: 0.9408982, y: 0.019034766, z: 0.3381177}
+  objectOffset: {x: 0.29346105, y: 0.006118357, z: 0.95594066}
   space: 0
   distanceTravelled: 0
   position: {x: 0, y: 0, z: 0}
@@ -2256,7 +2256,7 @@ MonoBehaviour:
   model: {fileID: 2262061112202720390}
   trainController: {fileID: 0}
   isSignal: 1
-  distanceOffset: 783.676
+  distanceOffset: 270.8662
   attachOffset: 0
   end: 0
   objectOffset: {x: 0, y: 0, z: 0}
