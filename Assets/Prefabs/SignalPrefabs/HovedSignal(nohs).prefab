@@ -674,8 +674,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2262061112202720390}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.014553095, y: -0.5941852, z: 0.014559039, w: 0.80406487}
+  m_LocalPosition: {x: 423.4536, y: 66.04499, z: -328.09146}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1384448969418098762}
@@ -729,7 +729,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: -5, y: 1, z: 0}
 --- !u!65 &5248235787454870083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -742,7 +742,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
-  m_Center: {x: 0, y: 2, z: -15}
+  m_Center: {x: -5, y: 1, z: -20}
 --- !u!114 &7193311078195865597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2179,7 +2179,7 @@ GameObject:
   - component: {fileID: 3382836600531923558}
   m_Layer: 0
   m_Name: HovedSignal(nohs)
-  m_TagString: Untagged
+  m_TagString: Signal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2214,10 +2214,10 @@ MonoBehaviour:
   lights: {fileID: 1357298702777335827}
   signalOffMaterial: {fileID: 2100000, guid: 3c84172a34b07cb41930a31cb66a3cfb, type: 2}
   signalType: 2
-  trainDetectionType: 0
-  timer: 0
-  startStatus: 0
-  endStatus: 0
+  trainDetectionType: 1
+  timer: 10
+  startStatus: 2
+  endStatus: 4
   signalStatus: 0
   signalRedMaterial: {fileID: 2100000, guid: 2ce5ab5192f690b478037cfd12b474ef, type: 2}
   signalGreenMaterial: {fileID: 2100000, guid: a9dbcb360b2d5624193ed06a0cf42cbf, type: 2}
@@ -2234,8 +2234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 3382836600531923558}
-  objectOffset: {x: 0, y: 0, z: 0}
   offsetDistance: 5
+  objectOffset: {x: 0.29346105, y: 0.006118357, z: 0.95594066}
   space: 0
   distanceTravelled: 0
   position: {x: 0, y: 0, z: 0}
@@ -2256,13 +2256,14 @@ MonoBehaviour:
   model: {fileID: 2262061112202720390}
   trainController: {fileID: 0}
   isSignal: 1
-  distanceOffset: 839.92267
+  distanceOffset: 270.8662
   attachOffset: 0
   end: 0
   objectOffset: {x: 0, y: 0, z: 0}
   distanceTravelled: 0
   frontAttachment: {fileID: 0}
   objectOnPath: {fileID: 0}
+  signalOffsetPos: {x: 0, y: 0, z: 0}
 --- !u!1 &7340541765681991578
 GameObject:
   m_ObjectHideFlags: 0

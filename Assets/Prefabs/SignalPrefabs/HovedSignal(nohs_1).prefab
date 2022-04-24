@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3809221571265499503}
   m_Layer: 0
   m_Name: HovedSignal(nohs_1)
-  m_TagString: Untagged
+  m_TagString: Signal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,8 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 3809221571265499503}
-  objectOffset: {x: 0, y: 0, z: 0}
   offsetDistance: 5
+  objectOffset: {x: 0, y: 0, z: 0}
   space: 0
   distanceTravelled: 0
   position: {x: 0, y: 0, z: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   distanceTravelled: 0
   frontAttachment: {fileID: 0}
   objectOnPath: {fileID: 0}
+  signalOffsetPos: {x: 0, y: 0, z: 0}
 --- !u!1 &185003428714567144
 GameObject:
   m_ObjectHideFlags: 0

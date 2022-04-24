@@ -1,0 +1,18 @@
+{
+    "name": "PathCreator",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6f4905981362b19458c63f8a7f598c5f",
+        "GUID:dee70862253a04c4e9103b206c84d7c2",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

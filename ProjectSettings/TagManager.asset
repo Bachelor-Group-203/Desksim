@@ -20,6 +20,7 @@ TagManager:
   - UI_Train_VR-interactive
   - UI_Train_VR-decorative
   - Rail
+  - Signal
   layers:
   - Default
   - TransparentFX
