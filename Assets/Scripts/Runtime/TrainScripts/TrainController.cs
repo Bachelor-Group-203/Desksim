@@ -167,7 +167,7 @@ public class TrainController : MonoBehaviour
      */
     private float GetBreakForce()
     {
-        return - ((tValues.MaxPullingForce + totalWagonBreakForce) * (1.0f - (pressure / 5.0f))) / (tValues.Mass + totalWagonMass);
+        return - ((tValues.MaxBreakForce + totalWagonBreakForce) * (1.0f - (pressure / 5.0f))) / (tValues.Mass + totalWagonMass); 
     }
 
     /**
