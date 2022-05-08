@@ -77,32 +77,45 @@ public class InputManager : MonoBehaviour
 
 
     /**
+     * Change to a different action map.
+     *  Disables both "Player" & "Train" action maps, and enables the one passed as a parameter (Usually either train or player).
      * 
-     **/
+     * @param       actionMap       A variable holding an InputActionMap, which holds one action map, with actions and bindings
+     */
     private static void SwitchToActionMap (InputActionMap actionMap)
     {
         if(debug) Debug.Log("<InputManager> \tSWITCHING TO ACTIONMAP: " + actionMap.name);
+        // If the passed action map is already enabled, no need to proceed
         if (actionMap.enabled)
         {
-            if(debug) Debug.Log("\t\t\t- RETURNING, action map is already enabled");
-            return;
             // If the selected action is already enabled do nothing
+            if (debug) Debug.Log("\t\t\t- RETURNING, action map is already enabled");
+            return;
         }
+
+        // Disable Train & Player action maps
         if(debug) Debug.Log("\t\t\t- Disabling all action maps");
         userInputActions.Disable(); // Disable all action maps
-        userInputActions.Train.Disable();
+        userInputActions.Train.Disable(); // Disable individually just in case
         userInputActions.Player.Disable();
 
-        actionMapChanged?.Invoke(actionMap); // Triggers a c# event that can be subscribed to in other scripts to see the currently active action map, e.g. when invoked read its InputActionMap.name
+        // Invoke C# event
+        actionMapChanged?.Invoke(actionMap); 
+        // Triggers a c# event that can be subscribed to in other scripts to see the currently active action map, e.g. when invoked read its InputActionMap.name
 
         if (debug) Debug.Log("\t\t\t- Enabling action map: is now "+actionMap.enabled);
-        actionMap.Enable(); // Enable new action map
+
+        // Enable new action map
+        actionMap.Enable(); 
+        
         if (debug) Debug.Log("\t\t\t- Enabled action map:  is now " + actionMap.enabled);
         if (debug) Debug.Log("\t\t\t= Trainmap="+userInputActions.Train.enabled+"   Playermap="+userInputActions.Player.enabled);
 
     }
 
-    // Use this when leaving the train, to change action maps. To keep it centralized
+    /**
+    * The function to call to exit the train, switches to Player action map
+    **/
     public static void ExitTrain()
     {
         Debug.Log("<InputManager> \tExitTrain() - Changing action map to Player");
@@ -110,7 +123,11 @@ public class InputManager : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("UI_Train")) GameObject.FindGameObjectWithTag("UI_Train").SetActive(false);
     }
 
-    // Use this when entering the train, to change action maps. To keep it centralized
+
+
+    /**
+    * The function to call to enter the train, switches to Train action map
+    **/
     public static void EnterTrain()
     {
         Debug.Log("<InputManager> \tEnterTrain() - Changing action map to Train");
@@ -120,9 +137,14 @@ public class InputManager : MonoBehaviour
 
 
     /**
-     * Called by UI component
-     * From Unity's rebinding sample
-     **/
+    * Start the rebinding process for a binding
+    *   Called by the Rebind_Prefab UI component. 
+    *   Modified from Unity's rebinding sample
+    *   
+    * @param    actionName      The name of the action
+    * @param    bindingIndex    The index of binding
+    * @param    statusText      The text element to change to show instructions to the user
+    */
     public static void StartRebind(string actionName, int bindingIndex, TMPro.TMP_Text statusText)
     {
         InputAction action = userInputActions.asset.FindAction(actionName); // Find action by name from our input action asset instance
@@ -147,12 +169,18 @@ public class InputManager : MonoBehaviour
     }
 
     /**
+     * Perform a rebinding for an action
      * 
+     * @param   actionToRebind      The action to rebind
+     * @param   bindingIndex        The index of the binding
+     * @param   statusText          Text element to change to communicate to the user that they're currently rebinding
+     * @param   allCompositeParts   Whether the binding consists of composites
      **/
     private static void DoRebind(InputAction actionToRebind, int bindingIndex, TMPro.TMP_Text statusText, bool allCompositeParts) 
     {
         if (actionToRebind == null || bindingIndex < 0) return;
 
+        // Change text to communicate to the user that they need to press a button
         statusText.text = $"Press a {actionToRebind.expectedControlType}";
 
         actionToRebind.Disable(); // Action must be disabled before rebinding
@@ -202,64 +230,86 @@ public class InputManager : MonoBehaviour
 
 
     /**
+     * Get the name for a binding
      * 
+     * @param actionName    Raw name of action
+     * @param bindingIndex  Index of binding in InputActionAsset
      **/
     public static string GetBindingName(string actionName, int bindingIndex)
     {
-        if (userInputActions == null) userInputActions = new UserInputActions(); // Stop racing condition
+        // Initialize userInputActions if it's null, to prevent racing condition
+        if (userInputActions == null) userInputActions = new UserInputActions();
 
+        // Get action object from raw action name
         InputAction action = userInputActions.asset.FindAction(actionName);
+        // Return the display name
         return action.GetBindingDisplayString(bindingIndex);
     }
 
 
     /**
+     * Save binding overrides
      * 
+     * @param   action  Action to save binding for
      **/
     private static void SaveBindingOverride(InputAction action)
     {
+        // Loop through bindings
         for (int i = 0; i < action.bindings.Count; i++)
         {
+            // Save binding with key (e.g. "TrainMenu") and binding (e.g. "keyboard/esc")
             PlayerPrefs.SetString(action.actionMap + action.name + i, action.bindings[i].overridePath); // Overridepath is what it looks for during runtime
         }
     }
 
     /**
+     * Load the binding override for an action, if it exists
+     *  (Public because it will be called by the RebindUI)
      * 
-     * Public because it will be called by the RebindUI
+     * @param   actionName  The name of the action to load the binding override for
      **/
     public static void LoadBindingOverride(string actionName)
     {
+        // Initialize userInputActions if it's null, to prevent racing condition
         if (userInputActions == null) userInputActions = new UserInputActions();
+        // Load the default bindings for this action
         InputAction action = userInputActions.asset.FindAction(actionName);
         
         // Loop through all bindings in action
         for (int i=0; i<action.bindings.Count; i++)
         {
+            // If a custom binding has been stored for this binding's index
             if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
+                // Apply the stored binding at current index, using native method
                 action.ApplyBindingOverride(i, PlayerPrefs.GetString(action.actionMap + action.name + i));
         }
     }
 
     /**
-     * 
+     * Loads binding overrides for all actions that have them
      **/
     public static void LoadAllBindingOverrides()
     {
+        // Initialize userInputActions if it's null, to prevent racing condition
         if (userInputActions == null) userInputActions = new UserInputActions();
+        // Get action maps from userInputActions
         var actionMaps = userInputActions.asset.actionMaps;
-        for(int i=0; i<actionMaps.Count; i++)
-        {
+        // Loop through very action map
+        for(int i=0; i<actionMaps.Count; i++) {
             var actions = actionMaps[i].actions;
-            for(int j=0; j<actions.Count; j++)
-            {
+            // Loop through every action in action map
+            for (int j=0; j<actions.Count; j++) {
+                // Load the binding override for this action
                 LoadBindingOverride(actions[j].name);
             }
         }
     }
 
     /**
+     * Resets a binding
      * 
+     * @param   actionName      The name of the action
+     * @param   bindingIndex    The indeex of the binding
      **/
     public static void ResetBinding(string actionName, int bindingIndex)
     {
@@ -273,15 +323,18 @@ public class InputManager : MonoBehaviour
         // if composite
         if (action.bindings[bindingIndex].isComposite)
         {
+            // Loop through composite parts
             for (int i = bindingIndex; i < action.bindings.Count && (action.bindings[i].isPartOfComposite || action.bindings[i].isComposite); i++)
             {
+                // Remove binding
                 action.RemoveBindingOverride(i);
             }
         }
         else
+            // If not a composite
             action.RemoveBindingOverride(bindingIndex);
 
-
+        // Save the reset binding
         SaveBindingOverride(action);
     }
 
