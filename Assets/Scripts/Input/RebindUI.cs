@@ -7,22 +7,28 @@ using UnityEngine.UI;
 public class RebindUI : MonoBehaviour
 {
     [SerializeField]
-    private InputActionReference inputActionReference; // This is part of the SO (scriptable object)
-
+    // Reference to an action from from the scriptable object InputActionAsset
+    private InputActionReference inputActionReference; 
+    
     [Range(0, 10)]
     [SerializeField]
+    // Index for the binding, lets us scroll between the bindings for the current action
     private int selectedBinding;
 
     [SerializeField]
-    private InputBinding.DisplayStringOptions displayStringOptions; // Built in enum that lets us format the binding name
+    // A built-in enum to format the names of the bindings
+    private InputBinding.DisplayStringOptions displayStringOptions;
 
-    [Header("Binding Info - DON'T EDIT")]
+    // Information about the binding
+    [Header("Read-only binding info")]
     [SerializeField]
-    private InputBinding inputBinding; // To help see what binding we have 
+    private InputBinding inputBinding; 
     private int bindingIndex;
 
-    private string actionName; // The action name stored as a string, from the SO, we dont want to rebind the SO so we're sending it over to the input manager, which looks up the action on the C# input action class, we find it with the original binding, and return that action.
-
+    // The action name stored as a string, from the scriptable object.
+    // Instead of rebind the scriptable object we look for the action in the C# input action class, the compiled class the InputActionAsset generates, by its original binding, and then return that action.
+    private string actionName; 
+    
     [Header("UI Fields")]
     [SerializeField]
     private TMPro.TMP_Text actionText;
@@ -39,6 +45,7 @@ public class RebindUI : MonoBehaviour
     private void OnEnable()
     {
 
+        // Add listeners for DoRebind and ResetBinding
         rebindButton.onClick.AddListener(() => DoRebind());
         resetButton.onClick.AddListener(() => ResetBinding());
 
@@ -46,20 +53,24 @@ public class RebindUI : MonoBehaviour
         // Make sure values are represented correctly in play mode 
         if(inputActionReference != null)
         {
+            // Load binding override and update info
             if (actionName == null) GetBindingInfo();
             InputManager.LoadBindingOverride(actionName);
             GetBindingInfo();
             UpdateUI();
         }
 
+        // Bind events
         InputManager.rebindComplete  += UpdateUI;
         InputManager.rebindCancelled += UpdateUI;
 
+        // Select a UI element default, to navigate with a controller
         if(GameObject.FindGameObjectsWithTag("UI_SelectedByDefault")[0] != null) GameObject.FindGameObjectsWithTag("UI_SelectedByDefault")[0].GetComponent<Button>().Select();
     }
     
     private void OnDisable()
     {
+        // Unbind events
         InputManager.rebindComplete  -= UpdateUI;
         InputManager.rebindCancelled -= UpdateUI;
     }
@@ -69,13 +80,20 @@ public class RebindUI : MonoBehaviour
      **/
     private void OnValidate()
     {
+        // Return if no input action reference selected in edit mode
+        if (inputActionReference == null) return; 
 
-        if (inputActionReference == null) return; // Return if no input action reference selected in edit mode
+        // Get info about binding and update the UI
         GetBindingInfo();
         UpdateUI();
-
     }
 
+
+    /**
+     * 
+     * 
+     * 
+     **/
     private void GetBindingInfo()
     {
         // See that action exists and rebind
