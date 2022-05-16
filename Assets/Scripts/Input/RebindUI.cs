@@ -40,7 +40,7 @@ public class RebindUI : MonoBehaviour
     private Button resetButton;
 
     /**
-     * 
+     * Called when enabled
      **/
     private void OnEnable()
     {
@@ -68,6 +68,9 @@ public class RebindUI : MonoBehaviour
         if(GameObject.FindGameObjectsWithTag("UI_SelectedByDefault")[0] != null) GameObject.FindGameObjectsWithTag("UI_SelectedByDefault")[0].GetComponent<Button>().Select();
     }
     
+    /**
+     * Called when disabled
+     **/
     private void OnDisable()
     {
         // Unbind events
@@ -90,9 +93,7 @@ public class RebindUI : MonoBehaviour
 
 
     /**
-     * 
-     * 
-     * 
+     * Get more info about binding selected in this button
      **/
     private void GetBindingInfo()
     {
@@ -110,6 +111,9 @@ public class RebindUI : MonoBehaviour
     }
 
 
+    /**
+     *  Update the information on the rebinding button
+     **/
     private void UpdateUI()
     {
 

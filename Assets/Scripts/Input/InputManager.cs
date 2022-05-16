@@ -62,7 +62,7 @@ public class InputManager : MonoBehaviour
 
 
     /**
-     * 
+     * Called when awoken
      **/
     private void Awake()
     {

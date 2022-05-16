@@ -344,7 +344,7 @@ public class TrainInput : MonoBehaviour
     }
 
     /**
-     * 
+     * Called by sliders that want to change acceleration
      **/
     public void OnSliderAccelerationValueChanged(System.Single value)
     {
@@ -352,7 +352,7 @@ public class TrainInput : MonoBehaviour
     }
 
     /**
-     * 
+     * Called by sliders that want to change pressure
      **/
     public void OnSliderPressureValueChanged(System.Single value)
     {
@@ -360,7 +360,7 @@ public class TrainInput : MonoBehaviour
     }
 
     /**
-     * 
+     * Exit the trani
      **/
     private void Train_ExitTrain(InputAction.CallbackContext obj)
     {
@@ -370,7 +370,7 @@ public class TrainInput : MonoBehaviour
     }
 
     /**
-     * 
+     * Change between first and third person perspectives
      **/
     private void ChangePerspective(InputAction.CallbackContext obj)
     {
@@ -401,7 +401,9 @@ public class TrainInput : MonoBehaviour
     }
 
 
-
+    /**
+     * Find both cameras, store them in variables so we can use them later, and disable one
+     **/
     private void InitiatePerspective()
     {
         if (debug) Debug.Log("<InputController Train> \tInitiatePerspective");
@@ -422,6 +424,10 @@ public class TrainInput : MonoBehaviour
         UpdateUI();
     }
 
+
+    /**
+     * Update which tran UI should be shown, 1P VR ui or 3P overlay UI, etc.
+     **/
     private void UpdateUI()
     {
         if (debug) Debug.Log("<InputController Train> \tUpdateUI");
@@ -462,7 +468,7 @@ public class TrainInput : MonoBehaviour
 
 
     /**
-     * 
+     * Zoom in on the ETCS panel (switches cameras)
      **/
     private void Train_FocusOnPanel(InputAction.CallbackContext obj)
     {
