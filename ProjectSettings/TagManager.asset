@@ -3,7 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UI_SelectedByDefault
+  - InputScripts
+  - Rebinding_ToggleAbsAcc
+  - Rebinding_ToggleAbsPre
+  - Rebinding_ToggleModifiers
+  - Rebinding_ToggleMultipleIdenticalSticks
+  - InputPack
+  - PauseMenu
+  - Train
+  - UI_Train
+  - Camera_1P
+  - Camera_3P
+  - Camera_FocusOnPanel
+  - UI_Train_VR-interactive
+  - UI_Train_VR-decorative
+  - Rail
+  - Signal
   layers:
   - Default
   - TransparentFX
@@ -14,9 +31,9 @@ TagManager:
   - 
   - 
   - 
+  - rail
   - 
-  - 
-  - 
+  - Ground
   - 
   - 
   - 
