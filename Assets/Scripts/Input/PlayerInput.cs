@@ -113,6 +113,9 @@ public class PlayerInput : MonoBehaviour
 
     }**/
 
+    /**
+     *  Called to enter the train
+     **/
     private void Train_EnterTrain(InputAction.CallbackContext obj)
     {
         // Do checks like seeing if you're close enough to the train here

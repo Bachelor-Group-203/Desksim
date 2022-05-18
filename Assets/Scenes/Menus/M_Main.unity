@@ -2641,7 +2641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Oslo S -> Lokf\xF8rerskolen (~1:5 scale)"
+  m_text: "Oslo S -> Lokf\xF8rerskolen (~1:1 scale)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3177,7 +3177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A scene with a heightmap of the Oslo fjord, at about 1:5 scale, and a
+  m_text: "A scene with a heightmap of the Oslo fjord, at about 1:1 scale, and a
     track going from the location of Oslo S to the location of Lokf\xF8rerskolen.
     Generated with the open source website: https://tangrams.github.io/heightmapper/ "
   m_isRightToLeft: 0
